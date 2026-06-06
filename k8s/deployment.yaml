@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insurance-backend
+  namespace: default
+  labels:
+    app: insurance-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: insurance-backend
+  template:
+    metadata:
+      labels:
+        app: insurance-backend
+    spec:
+      containers:
+        - name: backend
+          # Replace galeyro with your real GitHub username in lowercase
+          image: ghcr.io/galeyro/insurance-backend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://my-postgres-postgresql:5432/insurance_db
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: postgres
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              value: my-kafka:9092
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: insurance-frontend
+  namespace: default
+  labels:
+    app: insurance-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: insurance-frontend
+  template:
+    metadata:
+      labels:
+        app: insurance-frontend
+    spec:
+      containers:
+        - name: frontend
+          # Replace galeyro with your real GitHub username in lowercase
+          image: ghcr.io/galeyro/insurance-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
