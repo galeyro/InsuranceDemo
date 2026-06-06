@@ -13,7 +13,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>Insurance-Backend</name>
     <description>Insurance-Backend</description>
-    <url/>
+    <url/> <!-- trigger CI/CD -->
     <licenses>
         <license/>
     </licenses>
