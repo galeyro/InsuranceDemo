@@ -5,10 +5,13 @@ import edu.softkau.dev.insurancebackend.policy.domain.model.Coverage;
 import edu.softkau.dev.insurancebackend.policy.domain.model.Money;
 import edu.softkau.dev.insurancebackend.policy.domain.ports.PolicyFactoryPort;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.util.Currency;
 import java.util.Map;
 
+@Component
 public class AutoPolicyFactory implements PolicyFactoryPort {
     @Override
     public Branch getBranch() {
