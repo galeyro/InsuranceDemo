@@ -5,17 +5,17 @@ import java.util.Objects;
 
 public final class Coverage {
     private final Money coverageAmount;
-    private final int termMonths;
+    private final Integer termMonths;
     private final Map<String, Object> attributes;
 
-    public Coverage(Money coverageAmount, int termMonths, Map<String, Object> attributes){
+    public Coverage(Money coverageAmount, Integer termMonths, Map<String, Object> attributes){
         Objects.requireNonNull(coverageAmount, "El monto de la cobertura no puede ser nulo");
 
         if (!coverageAmount.isGreaterThanZero()) {
             throw new IllegalArgumentException("El monto de la cobertura debe ser mayor a 0");
         }
 
-        if (termMonths <= 0) {
+        if (termMonths != null && termMonths <= 0) {
             throw new IllegalArgumentException("El plazo en meses debe ser mayor a 0");
         }
 
@@ -37,7 +37,7 @@ public final class Coverage {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Coverage coverage = (Coverage) o;
-        return coverageAmount.equals(coverage.coverageAmount) && termMonths == coverage.termMonths && attributes.equals(coverage.attributes);
+        return coverageAmount.equals(coverage.coverageAmount) && Objects.equals(termMonths, coverage.termMonths) && attributes.equals(coverage.attributes);
     }
 
     @Override
@@ -58,7 +58,7 @@ public final class Coverage {
         return coverageAmount;
     }
 
-    public int getTermMonths() {
+    public Integer getTermMonths() {
         return termMonths;
     }
 
