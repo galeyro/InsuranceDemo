@@ -13,7 +13,8 @@ permissions:
   packages: write
 
 jobs:
-  build-backend:
+  test:
+    name: Run Unit & Integration Tests (JaCoCo)
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -76,6 +77,14 @@ jobs:
         with:
           name: jacoco-coverage-report
           path: Insurance-Backend/target/site/jacoco/
+
+  build-and-push:
+    name: Build & Publish Docker Image
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Log in to GitHub Container Registry (GHCR)
         uses: docker/login-action@v3
