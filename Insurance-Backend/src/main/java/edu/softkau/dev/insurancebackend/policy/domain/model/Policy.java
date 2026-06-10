@@ -1,6 +1,7 @@
 package edu.softkau.dev.insurancebackend.policy.domain.model;
 
 import edu.softkau.dev.insurancebackend.customer.domain.model.CustomerId;
+import edu.softkau.dev.insurancebackend.policy.domain.states.*;
 
 import java.time.Instant;
 import java.util.Objects;
@@ -16,7 +17,7 @@ public class Policy {
     private final Money monthlyPremium;
     private final RiskProfile riskProfile;
     private final Instant createdAt;
-    private PolicyStatus status;
+    private PolicyStatePort state;
     private Instant updatedAt;
 
     private Policy(PolicyId id,
@@ -38,7 +39,7 @@ public class Policy {
         this.customerId = Objects.requireNonNull(customerId, "El ID del cliente no puede ser nulo");
         this.branch = Objects.requireNonNull(branch, "El ramo no puede ser nulo");
         this.ratingStrategy = Objects.requireNonNull(ratingStrategy, "La estrategia de tarificación no puede ser nula");
-        this.status = Objects.requireNonNull(status, "El estado no puede ser nulo");
+        this.state = stateFor(status);
         this.coverage = Objects.requireNonNull(coverage, "La cobertura no puede ser nula");
         this.monthlyPremium = Objects.requireNonNull(monthlyPremium, "La prima mensual no puede ser nula");
         this.riskProfile = Objects.requireNonNull(riskProfile, "El perfil de riesgo no puede ser nulo");
@@ -74,9 +75,8 @@ public class Policy {
         return new Builder();
     }
 
-    public void changeStatus(PolicyStatus newStatus) {
-        this.status = Objects.requireNonNull(newStatus, "El estado no puede ser nulo");
-        this.updatedAt = Instant.now();
+    public void changeStatus(PolicyStatus target) {
+        this.state.transitionTo(this, target);
     }
 
     public PolicyId getId() {
@@ -100,7 +100,7 @@ public class Policy {
     }
 
     public PolicyStatus getStatus() {
-        return status;
+        return state.getStatus();
     }
 
     public Coverage getCoverage() {
@@ -121,6 +121,22 @@ public class Policy {
 
     public Instant getUpdatedAt() {
         return updatedAt;
+    }
+
+    private static PolicyStatePort stateFor(PolicyStatus status) {
+        Objects.requireNonNull(status, "El estado no puede ser nulo");
+        return switch (status){
+            case QUOTED -> new QuotedState();
+            case ISSUED -> new IssuedState();
+            case ACTIVE -> new ActiveState();
+            case SUSPENDED -> new SuspendedState();
+            case CANCELLED -> new CancelledState();
+        };
+    }
+
+    public void applyState(PolicyStatePort newState) {
+        this.state = Objects.requireNonNull(newState, "El estado no puede ser nulo");
+        this.updatedAt = Instant.now();
     }
 
     public static final class Builder {
