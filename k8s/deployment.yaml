@@ -56,3 +56,38 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-ui
+  namespace: default
+  labels:
+    app: kafka-ui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-ui
+  template:
+    metadata:
+      labels:
+        app: kafka-ui
+    spec:
+      containers:
+        - name: kafka-ui
+          image: ghcr.io/kafbat/kafka-ui:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: KAFKA_CLUSTERS_0_NAME
+              value: local-kraft
+            - name: KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS
+              value: my-kafka:9092
+            - name: KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL
+              value: SASL_PLAINTEXT
+            - name: KAFKA_CLUSTERS_0_PROPERTIES_SASL_MECHANISM
+              value: PLAIN
+            - name: KAFKA_CLUSTERS_0_PROPERTIES_SASL_JAAS_CONFIG
+              value: org.apache.kafka.common.security.plain.PlainLoginModule required username="user1" password="amIkM2sFfr";
+
