@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'insurance-frontend/**'
+      - '.github/workflows/frontend-ci.yml'
 
 permissions:
   contents: read

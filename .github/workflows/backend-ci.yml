@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'Insurance-Backend/**'
+      - '.github/workflows/backend-ci.yml'
 
 permissions:
   contents: read
