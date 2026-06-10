@@ -19,7 +19,7 @@ public class Policy {
     private PolicyStatus status;
     private Instant updatedAt;
 
-    public Policy(PolicyId id,
+    private Policy(PolicyId id,
                   String policyNumber,
                   CustomerId customerId,
                   Branch branch,
@@ -195,6 +195,25 @@ public class Policy {
         }
 
         public Policy build() {
+            if (this.status == null) {
+                this.status = PolicyStatus.QUOTED;
+            }
+            if (this.createdAt == null) {
+                this.createdAt = java.time.Instant.now();
+            }
+            if (this.updatedAt == null) {
+                this.updatedAt = java.time.Instant.now();
+            }
+
+            java.util.Objects.requireNonNull(id, "El ID es obligatorio");
+            java.util.Objects.requireNonNull(policyNumber, "El número de póliza es obligatorio");
+            java.util.Objects.requireNonNull(customerId, "El ID de cliente es obligatorio");
+            java.util.Objects.requireNonNull(branch, "El ramo es obligatorio");
+            java.util.Objects.requireNonNull(ratingStrategy, "La estrategia de tarificación es obligatoria");
+            java.util.Objects.requireNonNull(coverage, "La cobertura es obligatoria");
+            java.util.Objects.requireNonNull(monthlyPremium, "La prima mensual es obligatoria");
+            java.util.Objects.requireNonNull(riskProfile, "El perfil de riesgo es obligatorio");
+
             return new Policy(id, policyNumber, customerId, branch, ratingStrategy,
                     status, coverage, monthlyPremium, riskProfile,
                     createdAt, updatedAt);

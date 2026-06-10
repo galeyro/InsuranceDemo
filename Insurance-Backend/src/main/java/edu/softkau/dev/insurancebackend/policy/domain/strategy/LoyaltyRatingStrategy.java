@@ -18,6 +18,7 @@ public class LoyaltyRatingStrategy implements RatingStrategyPort {
     @Override
     public void validate(RiskProfile riskProfile) {
         // riskProfile.customerSince (año) obligatorio; antigüedad ≥ 2 años
+        java.util.Objects.requireNonNull(riskProfile, "El perfil de riesgo es obligatorio");
         java.util.Objects.requireNonNull(riskProfile.getCustomerSinceYear(), "El año de registro es obligatorio");
 
         int currentYear = java.time.LocalDate.now().getYear();
