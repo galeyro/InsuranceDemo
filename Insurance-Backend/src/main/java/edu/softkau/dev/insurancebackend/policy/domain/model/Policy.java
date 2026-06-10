@@ -2,10 +2,13 @@ package edu.softkau.dev.insurancebackend.policy.domain.model;
 
 import edu.softkau.dev.insurancebackend.customer.domain.model.CustomerId;
 import edu.softkau.dev.insurancebackend.policy.domain.states.*;
+import lombok.AccessLevel;
+import lombok.Getter;
 
 import java.time.Instant;
 import java.util.Objects;
 
+@Getter
 public class Policy {
 
     private final PolicyId id;
@@ -17,6 +20,7 @@ public class Policy {
     private final Money monthlyPremium;
     private final RiskProfile riskProfile;
     private final Instant createdAt;
+    @Getter(AccessLevel.NONE)
     private PolicyStatePort state;
     private Instant updatedAt;
 
@@ -79,48 +83,8 @@ public class Policy {
         this.state.transitionTo(this, target);
     }
 
-    public PolicyId getId() {
-        return id;
-    }
-
-    public String getPolicyNumber() {
-        return policyNumber;
-    }
-
-    public CustomerId getCustomerId() {
-        return customerId;
-    }
-
-    public Branch getBranch() {
-        return branch;
-    }
-
-    public RatingStrategyType getRatingStrategy() {
-        return ratingStrategy;
-    }
-
     public PolicyStatus getStatus() {
         return state.getStatus();
-    }
-
-    public Coverage getCoverage() {
-        return coverage;
-    }
-
-    public Money getMonthlyPremium() {
-        return monthlyPremium;
-    }
-
-    public RiskProfile getRiskProfile() {
-        return riskProfile;
-    }
-
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public Instant getUpdatedAt() {
-        return updatedAt;
     }
 
     private static PolicyStatePort stateFor(PolicyStatus status) {
