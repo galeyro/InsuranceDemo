@@ -1,4 +1,4 @@
-package edu.softkau.dev.insurancebackend.customer.domain.repository;
+package edu.softkau.dev.insurancebackend.customer.domain.ports;
 
 import edu.softkau.dev.insurancebackend.customer.domain.model.Customer;
 import edu.softkau.dev.insurancebackend.customer.domain.model.CustomerId;
