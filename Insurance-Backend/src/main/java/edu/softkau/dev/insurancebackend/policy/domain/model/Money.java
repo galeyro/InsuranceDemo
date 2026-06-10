@@ -20,6 +20,10 @@ public final class Money {
         return new Money(BigDecimal.valueOf(amount), Currency.getInstance("USD"));
     }
 
+    public static Money cop(double amount){
+        return new Money(BigDecimal.valueOf(amount), Currency.getInstance("COP"));
+    }
+
     public boolean isGreaterThanZero(){
         return this.amount.compareTo(BigDecimal.ZERO) > 0;
     }
