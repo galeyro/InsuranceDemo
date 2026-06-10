@@ -1,0 +1,284 @@
+# ====================================================================
+# VARIABLES GLOBALES
+# ====================================================================
+@host = http://localhost:8080
+
+
+# ====================================================================
+# 1. GESTIÓN DE CLIENTES (CUSTOMERS)
+# ====================================================================
+
+# El ID retornado se guardará automáticamente en una variable global
+### Crear Cliente 1 (Juan Perez)
+POST {{host}}/api/customers
+Content-Type: application/json
+
+{
+  "name": "Juan Perez",
+  "email": "juan.perez@example.com"
+}
+
+> {%
+    if (response.status === 201) {
+        client.global.set("customerId", response.body.id.value);
+        client.log("Cliente 1 creado. ID guardado: " + response.body.id.value);
+    }
+%}
+
+###
+
+# El ID retornado se guardará para la prueba de descuento por lealtad
+### Crear Cliente 2 (Maria Gomez)
+POST {{host}}/api/customers
+Content-Type: application/json
+
+{
+  "name": "Maria Gomez",
+  "email": "maria.gomez@example.com"
+}
+
+> {%
+    if (response.status === 201) {
+        client.global.set("customerIdLoyalty", response.body.id.value);
+        client.log("Cliente 2 creado. ID guardado: " + response.body.id.value);
+    }
+%}
+
+###
+
+### Obtener Cliente por ID
+GET {{host}}/api/customers/{{customerId}}
+Accept: application/json
+
+###
+
+### Error: Crear Cliente Duplicado (Debería retornar 409 Conflict)
+POST {{host}}/api/customers
+Content-Type: application/json
+
+{
+  "name": "Duplicado",
+  "email": "juan.perez@example.com"
+}
+
+###
+
+# ====================================================================
+# 2. COTIZACIÓN Y CREACIÓN DE PÓLIZAS (Los 4 Ramos + 3 Estrategias)
+# ====================================================================
+
+# Cobertura de 80M, deducible de 1M, plazo de 12 meses. Prima base de 120k.
+### Caso 1: Ramo AUTO con estrategia STANDARD (Estado inicial: QUOTED)
+POST {{host}}/api/policies
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId}}",
+  "branch": "AUTO",
+  "ratingStrategy": "STANDARD",
+  "riskProfile": {
+    "riskScore": 20,
+    "customerSinceYear": 2025
+  }
+}
+
+> {%
+    if (response.status === 201) {
+        client.global.set("policyIdAuto", response.body.id.value);
+        client.log("Póliza AUTO creada. ID guardada: " + response.body.id.value);
+    }
+%}
+
+###
+
+# Cobertura de 200M, beneficiario true, plazo de 12 meses. Prima base 90k.
+# Prima final = 90k * (1 + 40/100) = 126k.
+### Caso 2: Ramo LIFE con estrategia RISK_BASED
+POST {{host}}/api/policies
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId}}",
+  "branch": "LIFE",
+  "ratingStrategy": "RISK_BASED",
+  "riskProfile": {
+    "riskScore": 40,
+    "customerSinceYear": 2025
+  }
+}
+
+###
+
+# Cobertura 150M. Prima base 75k, descuento 15%. Prima final = 63.75k.
+# Registro en 2024 = Antigüedad de 2 años (Válido para descuento).
+### Caso 3: Ramo HOME con estrategia LOYALTY
+POST {{host}}/api/policies
+Content-Type: application/json
+
+{
+  "customerId": "{{customerIdLoyalty}}",
+  "branch": "HOME",
+  "ratingStrategy": "LOYALTY",
+  "riskProfile": {
+    "riskScore": 10,
+    "customerSinceYear": 2024
+  }
+}
+
+###
+
+# Cobertura 100M, copayRate 0.20, waitingPeriodDays 30. Prima base: 180k.
+### Caso 4: Ramo HEALTH con estrategia STANDARD
+POST {{host}}/api/policies
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId}}",
+  "branch": "HEALTH",
+  "ratingStrategy": "STANDARD",
+  "riskProfile": {
+    "riskScore": 5,
+    "customerSinceYear": 2025
+  }
+}
+
+###
+
+# ====================================================================
+# 3. CASOS DE ERROR EN CREACIÓN/COTIZACIÓN (Deberían retornar 400 Bad Request)
+# ====================================================================
+
+### Error de Estrategia: RISK_BASED sin 'riskScore'
+POST {{host}}/api/policies
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId}}",
+  "branch": "AUTO",
+  "ratingStrategy": "RISK_BASED",
+  "riskProfile": {
+    "customerSinceYear": 2025
+  }
+}
+
+###
+
+# Registro en 2025 = Antigüedad de 1 año (Menor a los 2 años requeridos).
+### Error de Estrategia: LOYALTY con antigüedad insuficiente
+POST {{host}}/api/policies
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId}}",
+  "branch": "HOME",
+  "ratingStrategy": "LOYALTY",
+  "riskProfile": {
+    "riskScore": 15,
+    "customerSinceYear": 2025
+  }
+}
+
+###
+
+### Error de DTO: Campo 'branch' nulo
+POST {{host}}/api/policies
+Content-Type: application/json
+
+{
+  "customerId": "{{customerId}}",
+  "ratingStrategy": "STANDARD",
+  "riskProfile": {
+    "riskScore": 10,
+    "customerSinceYear": 2025
+  }
+}
+
+###
+
+# ====================================================================
+# 4. RECORRIDO COMPLETO DE CICLO DE VIDA (Sobre la Póliza AUTO del Caso 1)
+# ====================================================================
+
+# Publica evento 'policy.issued' en Kafka
+### Paso A: Cambiar a ISSUED (Transición Válida: QUOTED -> ISSUED)
+PATCH {{host}}/api/policies/{{policyIdAuto}}/status
+Content-Type: application/json
+
+{
+  "targetStatus": "ISSUED"
+}
+
+###
+
+# Publica evento 'policy.activated' en Kafka
+### Paso B: Cambiar a ACTIVE (Transición Válida: ISSUED -> ACTIVE)
+PATCH {{host}}/api/policies/{{policyIdAuto}}/status
+Content-Type: application/json
+
+{
+  "targetStatus": "ACTIVE"
+}
+
+###
+
+# Publica evento 'policy.suspended' en Kafka
+### Paso C: Cambiar a SUSPENDED (Transición Válida: ACTIVE -> SUSPENDED)
+PATCH {{host}}/api/policies/{{policyIdAuto}}/status
+Content-Type: application/json
+
+{
+  "targetStatus": "SUSPENDED"
+}
+
+###
+
+# Publica evento 'policy.reactivated' en Kafka
+### Paso D: Cambiar a ACTIVE (Transición Válida: SUSPENDED -> ACTIVE)
+PATCH {{host}}/api/policies/{{policyIdAuto}}/status
+Content-Type: application/json
+
+{
+  "targetStatus": "ACTIVE"
+}
+
+###
+
+# Publica evento 'policy.cancelled' en Kafka
+### Paso E: Cambiar a CANCELLED (Transición Válida: ACTIVE -> CANCELLED)
+PATCH {{host}}/api/policies/{{policyIdAuto}}/status
+Content-Type: application/json
+
+{
+  "targetStatus": "CANCELLED"
+}
+
+###
+
+# ====================================================================
+# 5. CASO DE ERROR EN TRANSICIÓN (Debería retornar 400 Bad Request)
+# ====================================================================
+
+# Lanza InvalidStateTransitionException porque CANCELLED es terminal
+### Paso F: Intentar activar póliza ya CANCELADA (Transición Inválida)
+PATCH {{host}}/api/policies/{{policyIdAuto}}/status
+Content-Type: application/json
+
+{
+  "targetStatus": "ACTIVE"
+}
+
+###
+
+# ====================================================================
+# 6. CONSULTAS DE PÓLIZAS
+# ====================================================================
+
+### Obtener Detalle de la Póliza por ID
+GET {{host}}/api/policies/{{policyIdAuto}}
+Accept: application/json
+
+###
+
+### Obtener todas las pólizas de un cliente específico
+GET {{host}}/api/policies/customer/{{customerId}}
+Accept: application/json
