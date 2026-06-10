@@ -11,6 +11,13 @@ on:
 permissions:
   contents: read
   packages: write
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment to GitHub Pages
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   compile:
@@ -95,14 +102,25 @@ jobs:
           cd Insurance-Backend
           ./mvnw verify
 
-      - name: Upload JaCoCo Coverage Report
-        uses: actions/upload-artifact@v4
+      - name: Upload JaCoCo Pages Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: jacoco-coverage-report
           path: Insurance-Backend/target/site/jacoco/
 
+  deploy-pages:
+    name: 3. Deploy JaCoCo to GitHub Pages
+    needs: test-and-coverage
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
   docker-publish:
-    name: 3. Build & Publish Docker Image
+    name: 4. Build & Publish Docker Image
     needs: test-and-coverage
     runs-on: ubuntu-latest
     steps:
