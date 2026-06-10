@@ -3,7 +3,7 @@ package edu.softkau.dev.insurancebackend.customer.domain.model;
 import java.util.Objects;
 
 public final class Email {
-    private static final String EMAIL_REGEX = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\\\.[A-Za-z]{2,}$" ;
+    private static final String EMAIL_REGEX = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$" ;
 
     private final String value;
 
