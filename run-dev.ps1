@@ -3,7 +3,7 @@ Write-Host "   Iniciando Entorno de Desarrollo (Port-Forward)   " -ForegroundCol
 Write-Host "==================================================" -ForegroundColor Green
 
 # 1. Detener jobs anteriores si existen para evitar conflictos
-$oldJobs = Get-Job -Name "postgres-pf", "frontend-pf", "backend-pf", "kafka-pf" -ErrorAction SilentlyContinue
+$oldJobs = Get-Job -Name "postgres-pf", "frontend-pf", "backend-pf", "kafka-pf", "kafka-ui-pf" -ErrorAction SilentlyContinue
 if ($oldJobs) {
     $oldJobs | Stop-Job | Remove-Job
 }
@@ -13,10 +13,11 @@ Start-Job -Name "postgres-pf" -ScriptBlock { kubectl port-forward svc/my-postgre
 Start-Job -Name "frontend-pf" -ScriptBlock { kubectl port-forward svc/insurance-frontend-svc 8081:80 } | Out-Null
 Start-Job -Name "backend-pf"  -ScriptBlock { kubectl port-forward svc/insurance-backend-svc 8082:8080 } | Out-Null
 Start-Job -Name "kafka-pf"    -ScriptBlock { kubectl port-forward svc/my-kafka 9092:9092 } | Out-Null
+Start-Job -Name "kafka-ui-pf" -ScriptBlock { kubectl port-forward svc/kafka-ui-svc 8083:8080 } | Out-Null
 
 # 3. Esperar un segundo y verificar estado
 Start-Sleep -Seconds 2
-$jobs = Get-Job -Name "postgres-pf", "frontend-pf", "backend-pf", "kafka-pf"
+$jobs = Get-Job -Name "postgres-pf", "frontend-pf", "backend-pf", "kafka-pf", "kafka-ui-pf"
 
 Write-Host "`nEstado de los túneles:" -ForegroundColor Cyan
 foreach ($job in $jobs) {
@@ -30,6 +31,7 @@ Write-Host " * PostgreSQL:        localhost:5433" -ForegroundColor Gray
 Write-Host " * Apache Kafka:      localhost:9092" -ForegroundColor Gray
 Write-Host " * Angular Frontend:  http://localhost:8081" -ForegroundColor Gray
 Write-Host " * Spring Boot API:   http://localhost:8082" -ForegroundColor Gray
+Write-Host " * Kafka UI:          http://localhost:8083" -ForegroundColor Gray
 
 Write-Host "`n>>> PRESIONA [CTRL + C] PARA APAGAR TODOS LOS TÚNELES <<<" -ForegroundColor Yellow
 Write-Host "==================================================" -ForegroundColor Green
