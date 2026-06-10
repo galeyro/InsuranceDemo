@@ -41,7 +41,7 @@ public class PolicyStatusChangedIntegrationTest {
         // 3. Esperamos 3 segundos para dar tiempo a que el hilo de Kafka procese el mensaje
         // y nuestro "PolicyNotificationConsumer" lo lea.
         System.out.println("[TEST] Esperando que el consumidor de Kafka procese el evento...");
-        TimeUnit.SECONDS.sleep(3);
+        TimeUnit.SECONDS.sleep(10);
 
         System.out.println("=== [TEST] FIN DE LA PRUEBA ===\n");
     }
