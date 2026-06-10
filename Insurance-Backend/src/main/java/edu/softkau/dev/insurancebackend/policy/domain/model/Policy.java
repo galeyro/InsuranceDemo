@@ -185,6 +185,10 @@ public class Policy {
                 this.updatedAt = java.time.Instant.now();
             }
 
+            if (this.policyNumber == null || this.policyNumber.isBlank()) {
+                this.policyNumber = PolicyNumberSequencer.getInstance().nextPolicyNumber();
+            }
+
             java.util.Objects.requireNonNull(id, "El ID es obligatorio");
             java.util.Objects.requireNonNull(policyNumber, "El número de póliza es obligatorio");
             java.util.Objects.requireNonNull(customerId, "El ID de cliente es obligatorio");
