@@ -25,22 +25,22 @@ El sistema se basa en **Arquitectura Hexagonal (Ports & Adapters)** para desacop
 
 ```mermaid
 graph TD
-    subgraph Cliente
-        FE[Angular Frontend]
+    subgraph client ["Cliente"]
+        FE["Angular Frontend"]
     end
-    subgraph Ingress y Redes
-        CF[Cloudflare Tunnel] --> ING[Nginx Ingress Controller]
+    subgraph ingress ["Ingress y Redes"]
+        CF["Cloudflare Tunnel"] --> ING["Nginx Ingress Controller"]
     end
-    subgraph Kubernetes Cluster (Minikube)
-        ING --> FE_SVC[Frontend Service] --> FE_POD[Frontend Pod]
-        ING --> BE_SVC[Backend Service] --> BE_POD[Backend Pod]
-        BE_POD --> DB[(PostgreSQL)]
-        BE_POD --> KF[Apache Kafka]
-        KF_UI[Kafka UI] --> KF
+    subgraph k8s ["Kubernetes Cluster (Minikube)"]
+        ING --> FE_SVC["Frontend Service"] --> FE_POD["Frontend Pod"]
+        ING --> BE_SVC["Backend Service"] --> BE_POD["Backend Pod"]
+        BE_POD --> DB[("PostgreSQL")]
+        BE_POD --> KF["Apache Kafka"]
+        KF_UI["Kafka UI"] --> KF
     end
-    subgraph GitOps CD
-        Git[(GitHub Repo)] -->|Reconcilia| Flux[FluxCD Controllers]
-        Flux -->|Despliega| Kubernetes_Cluster
+    subgraph gitops ["GitOps CD"]
+        Git[("GitHub Repo")] -->|Reconcilia| Flux["FluxCD Controllers"]
+        Flux -->|Despliega| k8s
     end
 ```
 
