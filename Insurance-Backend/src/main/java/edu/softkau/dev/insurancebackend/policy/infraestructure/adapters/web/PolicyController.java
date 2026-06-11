@@ -4,6 +4,7 @@ import edu.softkau.dev.insurancebackend.policy.application.usecase.ChangePolicyS
 import edu.softkau.dev.insurancebackend.policy.application.usecase.CreatePolicyUseCase;
 import edu.softkau.dev.insurancebackend.policy.application.usecase.GetPolicyUseCase;
 import edu.softkau.dev.insurancebackend.policy.application.usecase.ListPoliciesByCustomerUseCase;
+import edu.softkau.dev.insurancebackend.policy.application.usecase.ListPoliciesUseCase;
 import edu.softkau.dev.insurancebackend.policy.domain.model.Policy;
 import edu.softkau.dev.insurancebackend.policy.domain.model.RiskProfile;
 import edu.softkau.dev.insurancebackend.policy.domain.ports.PolicyRepository;
@@ -32,17 +33,20 @@ public class PolicyController {
     private final ListPoliciesByCustomerUseCase listPoliciesByCustomerUseCase;
     private final ChangePolicyStatusUseCase changePolicyStatusUseCase;
     private final PolicyRepository policyRepository;
+    private final ListPoliciesUseCase listPoliciesUseCase;
 
     public PolicyController(CreatePolicyUseCase createPolicyUseCase,
                             GetPolicyUseCase getPolicyUseCase,
                             ListPoliciesByCustomerUseCase listPoliciesByCustomerUseCase,
                             ChangePolicyStatusUseCase changePolicyStatusUseCase,
-                            PolicyRepository policyRepository) {
+                            PolicyRepository policyRepository,
+                            ListPoliciesUseCase listPoliciesUseCase) {
         this.createPolicyUseCase = createPolicyUseCase;
         this.getPolicyUseCase = getPolicyUseCase;
         this.listPoliciesByCustomerUseCase = listPoliciesByCustomerUseCase;
         this.changePolicyStatusUseCase = changePolicyStatusUseCase;
         this.policyRepository = policyRepository;
+        this.listPoliciesUseCase = listPoliciesUseCase;
     }
 
     /**
@@ -87,6 +91,16 @@ public class PolicyController {
     public ResponseEntity<List<Policy>> getPoliciesByCustomerId(@PathVariable UUID id) {
         List<Policy> policies = listPoliciesByCustomerUseCase.execute(id);
         return ResponseEntity.ok(policies);
+    }
+
+    /**
+     * GET /api/policies
+     * Obtiene todas las pólizas registradas.
+     */
+    @GetMapping
+    @Operation(summary = "Listar todas las pólizas", description = "Retorna la lista completa de todas las pólizas registradas en el sistema.")
+    public ResponseEntity<List<Policy>> getAllPolicies() {
+        return ResponseEntity.ok(listPoliciesUseCase.execute());
     }
 
     /**

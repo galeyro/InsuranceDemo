@@ -1,8 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { StateService } from '../../../core/state/state.service';
+import { CustomerHttpService } from '../../customers/data/customer-http.service';
+import { PolicyHttpService } from '../../policies/data/policy-http.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -254,8 +256,47 @@ import { StateService } from '../../../core/state/state.service';
   `,
   styles: [],
 })
-export class DashboardPage {
+export class DashboardPage implements OnInit {
   protected readonly state = inject(StateService);
+  private readonly customerService = inject(CustomerHttpService);
+  private readonly policyService = inject(PolicyHttpService);
+
+  ngOnInit(): void {
+    this.customerService.getAll().subscribe();
+    this.policyService.getAll().subscribe({
+      next: (policies) => {
+        // Generar historial de eventos simulados de Kafka basados en pólizas reales de Postgres
+        if (this.state.transitions().length === 0 && policies.length > 0) {
+          const mockTransitions = policies.slice(0, 3).map((policy, index) => {
+            const minutesAgo = (index + 1) * 12 + 5;
+            const timestamp = new Date(Date.now() - minutesAgo * 60 * 1000);
+            
+            let oldStatus = 'QUOTED';
+            let newStatus = policy.status;
+            
+            if (policy.status === 'ACTIVE') {
+              oldStatus = 'ISSUED';
+            } else if (policy.status === 'ISSUED') {
+              oldStatus = 'QUOTED';
+            } else if (policy.status === 'SUSPENDED' || policy.status === 'CANCELLED') {
+              oldStatus = 'ACTIVE';
+            }
+
+            return {
+              policyNumber: policy.policyNumber,
+              oldStatus: oldStatus,
+              newStatus: newStatus,
+              timestamp: timestamp,
+              success: index !== 2 // Simular una fallida para variedad visual
+            };
+          });
+          
+          // Llenar el signal
+          mockTransitions.forEach((t) => this.state.addTransition(t));
+        }
+      }
+    });
+  }
 
   getPolicyCount(branch: string): number {
     return this.state.policies().filter((p) => p.branch === branch).length;

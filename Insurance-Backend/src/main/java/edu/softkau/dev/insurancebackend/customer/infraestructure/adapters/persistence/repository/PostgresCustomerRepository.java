@@ -8,7 +8,9 @@ import edu.softkau.dev.insurancebackend.customer.infraestructure.adapters.persis
 import edu.softkau.dev.insurancebackend.customer.infraestructure.adapters.persistence.mappers.CustomerMapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Adaptador de infraestructura que implementa el puerto CustomerRepository del dominio.
@@ -54,5 +56,12 @@ public class PostgresCustomerRepository implements CustomerRepository {
     public boolean existsByEmail(Email email) {
         // Comprobamos la existencia del email usando la interfaz de Spring Data
         return jpaRepository.existsByEmail(email.getValue());
+    }
+
+    @Override
+    public List<Customer> findAll() {
+        return jpaRepository.findAll().stream()
+                .map(mapper::toDomain)
+                .collect(Collectors.toList());
     }
 }

@@ -34,4 +34,16 @@ export class CustomerHttpService {
       })
     );
   }
+
+  getAll(): Observable<Customer[]> {
+    return this.http.get<Customer[]>(this.apiUrl).pipe(
+      tap((customers) => {
+        this.state.customers.set(customers);
+      }),
+      catchError((err) => {
+        this.notification.error(err.message || 'Error al cargar clientes');
+        throw err;
+      })
+    );
+  }
 }

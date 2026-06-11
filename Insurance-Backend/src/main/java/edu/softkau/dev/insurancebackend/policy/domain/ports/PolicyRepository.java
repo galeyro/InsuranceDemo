@@ -15,4 +15,5 @@ public interface PolicyRepository {
     void save(Policy policy);
     Optional<Policy> findById(PolicyId id);
     List<Policy> findByCustomerId(CustomerId customerId);
+    List<Policy> findAll();
 }

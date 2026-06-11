@@ -59,4 +59,16 @@ export class PolicyHttpService {
       })
     );
   }
+
+  getAll(): Observable<Policy[]> {
+    return this.http.get<Policy[]>(this.apiUrl).pipe(
+      tap((policies) => {
+        this.state.policies.set(policies);
+      }),
+      catchError((err) => {
+        this.notification.error(err.message || 'Error al cargar pólizas');
+        throw err;
+      })
+    );
+  }
 }

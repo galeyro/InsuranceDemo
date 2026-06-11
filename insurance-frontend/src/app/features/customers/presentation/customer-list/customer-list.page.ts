@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { StateService } from '../../../../core/state/state.service';
+import { CustomerHttpService } from '../../data/customer-http.service';
 
 @Component({
   selector: 'app-customer-list',
@@ -112,6 +113,11 @@ import { StateService } from '../../../../core/state/state.service';
   `,
   styles: [],
 })
-export class CustomerListPage {
+export class CustomerListPage implements OnInit {
   protected readonly state = inject(StateService);
+  private readonly customerService = inject(CustomerHttpService);
+
+  ngOnInit(): void {
+    this.customerService.getAll().subscribe();
+  }
 }

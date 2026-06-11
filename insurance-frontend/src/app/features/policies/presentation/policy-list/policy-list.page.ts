@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { StateService } from '../../../../core/state/state.service';
+import { PolicyHttpService } from '../../data/policy-http.service';
 
 @Component({
   selector: 'app-policy-list',
@@ -129,6 +130,11 @@ import { StateService } from '../../../../core/state/state.service';
   `,
   styles: [],
 })
-export class PolicyListPage {
+export class PolicyListPage implements OnInit {
   protected readonly state = inject(StateService);
+  private readonly policyService = inject(PolicyHttpService);
+
+  ngOnInit(): void {
+    this.policyService.getAll().subscribe();
+  }
 }

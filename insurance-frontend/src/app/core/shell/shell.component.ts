@@ -34,10 +34,14 @@ import { StateService } from '../state/state.service';
         class="fixed inset-y-0 left-0 z-50 w-64 lg:translate-x-0 lg:flex lg:flex-col py-8 px-4 transition-all duration-300 app-sidebar"
       >
         <!-- Brand Header -->
-        <div class="px-6 mb-10">
-          <h1 class="font-space-grotesk text-headline-md text-primary tracking-tight font-bold">Sofka Insure</h1>
+        <a
+          routerLink="/"
+          class="block px-6 mb-10 group cursor-pointer active:scale-95 transition-transform"
+          title="Volver al inicio"
+        >
+          <h1 class="font-space-grotesk text-headline-md text-primary tracking-tight font-bold group-hover:opacity-80 transition-opacity">Sofka Insure</h1>
           <p class="font-body-sm text-on-surface-variant opacity-75 text-xs">{{ t('landing.subtitle') }} Protection</p>
-        </div>
+        </a>
 
         <!-- Sidebar Navigation Menu -->
         <nav class="flex-1 space-y-2">
