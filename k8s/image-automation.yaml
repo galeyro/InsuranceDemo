@@ -1,0 +1,66 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: insurance-frontend
+  namespace: flux-system
+spec:
+  image: ghcr.io/galeyro/insurance-frontend
+  interval: 2m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: insurance-frontend
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: insurance-frontend
+  policy:
+    semver:
+      range: 'v1.0.x'
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImageRepository
+metadata:
+  name: insurance-backend
+  namespace: flux-system
+spec:
+  image: ghcr.io/galeyro/insurance-backend
+  interval: 2m0s
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: insurance-backend
+  namespace: flux-system
+spec:
+  imageRepositoryRef:
+    name: insurance-backend
+  policy:
+    semver:
+      range: 'v1.0.x'
+---
+apiVersion: image.toolkit.fluxcd.io/v1beta1
+kind: ImageUpdateAutomation
+metadata:
+  name: flux-system
+  namespace: flux-system
+spec:
+  interval: 2m0s
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  git:
+    checkout:
+      ref:
+        branch: main
+    commit:
+      author:
+        email: fluxcdbot@users.noreply.github.com
+        name: fluxcdbot
+      messageTemplate: 'chore(gitops): update images [skip ci]'
+    push:
+      branch: main
+  update:
+    path: ./k8s
+    strategy: SetImage
