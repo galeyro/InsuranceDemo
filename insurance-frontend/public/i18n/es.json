@@ -1,0 +1,225 @@
+{
+  "landing": {
+    "subtitle": "Premium",
+    "nav": {
+      "platform": "Plataforma",
+      "analytics": "Análisis",
+      "enterprise": "Corporativo"
+    },
+    "cta": {
+      "enter": "Entrar a la Plataforma"
+    },
+    "hero": {
+      "badge": "Evaluación de Riesgos de Próxima Generación",
+      "title": "Gestión del Ciclo de Vida de Seguros de <br> <span class=\"sofka-gradient-text\">Próxima Generación</span>",
+      "description": "Revolucionando los seguros empresariales con una evaluación de riesgos de precisión, suscripción automatizada y control de pólizas en tiempo real para carteras modernas de alto rendimiento.",
+      "cta": {
+        "primary": "Entrar a la Plataforma",
+        "secondary": "Ver Docs Técnicos"
+      }
+    },
+    "stats": {
+      "policies": "Pólizas Activas",
+      "premium": "Prima Total",
+      "risk": "Riesgo Global",
+      "portfolio": "Evolución de Cartera",
+      "active": "Activos",
+      "growth": "Crecimiento Anual",
+      "yoy": "YoY"
+    },
+    "features": {
+      "quoting": {
+        "title": "Cotización Automatizada",
+        "description": "Motores de cotización instantáneos basados en datos que analizan miles de variables de riesgo en milisegundos para ofrecer primas competitivas sin demoras humanas."
+      },
+      "lifecycle": {
+        "title": "Pasos del Ciclo de Vida",
+        "description": "Siga cada póliza desde su creación hasta la renovación a través de un flujo visual en tiempo real. Transparencia total para cada parte interesada en la cadena."
+      },
+      "intelligence": {
+        "title": "Inteligencia de Riesgo",
+        "description": "Modelos avanzados de ML que predicen la volatilidad de la cartera y brindan información procesable para estrategias preventivas de gestión de riesgos."
+      }
+    },
+    "clarity": {
+      "title": "Claridad de Póliza <br> <span class=\"text-primary\">Sin Igual</span>",
+      "riskProfiling": {
+        "title": "Perfilado de Riesgo Dinámico",
+        "description": "Ajuste los parámetros de la póliza sobre la marcha en función de las condiciones cambiantes del mercado y del entorno."
+      },
+      "compliance": {
+        "title": "Cumplimiento Automatizado",
+        "description": "La lógica regulatoria integrada garantiza que cada póliza cumpla automáticamente con los requisitos regionales."
+      },
+      "omnichannel": {
+        "title": "Gestión Omnicanal",
+        "description": "Acceda a su cartera desde el escritorio, el móvil o a través de nuestras integraciones de API headless."
+      }
+    },
+    "portfolio": {
+      "title": "Cartera Activa",
+      "growth": "Crecimiento Anual",
+      "yoy": "YoY"
+    },
+    "ctaSection": {
+      "title": "Control Ejecutivo Sin Fricción",
+      "description": "Respetamos su tiempo. Sofka Insure Premium está optimizado para una visión general inmediata de alto nivel. No se requiere inicio de sesión para la vista previa de la plataforma ejecutiva.",
+      "button": "Lanzar Dashboard Ejecutivo",
+      "noLogin": "Sin inicio de sesión",
+      "certified": "Certificado ISO 27001"
+    },
+    "footer": {
+      "privacy": "Privacidad",
+      "terms": "Términos",
+      "security": "Seguridad",
+      "copyright": "© 2026 Sofka Group. Todos los derechos reservados."
+    }
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "customers": "Clientes",
+    "policies": "Pólizas",
+    "logout": "Cerrar Sesión"
+  },
+  "theme": {
+    "toggle": "Cambiar a modo {mode}",
+    "light": "claro",
+    "dark": "oscuro"
+  },
+  "lang": {
+    "es": "Español",
+    "en": "English"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "customers": "Clientes",
+    "activePolicies": "Pólizas Activas",
+    "monthlyPremium": "Prima Mensual",
+    "subtitle": "Gestión inteligente de clientes, tarificación de pólizas basada en riesgo y control de ciclo de vida en tiempo real.",
+    "kafkaHistory": "Historial de Eventos (Kafka)",
+    "hotEvents": "Eventos en Caliente",
+    "riskDistribution": "Distribución de Pólizas por Ramo",
+    "recentTitle": "Pólizas Recientes",
+    "viewAll": "Ver Todas las Pólizas",
+    "emptyHistoryTitle": "Sin eventos recientes",
+    "emptyHistoryDescription": "Las transiciones de estado de las pólizas se registrarán y mostrarán aquí en tiempo real cuando ocurran y se encolen en Kafka."
+  },
+  "customers": {
+    "title": "Clientes",
+    "new": "Nuevo Cliente",
+    "list": "Lista de clientes",
+    "listSubtitle": "Registra y administra los perfiles de tus clientes para asociar pólizas.",
+    "listEmptyTitle": "No hay clientes registrados",
+    "listEmptyDescription": "Comienza creando tu primer cliente en la plataforma.",
+    "form": {
+      "title": "Nuevo Cliente",
+      "name": "Nombre",
+      "email": "Correo electrónico",
+      "submit": "Guardar",
+      "cancel": "Cancelar"
+    },
+    "detail": {
+      "title": "Detalle de Cliente",
+      "info": "Información del cliente"
+    }
+  },
+  "policies": {
+    "title": "Pólizas",
+    "new": "Nueva Póliza",
+    "list": "Lista de pólizas",
+    "listSubtitle": "Genera cotizaciones iniciales y controla el ciclo de vida de las pólizas activas.",
+    "listEmptyTitle": "No hay pólizas registradas",
+    "listEmptyDescription": "Comienza cotizando y emitiendo una nueva póliza de seguros.",
+    "form": {
+      "title": "Nueva Póliza",
+      "customer": "Cliente",
+      "branch": "Ramo",
+      "ratingStrategy": "Estrategia de tarificación",
+      "riskScore": "Puntuación de riesgo",
+      "customerSinceYear": "Año de registro",
+      "submit": "Cotizar",
+      "cancel": "Cancelar"
+    },
+    "detail": {
+      "title": "Detalle de Póliza",
+      "info": "Información de la póliza",
+      "status": "Estado",
+      "transition": "Transicionar estado",
+      "policyNumber": "Número de póliza",
+      "monthlyPremium": "Prima mensual",
+      "coverage": "Cobertura",
+      "termMonths": "Plazo (meses)",
+      "timeline": "Historial de Cambios",
+      "created": "Creada",
+      "lastUpdated": "Última actualización",
+      "indefinite": "Indefinido"
+    },
+    "status": {
+      "QUOTED": "Cotizada",
+      "ISSUED": "Emitida",
+      "ACTIVE": "Activa",
+      "SUSPENDED": "Suspendida",
+      "CANCELLED": "Cancelada"
+    },
+    "branch": {
+      "AUTO": "Automóviles",
+      "LIFE": "Vida",
+      "HOME": "Hogar",
+      "HEALTH": "Salud"
+    },
+    "ratingStrategy": {
+      "STANDARD": "Tarifa estándar",
+      "RISK_BASED": "Basado en riesgo",
+      "LOYALTY": "Fidelidad"
+    }
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "view": "Ver",
+    "back": "Volver",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "actions": "Acciones",
+    "noData": "No hay datos disponibles",
+    "select": "Seleccionar",
+    "confirm": "Confirmar",
+    "yes": "Sí",
+    "no": "No",
+    "month": "mes",
+    "months": "meses"
+  },
+  "errors": {
+    "generic": "Ocurrió un error inesperado",
+    "validation": "Uno o más campos tienen datos inválidos",
+    "notFound": "No encontrado",
+    "conflict": "El recurso ya existe",
+    "invalidTransition": "Transición de estado no permitida",
+    "network": "Error de conexión"
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "badge": "Eventos",
+    "clear": "Limpiar",
+    "empty": "No hay notificaciones recientes",
+    "events": {
+      "customer_created": {
+        "title": "Cliente Creado",
+        "message": "Se registró al cliente: {name}"
+      },
+      "policy_created": {
+        "title": "Póliza Creada",
+        "message": "Nueva póliza cotizada: {policyNumber}"
+      },
+      "policy_status_changed": {
+        "title": "Estado de Póliza Actualizado",
+        "message": "Póliza {policyNumber} cambió de {oldStatus} a {newStatus}"
+      }
+    }
+  }
+}

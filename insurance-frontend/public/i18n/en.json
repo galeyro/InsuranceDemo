@@ -1,0 +1,225 @@
+{
+  "landing": {
+    "subtitle": "Premium",
+    "nav": {
+      "platform": "Platform",
+      "analytics": "Analytics",
+      "enterprise": "Enterprise"
+    },
+    "cta": {
+      "enter": "Enter Platform"
+    },
+    "hero": {
+      "badge": "Next-Gen Risk Assessment",
+      "title": "Next-Generation Insurance <br> <span class=\"sofka-gradient-text\">Lifecycle Management</span>",
+      "description": "Revolutionizing enterprise insurance with precision-grade risk assessment, automated underwriting, and real-time policy control for modern high-performance portfolios.",
+      "cta": {
+        "primary": "Enter Platform",
+        "secondary": "View Technical Docs"
+      }
+    },
+    "stats": {
+      "policies": "Active Policies",
+      "premium": "Total Premium",
+      "risk": "Global Risk",
+      "portfolio": "Portfolio Evolution",
+      "active": "Active",
+      "growth": "Annual Growth",
+      "yoy": "YoY"
+    },
+    "features": {
+      "quoting": {
+        "title": "Automated Quoting",
+        "description": "Instant data-driven quoting engines that analyze thousands of risk variables in milliseconds to deliver competitive premiums without human delays."
+      },
+      "lifecycle": {
+        "title": "Lifecycle Steps",
+        "description": "Track every policy from inception to renewal through a real-time visual flow. Total transparency for every stakeholder in the chain."
+      },
+      "intelligence": {
+        "title": "Risk Intelligence",
+        "description": "Advanced ML models that predict portfolio volatility and provide actionable insights for preventive risk management strategies."
+      }
+    },
+    "clarity": {
+      "title": "Unparalleled <br> <span class=\"text-primary\">Policy Clarity</span>",
+      "riskProfiling": {
+        "title": "Dynamic Risk Profiling",
+        "description": "Adjust policy parameters on the fly based on changing market and environmental conditions."
+      },
+      "compliance": {
+        "title": "Automated Compliance",
+        "description": "Integrated regulatory logic ensures every policy automatically meets regional requirements."
+      },
+      "omnichannel": {
+        "title": "Omnichannel Management",
+        "description": "Access your portfolio from desktop, mobile, or through our headless API integrations."
+      }
+    },
+    "portfolio": {
+      "title": "Active Portfolio",
+      "growth": "Annual Growth",
+      "yoy": "YoY"
+    },
+    "ctaSection": {
+      "title": "Zero Friction Executive Control",
+      "description": "We respect your time. Sofka Insure Premium is optimized for immediate high-level executive overview. No login required for the executive platform preview.",
+      "button": "Launch Executive Dashboard",
+      "noLogin": "No login required",
+      "certified": "ISO 27001 Certified"
+    },
+    "footer": {
+      "privacy": "Privacy",
+      "terms": "Terms",
+      "security": "Security",
+      "copyright": "© 2026 Sofka Group. All rights reserved."
+    }
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "customers": "Customers",
+    "policies": "Policies",
+    "logout": "Log Out"
+  },
+  "theme": {
+    "toggle": "Switch to {mode} mode",
+    "light": "light",
+    "dark": "dark"
+  },
+  "lang": {
+    "es": "Español",
+    "en": "English"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "customers": "Customers",
+    "activePolicies": "Active Policies",
+    "monthlyPremium": "Monthly Premium",
+    "subtitle": "Intelligent customer management, risk-based policy pricing and real-time lifecycle control.",
+    "kafkaHistory": "Event History (Kafka)",
+    "hotEvents": "Live Events",
+    "riskDistribution": "Policy Distribution by Branch",
+    "recentTitle": "Recent Policies",
+    "viewAll": "View All Policies",
+    "emptyHistoryTitle": "No recent events",
+    "emptyHistoryDescription": "Policy status transitions will be recorded and shown here in real time as they occur and queue in Kafka."
+  },
+  "customers": {
+    "title": "Customers",
+    "new": "New Customer",
+    "list": "Customer list",
+    "listSubtitle": "Register and manage your customer profiles to link policies.",
+    "listEmptyTitle": "No registered customers",
+    "listEmptyDescription": "Start by creating your first customer on the platform.",
+    "form": {
+      "title": "New Customer",
+      "name": "Name",
+      "email": "Email",
+      "submit": "Save",
+      "cancel": "Cancel"
+    },
+    "detail": {
+      "title": "Customer Detail",
+      "info": "Customer information"
+    }
+  },
+  "policies": {
+    "title": "Policies",
+    "new": "New Policy",
+    "list": "Policy list",
+    "listSubtitle": "Generate initial quotes and control the lifecycle of active policies.",
+    "listEmptyTitle": "No registered policies",
+    "listEmptyDescription": "Start by quoting and issuing a new insurance policy.",
+    "form": {
+      "title": "New Policy",
+      "customer": "Customer",
+      "branch": "Branch",
+      "ratingStrategy": "Rating Strategy",
+      "riskScore": "Risk Score",
+      "customerSinceYear": "Customer Since Year",
+      "submit": "Quote",
+      "cancel": "Cancel"
+    },
+    "detail": {
+      "title": "Policy Detail",
+      "info": "Policy information",
+      "status": "Status",
+      "transition": "Transition status",
+      "policyNumber": "Policy Number",
+      "monthlyPremium": "Monthly Premium",
+      "coverage": "Coverage",
+      "termMonths": "Term (months)",
+      "timeline": "Timeline",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "indefinite": "Indefinite"
+    },
+    "status": {
+      "QUOTED": "Quoted",
+      "ISSUED": "Issued",
+      "ACTIVE": "Active",
+      "SUSPENDED": "Suspended",
+      "CANCELLED": "Cancelled"
+    },
+    "branch": {
+      "AUTO": "Auto",
+      "LIFE": "Life",
+      "HOME": "Home",
+      "HEALTH": "Health"
+    },
+    "ratingStrategy": {
+      "STANDARD": "Standard Rate",
+      "RISK_BASED": "Risk Based",
+      "LOYALTY": "Loyalty"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "view": "View",
+    "back": "Back",
+    "search": "Search",
+    "filter": "Filter",
+    "actions": "Actions",
+    "noData": "No data available",
+    "select": "Select",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "month": "month",
+    "months": "months"
+  },
+  "errors": {
+    "generic": "An unexpected error occurred",
+    "validation": "One or more fields have invalid data",
+    "notFound": "Not found",
+    "conflict": "Resource already exists",
+    "invalidTransition": "Invalid state transition",
+    "network": "Connection error"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "badge": "Events",
+    "clear": "Clear",
+    "empty": "No recent notifications",
+    "events": {
+      "customer_created": {
+        "title": "Customer Created",
+        "message": "Customer registered: {name}"
+      },
+      "policy_created": {
+        "title": "Policy Created",
+        "message": "New policy quoted: {policyNumber}"
+      },
+      "policy_status_changed": {
+        "title": "Policy Status Updated",
+        "message": "Policy {policyNumber} changed from {oldStatus} to {newStatus}"
+      }
+    }
+  }
+}

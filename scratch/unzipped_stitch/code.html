@@ -1,0 +1,362 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title class="">Sofka Insurance Premium | Next-Gen Lifecycle Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Shared Style Context -->
+<style>
+        :root {
+            --sofka-orange: #ff7e0a;
+            --carbon-black: #0d0d0d;
+        }
+        body {
+            background-color: var(--carbon-black);
+            color: #e5e2e1;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .surface-gradient {
+            background: linear-gradient(135deg, rgba(255, 126, 10, 0.05) 0%, rgba(13, 13, 13, 1) 100%);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        .text-glow {
+            text-shadow: 0 0 20px rgba(255, 126, 10, 0.4);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sofka-gradient-text {
+            background: linear-gradient(to right, #ffb689, #ff7e0a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#a68b7c",
+                    "on-tertiary-fixed-variant": "#004b71",
+                    "on-primary-container": "#5e2a00",
+                    "inverse-primary": "#984800",
+                    "on-secondary-fixed": "#261910",
+                    "tertiary": "#8fcdff",
+                    "error": "#ffb4ab",
+                    "tertiary-fixed-dim": "#8fcdff",
+                    "surface-container-low": "#1c1b1b",
+                    "secondary": "#dac2b4",
+                    "on-secondary": "#3c2d24",
+                    "secondary-container": "#57463b",
+                    "on-tertiary-fixed": "#001e30",
+                    "on-primary": "#512300",
+                    "outline-variant": "#584235",
+                    "on-secondary-container": "#cbb4a6",
+                    "secondary-fixed": "#f7decf",
+                    "surface-variant": "#353534",
+                    "on-tertiary": "#003450",
+                    "on-background": "#e5e2e1",
+                    "surface-bright": "#3a3939",
+                    "primary-fixed": "#ffdbc8",
+                    "primary": "#ffb689",
+                    "on-primary-fixed-variant": "#743500",
+                    "tertiary-container": "#00abfb",
+                    "surface-dim": "#131313",
+                    "on-tertiary-container": "#003c5c",
+                    "surface-container-highest": "#353534",
+                    "surface-container-high": "#2a2a2a",
+                    "surface": "#131313",
+                    "error-container": "#93000a",
+                    "on-error": "#690005",
+                    "on-primary-fixed": "#311300",
+                    "surface-tint": "#ffb689",
+                    "surface-container": "#201f1f",
+                    "on-surface": "#e5e2e1",
+                    "background": "#131313",
+                    "tertiary-fixed": "#cbe6ff",
+                    "on-secondary-fixed-variant": "#544339",
+                    "secondary-fixed-dim": "#dac2b4",
+                    "on-surface-variant": "#dfc0af",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-lowest": "#0e0e0e",
+                    "inverse-surface": "#e5e2e1",
+                    "inverse-on-surface": "#313030",
+                    "primary-fixed-dim": "#ffb689",
+                    "primary-container": "#ff7e0a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "20px",
+                    "unit": "8px",
+                    "margin-desktop": "64px",
+                    "gutter": "24px",
+                    "container-max": "1280px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "headline-sm": ["Space Grotesk"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg-mobile": ["Space Grotesk"],
+                    "display-lg": ["Space Grotesk"],
+                    "label-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Space Grotesk"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background">
+<!-- Top Navigation Bar -->
+<header class="bg-surface/80 backdrop-blur-xl border-b border-white/10 docked full-width top-0 sticky z-50 transition-all duration-300 h-20">
+<div class="flex justify-between items-center w-full px-gutter h-20 max-w-container-max mx-auto">
+<div class="flex items-center gap-3">
+<span class="font-display-lg text-headline-md text-primary tracking-tight font-headline-md">Sofka Insurance</span>
+<span class="text-on-surface-variant font-label-md text-label-md px-2 py-0.5 border border-primary/20 rounded">PREMIUM</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md cursor-pointer active:scale-95" href="#">Platform</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-label-md text-label-md cursor-pointer active:scale-95" href="#">Insights</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-label-md text-label-md cursor-pointer active:scale-95" href="#">Enterprise</a>
+</nav>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" data-icon="help">help</span>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors" data-icon="notifications">notifications</span>
+<button class="bg-primary text-on-primary-container px-6 py-2 rounded-lg font-label-md text-label-md font-bold transition-all hover:brightness-110 active:scale-95">
+                    Enter Platform
+                </button>
+</div>
+</div>
+</header>
+<main class="relative">
+<!-- Hero Section -->
+<section class="relative min-h-[90vh] flex items-center justify-center pt-20 overflow-hidden">
+<!-- Animated Shader Background Placeholder -->
+
+<div class="max-w-container-max mx-auto px-gutter relative z-10 text-center">
+<div class="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 px-4 py-1.5 rounded-full mb-8">
+<span class="material-symbols-outlined text-primary text-[16px]" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-primary font-label-sm text-label-sm uppercase tracking-widest">Next-Gen Risk Assessment</span>
+</div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg mb-6 leading-tight max-w-4xl mx-auto">
+                    Next-Gen Insurance <br>
+<span class="sofka-gradient-text">Lifecycle Management</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-10 opacity-80">
+                    Revolutionizing enterprise insurance with precision risk assessment, automated underwriting, and real-time policy control for modern high-performance portfolios.
+                </p>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+<button class="bg-primary text-on-primary-container h-14 px-10 rounded-xl font-label-md text-label-md font-bold flex items-center gap-2 shadow-[0_0_30px_rgba(255,126,10,0.3)] transition-all hover:scale-105 active:scale-95">
+                        Enter Platform
+                        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<button class="border border-white/15 hover:bg-white/5 h-14 px-10 rounded-xl font-label-md text-label-md font-medium transition-all">
+                        View Technical Docs
+                    </button>
+</div>
+</div>
+<!-- Dashboard Peek (Lower Hero) -->
+<div class="absolute -bottom-64 left-1/2 -translate-x-1/2 w-full max-w-5xl opacity-40 hover:opacity-100 transition-opacity duration-700 pointer-events-none md:pointer-events-auto">
+<div class="glass-card rounded-t-3xl p-4 pb-0 overflow-hidden shadow-2xl transition-all duration-700 opacity-100 translate-y-0">
+<img alt="Sofka Insure Executive Dashboard Interface" class="w-full rounded-t-2xl border border-white/10" data-alt="A high-fidelity software interface showing a sophisticated insurance management dashboard on a dark carbon black background. The screen displays vibrant orange data visualizations, including real-time risk bar charts and policy lifecycle heatmaps. Glassmorphic card elements float with subtle transparency over the dark interface, reflecting a premium corporate aesthetic with clean Inter typography and precise spacing." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR_doasf7seGnmN4K3mPt6IDnl-Jxm2nYPIFkFQgDXTqI1WvLIcHDVYXFYubQFGNNHLs8GHDS-UwbLJQOWucGGPoU-z6tFzesBehlumiQJ1nVoct1cDq5o9SWG1YMPUeeSFL6hOSE4Oe479R3AUbwxLLlz-hDD8aEiDfU9kRCjQotCuAEoFtQipQAqIcOmxcioNxdZXSVIbYLlAWX6He0UbwCzBoET4hDyKAL7tdNrHNZjj382kbTU_qNUNUQI8hIlbVpqdWEAXho">
+</div>
+</div>
+</section>
+<!-- Value Propositions -->
+<section class="py-32 bg-surface mt-32 relative">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Prop 1 -->
+<div class="glass-card p-8 rounded-2xl group hover:border-primary/50 transition-all duration-300 duration-700 opacity-100 translate-y-0">
+<div class="w-14 h-14 bg-primary/10 border border-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="speed">speed</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-4">Automated Quoting</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Instant, data-driven quoting engines that analyze thousands of risk variables in milliseconds to deliver competitive premiums without human delay.</p>
+</div>
+<!-- Prop 2 -->
+<div class="glass-card p-8 rounded-2xl group hover:border-primary/50 transition-all duration-300 duration-700 opacity-100 translate-y-0">
+<div class="w-14 h-14 bg-primary/10 border border-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="account_tree">account_tree</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-4">Lifecycle Stepper</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Track every policy from inception to renewal through a real-time, visual pipeline. Total transparency for every stake holder in the chain.</p>
+</div>
+<!-- Prop 3 -->
+<div class="glass-card p-8 rounded-2xl group hover:border-primary/50 transition-all duration-300 duration-700 opacity-100 translate-y-0">
+<div class="w-14 h-14 bg-primary/10 border border-primary/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="psychology">psychology</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm mb-4">Risk Intelligence</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Advanced ML models that predict portfolio volatility and provide actionable insights for preventative risk management strategies.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Showcase -->
+<section class="py-32 overflow-hidden">
+<div class="max-w-container-max mx-auto px-gutter">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+<div>
+<h2 class="font-display-lg text-headline-md md:text-display-lg mb-8">Unparalleled <br><span class="text-primary">Policy Clarity.</span></h2>
+<div class="space-y-8">
+<div class="flex gap-4">
+<div class="mt-1">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle">check_circle</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm mb-2">Dynamic Risk Profiling</h4>
+<p class="text-on-surface-variant font-body-md text-body-md">Adjust policy parameters on the fly based on changing environmental and market conditions.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="mt-1">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle">check_circle</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm mb-2">Automated Compliance</h4>
+<p class="text-on-surface-variant font-body-md text-body-md">Embedded regulatory logic ensures every policy follows regional requirements automatically.</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="mt-1">
+<span class="material-symbols-outlined text-primary" data-icon="check_circle">check_circle</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm mb-2">Omni-Channel Management</h4>
+<p class="text-on-surface-variant font-body-md text-body-md">Access your portfolio from desktop, mobile, or via our headless API integrations.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative group">
+<!-- Background Glow -->
+<div class="absolute -inset-10 bg-primary/20 rounded-full blur-[100px] opacity-20 group-hover:opacity-40 transition-opacity"></div>
+<!-- Visual Peek -->
+<div class="relative glass-card p-6 rounded-[2rem] border-white/20 transform hover:-rotate-2 transition-transform duration-500 transition-all duration-700 opacity-100 translate-y-0">
+<div class="bg-background rounded-xl overflow-hidden shadow-2xl">
+<img alt="Sofka Insure Visual Stepper Analytics" class="w-full h-auto" data-alt="A macro shot of a sleek digital display featuring an insurance policy lifecycle stepper. The UI uses a minimalist dark design with glowing orange nodes representing stages like 'Underwriting', 'Active', and 'Renewal'. The background is deep carbon black with very subtle light-leak effects of orange and bronze, highlighting a premium data-visualization experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLhxWqsufjR4tY6LcPSjFsLj7wt2B23wD7vpq9gOEEOxkbtRTWC8FfN4gIz1q09h9hklp-8FPh-6iSJN4Xwxny1z1pSAac0Pkmp3tCVaTYm55JNUp571s-AHBtTgGnqqFdI1_3iSd1UHv3y6NmvmQmYzb8AW11AwlC3TNSs73mQRjJ4tvb_NVXFVsKFIx-viUt5EsiCvHHgZ2OoeuLm3kpiZtQpYnlh55pHD-UySHXg5-DXFs_B_3COXMi1veqe2SMIn1yLrYxJYg">
+<div class="p-6 border-t border-white/10 flex justify-between items-center">
+<div>
+<p class="text-on-surface-variant font-label-sm text-label-sm">Active Portfolio</p>
+<p class="text-primary font-headline-md text-headline-md">$142.8M</p>
+</div>
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-background bg-secondary flex items-center justify-center text-xs text-on-secondary font-bold">JD</div>
+<div class="w-10 h-10 rounded-full border-2 border-background bg-primary flex items-center justify-center text-xs text-on-primary font-bold">SA</div>
+<div class="w-10 h-10 rounded-full border-2 border-background bg-surface-container-highest flex items-center justify-center text-xs text-white">+4</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Direct Access Section -->
+<section class="py-32 relative bg-surface-container-lowest overflow-hidden">
+<!-- Asymmetric Glow -->
+<div class="absolute top-0 right-0 w-1/3 h-full bg-primary/5 blur-[120px] rounded-full"></div>
+<div class="max-w-container-max mx-auto px-gutter text-center relative z-10">
+<div class="max-w-3xl mx-auto border border-white/15 p-12 md:p-20 rounded-[3rem] surface-gradient glass-card transition-all duration-700 opacity-100 translate-y-0">
+<h2 class="font-display-lg text-headline-md md:text-display-lg mb-6">Zero Friction <br>Executive Control</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant opacity-80 mb-10">We respect your time. Sofka Insurance Premium is optimized for immediate high-level overview. No login is required for executive platform preview. Launch the dashboard now to experience the next-gen insurance interface.</p>
+<button class="bg-primary text-on-primary-container h-16 px-12 rounded-2xl font-label-md text-label-md font-bold text-lg transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_rgba(255,126,10,0.2)]">
+                        Launch Executive Dashboard
+                    </button>
+<div class="mt-8 flex items-center justify-center gap-6 text-on-surface-variant font-label-sm text-label-sm">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]" data-icon="lock_open">lock_open</span> No Login Required</span>
+<span class="w-1 h-1 rounded-full bg-white/30"></span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]" data-icon="verified_user">verified_user</span> ISO 27001 Certified</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="py-16 border-t border-white/10">
+<div class="max-w-container-max mx-auto px-gutter flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="font-display-lg text-headline-sm text-primary tracking-tight">Sofka Insurance</span>
+<p class="text-on-surface-variant font-label-sm text-label-sm">© 2026 Sofka Insurance Group. All rights reserved.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Privacy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Terms</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Security</a>
+</div>
+<div class="flex gap-4">
+<button class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="terminal">terminal</span>
+</button>
+<button class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-[20px]" data-icon="hub">hub</span>
+</button>
+</div>
+</div>
+</footer>
+</main>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const header = document.querySelector('header');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    header.classList.add('h-16', 'bg-surface/95');
+                    header.classList.remove('h-20', 'bg-surface/80');
+                } else {
+                    header.classList.add('h-20', 'bg-surface/80');
+                    header.classList.remove('h-16', 'bg-surface/95');
+                }
+            });
+
+            // Smooth appear for glass cards
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        entry.target.classList.remove('opacity-0', 'translate-y-10');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.glass-card').forEach(card => {
+                card.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-10');
+                observer.observe(card);
+            });
+        });
+    </script>
+
+
+</body></html>

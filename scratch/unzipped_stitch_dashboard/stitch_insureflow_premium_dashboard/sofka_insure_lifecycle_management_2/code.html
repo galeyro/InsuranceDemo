@@ -1,0 +1,513 @@
+<!DOCTYPE html><html class="dark" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title class="">Policy Detail | Sofka Insurance</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#261910",
+                        "on-secondary-fixed-variant": "#544339",
+                        "on-primary": "#512300",
+                        "tertiary-container": "#00abfb",
+                        "surface-variant": "#353534",
+                        "surface": "#131313",
+                        "secondary": "#dac2b4",
+                        "surface-container-high": "#2a2a2a",
+                        "on-primary-container": "#5e2a00",
+                        "on-secondary-container": "#cbb4a6",
+                        "surface-bright": "#3a3939",
+                        "secondary-fixed": "#f7decf",
+                        "on-tertiary": "#003450",
+                        "surface-container-highest": "#353534",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e",
+                        "inverse-on-surface": "#313030",
+                        "on-surface-variant": "#dfc0af",
+                        "on-surface": "#e5e2e1",
+                        "tertiary-fixed-dim": "#8fcdff",
+                        "error-container": "#93000a",
+                        "background": "#131313",
+                        "inverse-primary": "#984800",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#57463b",
+                        "primary": "#ffb689",
+                        "tertiary": "#8fcdff",
+                        "on-primary-fixed-variant": "#743500",
+                        "on-tertiary-fixed-variant": "#004b71",
+                        "on-background": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "on-primary-fixed": "#311300",
+                        "error": "#ffb4ab",
+                        "on-secondary": "#3c2d24",
+                        "secondary-fixed-dim": "#dac2b4",
+                        "on-tertiary-fixed": "#001e30",
+                        "tertiary-fixed": "#cbe6ff",
+                        "surface-tint": "#ffb689",
+                        "primary-fixed": "#ffdbc8",
+                        "primary-container": "#ff7e0a",
+                        "outline-variant": "#584235",
+                        "surface-container": "#201f1f",
+                        "outline": "#a68b7c",
+                        "surface-dim": "#131313",
+                        "primary-fixed-dim": "#ffb689",
+                        "on-tertiary-container": "#003c5c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Space Grotesk"],
+                        "headline-sm": ["Space Grotesk"],
+                        "display-lg-mobile": ["Space Grotesk"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #0d0d0d;
+            color: #e5e2e1;
+            -webkit-font-smoothing: antialiased;
+        }
+        .surface-gradient {
+            background: linear-gradient(145deg, rgba(32, 31, 31, 0.8) 0%, rgba(14, 14, 14, 0.9) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .bronze-gradient {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a1a0e 100%);
+            border: 1px solid rgba(255, 182, 137, 0.2);
+        }
+        .glass-blur {
+            backdrop-filter: blur(20px);
+        }
+        .stepper-line {
+            height: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            z-index: 0;
+            transform: translateY(-50%);
+        }
+        .stepper-progress {
+            height: 2px;
+            background: #ff7e0a;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            z-index: 1;
+            transform: translateY(-50%);
+            transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .step-node {
+            z-index: 2;
+            transition: all 0.3s ease;
+        }
+        .step-node.active {
+            border-color: #ff7e0a;
+            box-shadow: 0 0 15px rgba(255, 126, 10, 0.4);
+        }
+        .status-pill {
+            padding: 4px 12px;
+            border-radius: 9999px;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-background dark:bg-[#0d0d0d] transition-colors duration-300">
+<!-- Toast Notification System -->
+<div class="fixed top-24 right-gutter z-50 flex flex-col gap-4 pointer-events-none" id="toast-container"></div>
+<!-- Side Navigation Shell -->
+<aside class="h-screen w-64 fixed left-0 top-0 flex flex-col bg-surface border-r border-white/10 h-full py-8 bg-surface-container-low dark:bg-surface border-outline/10 dark:border-white/10">
+<div class="px-6 mb-10">
+<h1 class="font-display-lg text-headline-md text-primary tracking-tight">Sofka Insurance</h1>
+<p class="font-label-sm text-on-surface-variant opacity-70">Premium Protection</p>
+</div>
+<nav class="flex-1 space-y-2 px-4">
+<a class="flex items-center gap-3 px-4 py-3 font-label-md text-on-surface-variant hover:bg-white/5 transition-all duration-200 cursor-pointer active:scale-95 group" href="#">
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 font-label-md bg-secondary-container/20 text-primary border-r-4 border-primary transition-all duration-200 cursor-pointer active:scale-95 group" href="#">
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1" style="font-variation-settings: 'FILL' 1;">description</span>
+                Policies
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 font-label-md text-on-surface-variant hover:bg-white/5 transition-all duration-200 cursor-pointer active:scale-95 group" href="#">
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">group</span>
+                Clients
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 font-label-md text-on-surface-variant hover:bg-white/5 transition-all duration-200 cursor-pointer active:scale-95 group" href="#">
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto px-4 space-y-2">
+<button class="w-full bg-primary-container text-on-primary-fixed font-label-md py-3 rounded-lg mb-4 hover:brightness-110 active:scale-95 transition-all">
+                New Quote
+            </button>
+<a class="flex items-center gap-3 px-4 py-3 font-label-md text-on-surface-variant hover:bg-white/5 transition-all duration-200 cursor-pointer group" href="#">
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">headset_mic</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 font-label-md text-on-surface-variant hover:bg-white/5 transition-all duration-200 cursor-pointer group" href="#">
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- Main Content Shell -->
+<main class="ml-64 min-h-screen">
+<!-- Top Navigation Shell -->
+<header class="bg-surface/80 backdrop-blur-xl border-b border-white/10 sticky top-0 z-40">
+<div class="flex justify-between items-center w-full px-gutter h-20 max-w-container-max mx-auto">
+<div class="flex items-center gap-4">
+<span class="font-headline-sm text-headline-sm text-primary">Policy Detail</span>
+<span class="h-6 w-px bg-white/10"></span>
+<span class="font-label-md text-on-surface-variant">POL-8829-XJ</span>
+</div>
+<div class="flex items-center gap-6"><button id="theme-toggle" class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-white/5 transition-colors text-on-surface-variant hover:text-primary" onclick="document.documentElement.classList.toggle('dark')"><span class="material-symbols-outlined">light_mode</span></button>
+<div class="relative">
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-primary rounded-full"></span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">help</span>
+<div class="flex items-center gap-3 pl-4 border-l border-white/10 cursor-pointer active:scale-95 transition-transform">
+<img alt="Active Customer Avatar" class="w-10 h-10 rounded-full border border-primary/20 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQ8nXySh2Q_hlm5WlPoji_gWpdODZR5t9T1-iGJ7NJ2aoqdCUt5-2ZRri9G3QfzWXFmEfmp4NmFAVGLWSxCo-_Me35o6XxuQO2oJpqkv7vceWrLHxdJqGj6QJMMMeWfGXqOafZsaECeQX9jdjNAGDZxCwUAk_gtz4TI_ke0D1kxSXAoYnJx567taLPK7qtAOPkSaxEeo01fWnLAs9RqGc5ssrJON12BO6G8ZQCKNrdcOsrMWjn_E3f0LHG2Rs22Eub2Y6F1oFiVG0">
+</div>
+</div>
+</div>
+</header>
+<!-- Content Canvas -->
+<div class="max-w-container-max mx-auto px-gutter py-12">
+<!-- Policy Hero Header -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+<div class="md:col-span-2 flex flex-col justify-center">
+<div class="flex items-center gap-4 mb-4">
+<div class="status-pill bg-emerald-500/10 text-emerald-400 border border-emerald-500/20" id="status-badge">ACTIVE</div>
+<span class="font-label-md text-on-surface-variant">Branch: London Central</span>
+</div>
+<h2 class="font-display-lg text-display-lg text-on-surface mb-2">Comprehensive Ultra Elite</h2>
+<p class="font-body-lg text-on-surface-variant max-w-2xl">Premium commercial real estate protection with extended liability and disaster recovery riders. Last audited March 2026.</p>
+</div>
+<!-- Premium Policy Card -->
+<div class="bronze-gradient p-8 rounded-xl relative overflow-hidden group bg-surface-container-lowest dark:bg-transparent border-outline/10 dark:border-white/10">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">shield</span>
+</div>
+<div class="relative z-10">
+<p class="font-label-sm text-primary mb-1 uppercase tracking-widest">Monthly Premium</p>
+<h3 class="font-display-lg text-4xl text-on-surface mb-6">$12,450.00</h3>
+<div class="flex justify-between items-end">
+<div>
+<p class="font-label-sm text-on-surface-variant opacity-60">Policy ID</p>
+<p class="font-label-md text-on-surface">SOF-2026-8829</p>
+</div>
+<span class="material-symbols-outlined text-primary">contactless</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Lifecycle Stepper Section -->
+<section class="surface-gradient rounded-xl p-10 mb-12 relative overflow-hidden bg-surface-container-lowest dark:bg-transparent border-outline/10 dark:border-white/10">
+<div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+<h4 class="font-headline-sm text-on-surface mb-12 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                    Policy Lifecycle Management
+                </h4>
+<div class="relative px-8 py-4">
+<!-- Progress Tracks -->
+<div class="stepper-line"></div>
+<div class="stepper-progress" id="stepper-progress" style="width: 50%;"></div>
+<div class="flex justify-between items-center relative z-10">
+<!-- Step: QUOTED -->
+<div class="flex flex-col items-center gap-3">
+<div class="step-node w-10 h-10 rounded-full border-2 border-primary bg-surface flex items-center justify-center" id="step-quoted">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-label-md text-primary">QUOTED</span>
+</div>
+<!-- Step: ISSUED -->
+<div class="flex flex-col items-center gap-3">
+<div class="step-node w-10 h-10 rounded-full border-2 border-primary bg-surface flex items-center justify-center" id="step-issued">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+<span class="font-label-md text-primary">ISSUED</span>
+</div>
+<!-- Step: ACTIVE -->
+<div class="flex flex-col items-center gap-3">
+<div class="step-node w-10 h-10 rounded-full border-2 border-primary bg-surface flex items-center justify-center active" id="step-active">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+</div>
+<span class="font-label-md text-primary">ACTIVE</span>
+</div>
+<!-- Step: SUSPENDED -->
+<div class="flex flex-col items-center gap-3">
+<div class="step-node w-10 h-10 rounded-full border-2 border-white/10 bg-surface flex items-center justify-center" id="step-suspended">
+<span class="material-symbols-outlined text-on-surface-variant text-xl">pause_circle</span>
+</div>
+<span class="font-label-md text-on-surface-variant">SUSPENDED</span>
+</div>
+<!-- Step: CANCELLED -->
+<div class="flex flex-col items-center gap-3">
+<div class="step-node w-10 h-10 rounded-full border-2 border-white/10 bg-surface flex items-center justify-center" id="step-cancelled">
+<span class="material-symbols-outlined text-on-surface-variant text-xl">cancel</span>
+</div>
+<span class="font-label-md text-on-surface-variant">CANCELLED</span>
+</div>
+</div>
+</div>
+<div class="mt-16 grid grid-cols-1 md:grid-cols-4 gap-4">
+<button class="bg-primary hover:bg-[#e06c00] text-on-primary-fixed font-label-md py-4 rounded-lg flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg shadow-primary/10" onclick="changeStatus('ACTIVE')">
+<span class="material-symbols-outlined">play_arrow</span>
+                        Reactivate Policy
+                    </button>
+<button class="bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-md py-4 rounded-lg border border-white/5 flex items-center justify-center gap-2 transition-all active:scale-95" onclick="changeStatus('SUSPENDED')">
+<span class="material-symbols-outlined">pause</span>
+                        Suspend Policy
+                    </button>
+<button class="bg-error-container/20 hover:bg-error-container/30 text-error font-label-md py-4 rounded-lg border border-error/10 flex items-center justify-center gap-2 transition-all active:scale-95" onclick="changeStatus('CANCELLED')">
+<span class="material-symbols-outlined">delete_forever</span>
+                        Cancel Policy
+                    </button>
+<button class="bg-surface-container-high hover:bg-surface-bright text-on-surface font-label-md py-4 rounded-lg border border-white/5 flex items-center justify-center gap-2 transition-all active:scale-95" onclick="showToast('Invalid Transition: Policy is already Issued', 'error')">
+<span class="material-symbols-outlined">history</span>
+                        Manual Audit
+                    </button>
+</div>
+</section>
+<!-- Bottom Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Transaction History -->
+<div class="md:col-span-2 surface-gradient rounded-xl p-8 bg-surface-container-lowest dark:bg-transparent border-outline/10 dark:border-white/10">
+<div class="flex justify-between items-center mb-6">
+<h5 class="font-headline-sm text-on-surface">Payment History</h5>
+<button class="text-primary font-label-md flex items-center gap-1 hover:underline">
+                            View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="space-y-0">
+<div class="flex items-center justify-between py-4 border-b border-white/5 hover:bg-white/5 transition-colors px-4 -mx-4 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">March Premium Installment</p>
+<p class="font-body-sm text-on-surface-variant">Processed via Amex • Mar 12, 2026</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-md text-on-surface">$12,450.00</p>
+<span class="text-[10px] text-emerald-400 uppercase font-bold tracking-tighter">SUCCESS</span>
+</div>
+</div>
+<div class="flex items-center justify-between py-4 border-b border-white/5 hover:bg-white/5 transition-colors px-4 -mx-4 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-emerald-500/10 flex items-center justify-center text-emerald-400">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">February Premium Installment</p>
+<p class="font-body-sm text-on-surface-variant">Processed via Amex • Feb 12, 2026</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-md text-on-surface">$12,450.00</p>
+<span class="text-[10px] text-emerald-400 uppercase font-bold tracking-tighter">SUCCESS</span>
+</div>
+</div>
+<div class="flex items-center justify-between py-4 hover:bg-white/5 transition-colors px-4 -mx-4 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-error-container/10 flex items-center justify-center text-error">
+<span class="material-symbols-outlined">report</span>
+</div>
+<div>
+<p class="font-label-md text-on-surface">Annual Inspection Fee</p>
+<p class="font-body-sm text-on-surface-variant">Failed attempt • Jan 20, 2026</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-label-md text-error">$450.00</p>
+<span class="text-[10px] text-error uppercase font-bold tracking-tighter">REJECTED</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Coverage Details -->
+<div class="surface-gradient rounded-xl p-8 flex flex-col bg-surface-container-lowest dark:bg-transparent border-outline/10 dark:border-white/10">
+<h5 class="font-headline-sm text-on-surface mb-6">Risk Coverage</h5>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-md text-on-surface-variant">Fire &amp; Storm</span>
+<span class="font-label-md text-primary">$2.5M</span>
+</div>
+<div class="w-full bg-white/5 h-2 rounded-full overflow-hidden bg-outline/10 dark:bg-white/5">
+<div class="bg-primary h-full w-full"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-md text-on-surface-variant">Public Liability</span>
+<span class="font-label-md text-primary">$10.0M</span>
+</div>
+<div class="w-full bg-white/5 h-2 rounded-full overflow-hidden bg-outline/10 dark:bg-white/5">
+<div class="bg-primary h-full w-3/4"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<span class="font-label-md text-on-surface-variant">Business Interruption</span>
+<span class="font-label-md text-primary">$1.2M</span>
+</div>
+<div class="w-full bg-white/5 h-2 rounded-full overflow-hidden bg-outline/10 dark:bg-white/5">
+<div class="bg-primary h-full w-1/2"></div>
+</div>
+</div>
+</div>
+<div class="mt-auto pt-8">
+<img class="w-full h-32 object-cover rounded-lg grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all cursor-pointer" data-alt="A cinematic architectural shot of a sleek modern skyscraper reflecting the late afternoon sun in a high-tech business district. The visual style is premium corporate with deep black shadows and golden orange reflections. The lighting is low-key and dramatic, emphasizing precision and urban protection. The composition is clean and minimalist, reinforcing the Sofka Insure brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMJ5H7Wdr7EAN8Bgnf_haNc3S0xPSJXWJC-fsxmFhL_OTMpAeOLG53dLHVB-bq6Q8Y4qihF0Q-M72eu8-_DyzN6qcYQRIbQBgQssQa829r-bCkOGROldUmQP8JKhHOV95OQOnE92uNvjdqbQRHM0ReyCoFnZyfmZArVTppmUgD6vdo0M0ZNt6umeFW8mj0DDGj47e1WSfmFHxijtxJUGndk75hF1pekxyP8niOVdZHNXR5HZt2SbSlTW62bYW0fWCUifyynzR8fD8">
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        const statusFlow = ['QUOTED', 'ISSUED', 'ACTIVE', 'SUSPENDED', 'CANCELLED'];
+        let currentStatus = 'ACTIVE';
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const isError = type === 'error';
+            
+            toast.className = `flex items-center gap-3 p-4 rounded-xl shadow-2xl glass-blur border transition-all duration-300 translate-x-10 opacity-0 pointer-events-auto ${isError ? 'bg-error-container/20 border-error/50 text-error' : 'bg-surface-container-high/90 border-primary/50 text-primary'}`;
+            
+            toast.innerHTML = `
+                <span class="material-symbols-outlined">${isError ? 'error' : 'check_circle'}</span>
+                <span class="font-label-md">${message}</span>
+            `;
+            
+            container.appendChild(toast);
+            
+            // Trigger animation
+            setTimeout(() => {
+                toast.classList.remove('translate-x-10', 'opacity-0');
+            }, 10);
+            
+            // Remove after 4 seconds
+            setTimeout(() => {
+                toast.classList.add('translate-x-10', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 4000);
+        }
+
+        function updateUI(status) {
+            const badge = document.getElementById('status-badge');
+            const progress = document.getElementById('stepper-progress');
+            
+            // Update Badge
+            badge.innerText = status;
+            badge.className = 'status-pill border ';
+            
+            if (status === 'ACTIVE') {
+                badge.classList.add('bg-emerald-500/10', 'text-emerald-400', 'border-emerald-500/20');
+                progress.style.width = '50%';
+            } else if (status === 'SUSPENDED') {
+                badge.classList.add('bg-yellow-500/10', 'text-yellow-400', 'border-yellow-500/20');
+                progress.style.width = '75%';
+            } else if (status === 'CANCELLED') {
+                badge.classList.add('bg-error-container/10', 'text-error', 'border-error/20');
+                progress.style.width = '100%';
+            }
+
+            // Update Step Nodes
+            statusFlow.forEach((s, idx) => {
+                const node = document.getElementById(`step-${s.toLowerCase()}`);
+                const text = node.nextElementSibling;
+                const statusIdx = statusFlow.indexOf(status);
+
+                if (idx <= statusIdx) {
+                    node.classList.add('border-primary');
+                    node.classList.remove('border-white/10');
+                    text.classList.add('text-primary');
+                    text.classList.remove('text-on-surface-variant');
+                    node.querySelector('span').style.fontVariationSettings = "'FILL' 1";
+                    node.querySelector('span').classList.add('text-primary');
+                    node.querySelector('span').classList.remove('text-on-surface-variant');
+                } else {
+                    node.classList.remove('border-primary', 'active');
+                    node.classList.add('border-white/10');
+                    text.classList.remove('text-primary');
+                    text.classList.add('text-on-surface-variant');
+                    node.querySelector('span').style.fontVariationSettings = "'FILL' 0";
+                    node.querySelector('span').classList.remove('text-primary');
+                    node.querySelector('span').classList.add('text-on-surface-variant');
+                }
+
+                if (idx === statusIdx) {
+                    node.classList.add('active');
+                }
+            });
+        }
+
+        function changeStatus(targetStatus) {
+            // Business Rule: Cannot transition to QUOTED or ISSUED from a later state in this demo
+            const targetIdx = statusFlow.indexOf(targetStatus);
+            const currentIdx = statusFlow.indexOf(currentStatus);
+
+            if (targetStatus === currentStatus) {
+                showToast(`Policy is already ${targetStatus}`, 'error');
+                return;
+            }
+
+            // Simple logic for the demo: Allow any forward or backward between the last 3 states
+            currentStatus = targetStatus;
+            updateUI(targetStatus);
+            showToast(`Policy status updated to ${targetStatus}`);
+        }
+    </script>
+
+
+</body></html>
