@@ -71,28 +71,27 @@ graph TD
 
 ---
 
-## 5. Exposición a Internet para Demos (Cloudflare Tunnel)
+## 5. Exposición a Internet Simplificada (Cloudflare Tunnel)
 
-Para mostrar una demo en vivo de la aplicación (frontend + backend) desde tu PC local a cualquier dispositivo con internet (como un móvil u otro cliente), utilizamos los túneles rápidos de Cloudflare.
+Para exponer de forma unificada toda tu aplicación (frontend + backend) a través de internet usando Cloudflare Tunnel y que se actualice sola mediante GitOps (FluxCD), puedes utilizar el script automatizado creado en la raíz:
 
-### Paso 1: Iniciar el puente de red de Minikube para Ingress
-Debido a que en Windows la IP de Minikube no es accesible directamente por Cloudflare, exponemos el controlador de Ingress en un puerto local de tu PC:
+### Iniciar la Exposición a Internet
+Ejecuta en una consola de PowerShell con permisos apropiados:
 ```powershell
-minikube service ingress-nginx-controller -n ingress-nginx -p insurance-demo --url
+.\run-public-tunnel.ps1
 ```
-*Este comando se quedará corriendo en segundo plano y te dará una salida como:*
-`http://127.0.0.1:51802` (el puerto final puede variar en cada inicio).
 
-### Paso 2: Lanzar el túnel de Cloudflare
-Abre otra terminal y ejecuta el túnel apuntando al puerto que te dio el comando anterior:
-```powershell
-# Reemplaza 51802 por el puerto real que te dio el paso 1
-cloudflared tunnel --url http://127.0.0.1:51802
-```
-*Copia la URL `https://xxxx.trycloudflare.com` que saldrá en consola y compártela.*
+**¿Qué hace este script de forma tolerante a errores?**
+1. **Minikube check:** Verifica si Minikube está corriendo; si no es así, lo inicia con la configuración óptima (4 CPUs, 4GB RAM).
+2. **Ingress controller:** Habilita el addon `ingress` de Minikube si no estuviese activo.
+3. **Aplicación de cambios:** Ejecuta `kubectl apply -f k8s/` para forzar que todos los manifiestos locales estén en sincronía en el clúster.
+4. **Health Check (Readiness):** Espera a que los pods de backend/frontend y el propio Ingress Controller estén completamente sanos (`Running` y `Ready`).
+5. **Túnel de Minikube:** Inicia en segundo plano el túnel del Ingress Controller de Minikube y extrae de forma automática la URL interna.
+6. **Cloudflare Tunnel:** Lanza el túnel rápido de Cloudflare apuntando a la URL del Ingress y lo mantiene activo en primer plano para mostrarte la URL pública de la demo (`https://xxxx.trycloudflare.com`).
 
-### Paso 3: Apagar la Demo
-* Presiona `Ctrl + C` en ambas consolas (la de `minikube service` y la de `cloudflared`). La URL pública dejará de funcionar inmediatamente.
+### Detener la Demo Pública
+* Presiona `Ctrl + C` en la terminal donde corre el script.
+* El bloque de limpieza detendrá automáticamente el túnel interno de Minikube y liberará la URL pública.
 
 ---
 
