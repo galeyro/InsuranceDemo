@@ -1,10 +1,11 @@
 # Stage 1: Build
 FROM node:20-alpine AS build
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+RUN npm install -g pnpm@10.28.1
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 COPY . .
-RUN npm run build -- --configuration=production
+RUN pnpm run build
 
 # Stage 2: Serve
 FROM nginx:alpine
