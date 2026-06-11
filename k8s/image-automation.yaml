@@ -63,4 +63,4 @@ spec:
       branch: main
   update:
     path: ./k8s
-    strategy: SetImage
+    strategy: Setters
