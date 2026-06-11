@@ -20,7 +20,38 @@ permissions:
   packages: write
 
 jobs:
-  build-frontend:
+  compile-and-validate:
+    name: 1. Compile & Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 10.28.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+          cache-dependency-path: 'insurance-frontend/pnpm-lock.yaml'
+
+      - name: Install dependencies
+        run: |
+          cd insurance-frontend
+          pnpm install --frozen-lockfile
+
+      - name: Build Angular app
+        run: |
+          cd insurance-frontend
+          pnpm run build
+
+  docker-publish:
+    name: 2. Build & Publish Docker Image
+    needs: compile-and-validate
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
