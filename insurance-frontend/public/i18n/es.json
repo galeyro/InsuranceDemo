@@ -210,15 +210,15 @@
     "events": {
       "customer_created": {
         "title": "Cliente Creado",
-        "message": "Se registró al cliente: {name}"
+        "message": "Se registró al cliente: {{name}}"
       },
       "policy_created": {
         "title": "Póliza Creada",
-        "message": "Nueva póliza cotizada: {policyNumber}"
+        "message": "Nueva póliza cotizada: {{policyNumber}}"
       },
       "policy_status_changed": {
         "title": "Estado de Póliza Actualizado",
-        "message": "Póliza {policyNumber} cambió de {oldStatus} a {newStatus}"
+        "message": "Póliza {{policyNumber}} cambió de {{oldStatus}} a {{newStatus}}"
       }
     }
   }

@@ -210,15 +210,15 @@
     "events": {
       "customer_created": {
         "title": "Customer Created",
-        "message": "Customer registered: {name}"
+        "message": "Customer registered: {{name}}"
       },
       "policy_created": {
         "title": "Policy Created",
-        "message": "New policy quoted: {policyNumber}"
+        "message": "New policy quoted: {{policyNumber}}"
       },
       "policy_status_changed": {
         "title": "Policy Status Updated",
-        "message": "Policy {policyNumber} changed from {oldStatus} to {newStatus}"
+        "message": "Policy {{policyNumber}} changed from {{oldStatus}} to {{newStatus}}"
       }
     }
   }
