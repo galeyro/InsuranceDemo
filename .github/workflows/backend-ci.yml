@@ -7,6 +7,13 @@ on:
     paths:
       - 'Insurance-Backend/**'
       - '.github/workflows/backend-ci.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'Insurance-Backend/**'
+      - '.github/workflows/backend-ci.yml'
+  workflow_dispatch:
 
 permissions:
   contents: read
