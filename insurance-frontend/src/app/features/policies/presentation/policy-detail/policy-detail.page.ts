@@ -57,19 +57,21 @@ import { PolicyStatus } from '../../../../domain/enums/policy-status.enum';
               </div>
               <div class="flex justify-between py-2 border-b border-outline-variant/50">
                 <span class="text-on-surface-variant">{{ t('policies.detail.monthlyPremium') }}</span>
-                <span class="text-on-surface font-medium">$ {{ p.monthlyPremium.amount }}</span>
+                <span class="text-on-surface font-medium">$ {{ p.monthlyPremium.amount | number:'1.0-2' }}</span>
               </div>
               <div class="flex justify-between py-2 border-b border-outline-variant/50">
                 <span class="text-on-surface-variant">{{ t('policies.detail.coverage') }}</span>
-                <span class="text-on-surface font-medium">$ {{ p.coverage.coverageAmount.amount }}</span>
+                <span class="text-on-surface font-medium">$ {{ p.coverage.coverageAmount.amount | number:'1.0-2' }}</span>
               </div>
               <div class="flex justify-between py-2 border-b border-outline-variant/50">
                 <span class="text-on-surface-variant">{{ t('policies.detail.termMonths') }}</span>
-                <span class="text-on-surface font-medium">{{ p.coverage.termMonths }} meses</span>
+                <span class="text-on-surface font-medium">
+                  {{ p.coverage.termMonths ? p.coverage.termMonths + ' ' + (p.coverage.termMonths === 1 ? t('common.month') : t('common.months')) : t('policies.detail.indefinite') }}
+                </span>
               </div>
               <div class="flex justify-between py-2">
                 <span class="text-on-surface-variant">{{ t('policies.form.ratingStrategy') }}</span>
-                <span class="text-on-surface font-medium">{{ p.ratingStrategy }}</span>
+                <span class="text-on-surface font-medium">{{ t('policies.ratingStrategy.' + p.ratingStrategy) }}</span>
               </div>
             </div>
           </div>
@@ -92,7 +94,7 @@ import { PolicyStatus } from '../../../../domain/enums/policy-status.enum';
                 [class.bg-red-400/20]="transition === 'CANCELLED'"
                 [class.text-red-400]="transition === 'CANCELLED'"
               >
-                {{ transition }}
+                {{ t('policies.status.' + transition) }}
               </button>
             </div>
           </div>
@@ -103,11 +105,11 @@ import { PolicyStatus } from '../../../../domain/enums/policy-status.enum';
             <h3 class="font-outfit text-lg font-semibold text-on-surface mb-4">{{ t('policies.form.ratingStrategy') }}</h3>
             <div class="space-y-3">
               <div class="flex justify-between py-2 border-b border-outline-variant/50">
-                <span class="text-on-surface-variant">Risk Score</span>
+                <span class="text-on-surface-variant">{{ t('policies.form.riskScore') }}</span>
                 <span class="text-on-surface font-medium">{{ p.riskProfile.riskScore }}/100</span>
               </div>
               <div class="flex justify-between py-2">
-                <span class="text-on-surface-variant">Customer Since</span>
+                <span class="text-on-surface-variant">{{ t('policies.form.customerSinceYear') }}</span>
                 <span class="text-on-surface font-medium">{{ p.riskProfile.customerSinceYear }}</span>
               </div>
             </div>
@@ -124,19 +126,19 @@ import { PolicyStatus } from '../../../../domain/enums/policy-status.enum';
           </div>
           
           <div class="glass rounded-xl p-6">
-            <h3 class="font-outfit text-lg font-semibold text-on-surface mb-4">Timeline</h3>
+            <h3 class="font-outfit text-lg font-semibold text-on-surface mb-4">{{ t('policies.detail.timeline') }}</h3>
             <div class="space-y-4">
               <div class="flex items-center gap-3">
                 <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
                 <div>
-                  <div class="text-sm text-on-surface">Created</div>
+                  <div class="text-sm text-on-surface">{{ t('policies.detail.created') }}</div>
                   <div class="text-xs text-on-surface-variant">{{ p.createdAt | date:'medium' }}</div>
                 </div>
               </div>
               <div class="flex items-center gap-3">
                 <div class="w-3 h-3 rounded-full bg-blue-400"></div>
                 <div>
-                  <div class="text-sm text-on-surface">Last Updated</div>
+                  <div class="text-sm text-on-surface">{{ t('policies.detail.lastUpdated') }}</div>
                   <div class="text-xs text-on-surface-variant">{{ p.updatedAt | date:'medium' }}</div>
                 </div>
               </div>

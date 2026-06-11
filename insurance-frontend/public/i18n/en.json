@@ -148,7 +148,11 @@
       "policyNumber": "Policy Number",
       "monthlyPremium": "Monthly Premium",
       "coverage": "Coverage",
-      "termMonths": "Term (months)"
+      "termMonths": "Term (months)",
+      "timeline": "Timeline",
+      "created": "Created",
+      "lastUpdated": "Last Updated",
+      "indefinite": "Indefinite"
     },
     "status": {
       "QUOTED": "Quoted",
@@ -186,7 +190,9 @@
     "select": "Select",
     "confirm": "Confirm",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "month": "month",
+    "months": "months"
   },
   "errors": {
     "generic": "An unexpected error occurred",
@@ -195,5 +201,25 @@
     "conflict": "Resource already exists",
     "invalidTransition": "Invalid state transition",
     "network": "Connection error"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "badge": "Events",
+    "clear": "Clear",
+    "empty": "No recent notifications",
+    "events": {
+      "customer_created": {
+        "title": "Customer Created",
+        "message": "Customer registered: {name}"
+      },
+      "policy_created": {
+        "title": "Policy Created",
+        "message": "New policy quoted: {policyNumber}"
+      },
+      "policy_status_changed": {
+        "title": "Policy Status Updated",
+        "message": "Policy {policyNumber} changed from {oldStatus} to {newStatus}"
+      }
+    }
   }
 }

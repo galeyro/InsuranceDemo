@@ -149,14 +149,24 @@ import { StateService } from '../state/state.service';
                   class="absolute right-0 top-12 w-80 bg-surface border border-outline/10 dark:border-white/10 rounded-2xl shadow-xl z-50 p-4 space-y-3 max-h-96 overflow-y-auto animate-fade-in glass-card text-left"
                 >
                   <div class="flex justify-between items-center pb-2 border-b border-outline-variant/20">
-                    <h3 class="font-space-grotesk text-title-sm font-bold text-on-surface">Notificaciones</h3>
-                    <span class="text-[9px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold tracking-wider uppercase">Eventos</span>
+                    <div class="flex items-center gap-2">
+                      <h3 class="font-space-grotesk text-title-sm font-bold text-on-surface">{{ t('notifications.title') }}</h3>
+                      <span class="text-[9px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold tracking-wider uppercase">{{ t('notifications.badge') }}</span>
+                    </div>
+                    <button
+                      *ngIf="state.notifications().length > 0"
+                      (click)="clearNotifications()"
+                      class="text-[11px] text-primary hover:text-primary-hover font-semibold cursor-pointer transition-colors px-2 py-1 rounded hover:bg-primary/5 active:scale-95 flex items-center gap-1"
+                    >
+                      <span class="material-symbols-outlined text-sm">clear_all</span>
+                      {{ t('notifications.clear') }}
+                    </button>
                   </div>
 
                   <!-- Empty state -->
                   <div *ngIf="state.notifications().length === 0" class="py-6 text-center text-on-surface-variant text-xs space-y-2">
                     <span class="material-symbols-outlined text-3xl opacity-50 block mx-auto">notifications_off</span>
-                    <p>No hay notificaciones recientes</p>
+                    <p>{{ t('notifications.empty') }}</p>
                   </div>
 
                   <!-- Notifications List -->
@@ -183,14 +193,27 @@ import { StateService } from '../state/state.service';
                       <div class="space-y-0.5 flex-1 min-w-0">
                         <div class="flex justify-between items-start gap-2">
                           <p class="font-semibold text-xs text-on-surface truncate group-hover:text-primary transition-colors">
-                            {{ notif.title }}
+                            {{ t('notifications.events.' + notif.type + '.title') }}
                           </p>
                           <span class="text-[9px] text-on-surface-variant font-mono whitespace-nowrap">
                             {{ notif.timestamp | date:'HH:mm' }}
                           </span>
                         </div>
                         <p class="text-[10px] text-on-surface-variant leading-relaxed break-words">
-                          {{ notif.message }}
+                          <ng-container *ngIf="notif.type === 'customer_created'">
+                            {{ t('notifications.events.customer_created.message', { name: notif.payload?.customerName }) }}
+                          </ng-container>
+                          <ng-container *ngIf="notif.type === 'policy_created'">
+                            {{ t('notifications.events.policy_created.message', { policyNumber: notif.payload?.policyNumber }) }}
+                          </ng-container>
+                          <ng-container *ngIf="notif.type === 'policy_status_changed'">
+                            {{ t('notifications.events.policy_status_changed.message', { 
+                                 policyNumber: notif.payload?.policyNumber, 
+                                 oldStatus: t('policies.status.' + notif.payload?.oldStatus), 
+                                 newStatus: t('policies.status.' + notif.payload?.newStatus) 
+                               }) 
+                            }}
+                          </ng-container>
                         </p>
                       </div>
                     </div>
@@ -240,6 +263,10 @@ export class ShellComponent {
     if (this.isNotifDropdownOpen) {
       this.state.markAllAsRead();
     }
+  }
+
+  clearNotifications(): void {
+    this.state.clearNotifications();
   }
 
   toggleMobileMenu(): void {

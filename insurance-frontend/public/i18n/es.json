@@ -148,7 +148,11 @@
       "policyNumber": "Número de póliza",
       "monthlyPremium": "Prima mensual",
       "coverage": "Cobertura",
-      "termMonths": "Plazo (meses)"
+      "termMonths": "Plazo (meses)",
+      "timeline": "Historial de Cambios",
+      "created": "Creada",
+      "lastUpdated": "Última actualización",
+      "indefinite": "Indefinido"
     },
     "status": {
       "QUOTED": "Cotizada",
@@ -186,7 +190,9 @@
     "select": "Seleccionar",
     "confirm": "Confirmar",
     "yes": "Sí",
-    "no": "No"
+    "no": "No",
+    "month": "mes",
+    "months": "meses"
   },
   "errors": {
     "generic": "Ocurrió un error inesperado",
@@ -195,5 +201,25 @@
     "conflict": "El recurso ya existe",
     "invalidTransition": "Transición de estado no permitida",
     "network": "Error de conexión"
+  },
+  "notifications": {
+    "title": "Notificaciones",
+    "badge": "Eventos",
+    "clear": "Limpiar",
+    "empty": "No hay notificaciones recientes",
+    "events": {
+      "customer_created": {
+        "title": "Cliente Creado",
+        "message": "Se registró al cliente: {name}"
+      },
+      "policy_created": {
+        "title": "Póliza Creada",
+        "message": "Nueva póliza cotizada: {policyNumber}"
+      },
+      "policy_status_changed": {
+        "title": "Estado de Póliza Actualizado",
+        "message": "Póliza {policyNumber} cambió de {oldStatus} a {newStatus}"
+      }
+    }
   }
 }

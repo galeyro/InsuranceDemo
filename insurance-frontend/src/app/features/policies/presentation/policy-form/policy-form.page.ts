@@ -12,10 +12,10 @@ import { canTransition, getAllowedTransitions } from '../../../../domain/service
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TranslocoDirective],
   template: `
-    <div class="space-y-6" *transloco="let t">
-      <h2 class="font-outfit text-headline-md font-semibold text-on-surface">{{ t('policies.form.title') }}</h2>
+    <div class="space-y-6 max-w-2xl mx-auto" *transloco="let t">
+      <h2 class="font-outfit text-headline-md font-semibold text-on-surface text-center">{{ t('policies.form.title') }}</h2>
       
-      <div class="glass rounded-xl p-6 md:p-8 max-w-2xl">
+      <div class="glass rounded-xl p-6 md:p-8">
         <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
           <!-- Step 1: Customer -->
           <div>
@@ -46,13 +46,13 @@ import { canTransition, getAllowedTransitions } from '../../../../domain/service
                 type="button"
                 *ngFor="let branch of branches"
                 (click)="form.patchValue({ branch })"
-                class="p-4 rounded-xl border transition-all text-center"
+                class="p-4 rounded-xl border transition-all text-center cursor-pointer active:scale-95"
                 [class.border-primary]="form.value.branch === branch"
                 [class.bg-primary/10]="form.value.branch === branch"
                 [class.border-outline-variant]="form.value.branch !== branch"
                 [class.hover:border-primary/50]="form.value.branch !== branch"
               >
-                <div class="font-medium text-on-surface">{{ branch }}</div>
+                <div class="font-medium text-on-surface">{{ t('policies.branch.' + branch) }}</div>
               </button>
             </div>
           </div>
@@ -67,13 +67,13 @@ import { canTransition, getAllowedTransitions } from '../../../../domain/service
                 type="button"
                 *ngFor="let strategy of strategies"
                 (click)="form.patchValue({ ratingStrategy: strategy })"
-                class="p-4 rounded-xl border transition-all text-center"
+                class="p-4 rounded-xl border transition-all text-center cursor-pointer active:scale-95"
                 [class.border-primary]="form.value.ratingStrategy === strategy"
                 [class.bg-primary/10]="form.value.ratingStrategy === strategy"
                 [class.border-outline-variant]="form.value.ratingStrategy !== strategy"
                 [class.hover:border-primary/50]="form.value.ratingStrategy !== strategy"
               >
-                <div class="font-medium text-on-surface">{{ strategy }}</div>
+                <div class="font-medium text-on-surface">{{ t('policies.ratingStrategy.' + strategy) }}</div>
               </button>
             </div>
           </div>

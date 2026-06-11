@@ -17,6 +17,12 @@ export interface AppNotification {
   type: 'customer_created' | 'policy_created' | 'policy_status_changed';
   timestamp: Date;
   read: boolean;
+  payload?: {
+    customerName?: string;
+    policyNumber?: string;
+    oldStatus?: string;
+    newStatus?: string;
+  };
 }
 
 @Injectable({ providedIn: 'root' })
@@ -40,12 +46,17 @@ export class StateService {
     this.notifications.update((list) => list.map((n) => ({ ...n, read: true })));
   }
 
+  clearNotifications(): void {
+    this.notifications.set([]);
+  }
+
   addCustomer(customer: Customer): void {
     this.customers.update((list) => [...list, customer]);
     this.addNotification({
       title: 'Cliente Creado',
       message: `Se registró al cliente: ${customer.name}`,
-      type: 'customer_created'
+      type: 'customer_created',
+      payload: { customerName: customer.name }
     });
   }
 
@@ -57,7 +68,8 @@ export class StateService {
       this.addNotification({
         title: 'Póliza Creada',
         message: `Nueva póliza cotizada: ${policy.policyNumber}`,
-        type: 'policy_created'
+        type: 'policy_created',
+        payload: { policyNumber: policy.policyNumber }
       });
     }
   }
@@ -71,7 +83,12 @@ export class StateService {
       this.addNotification({
         title: 'Estado de Póliza Actualizado',
         message: `Póliza ${updated.policyNumber} cambió de ${oldPolicy.status} a ${updated.status}`,
-        type: 'policy_status_changed'
+        type: 'policy_status_changed',
+        payload: {
+          policyNumber: updated.policyNumber,
+          oldStatus: oldPolicy.status,
+          newStatus: updated.status
+        }
       });
     }
   }
