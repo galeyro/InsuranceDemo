@@ -11,12 +11,12 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
   standalone: true,
   imports: [CommonModule, RouterLink, TranslocoDirective],
   template: `
-    <div class="space-y-8 animate-fade-in" *transloco="let t">
+    <div class="space-y-5 md:space-y-8 animate-fade-in" *transloco="let t">
       
       <!-- Welcome/Greeting Banner -->
-      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary-container/20 via-primary-container/5 to-transparent border border-primary/20 p-6 md:p-8">
+      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-primary-container/20 via-primary-container/5 to-transparent border border-primary/20 p-4 md:p-8">
         <div class="absolute right-0 top-0 w-1/3 h-full bg-radial-gradient from-primary/10 to-transparent pointer-events-none"></div>
-        <div class="relative z-10 space-y-2">
+        <div class="relative z-10 space-y-1.5 md:space-y-2">
           <span class="text-xs font-bold uppercase tracking-widest text-primary flex items-center gap-1.5">
             <span class="material-symbols-outlined text-sm">auto_awesome</span> 
             {{ t('landing.hero.badge') }}
@@ -31,10 +31,10 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
       </div>
 
       <!-- KPI Summary Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
         <!-- Customers KPI -->
-        <div class="glass-card rounded-2xl p-6 hover:scale-[1.02] hover:border-primary/45 hover:shadow-[0_8px_32px_-16px_rgba(255,126,10,0.3)] transition-all duration-300 flex justify-between items-center group">
-          <div class="space-y-2">
+        <div class="glass-card rounded-2xl p-4 md:p-6 hover:scale-[1.02] hover:border-primary/45 hover:shadow-[0_8px_32px_-16px_rgba(255,126,10,0.3)] transition-all duration-300 flex justify-between items-center group">
+          <div class="space-y-1.5 md:space-y-2">
             <h3 class="text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">{{ t('dashboard.customers') }}</h3>
             <p class="font-space-grotesk text-display-md font-bold text-on-surface group-hover:text-primary transition-colors">{{ state.customers().length }}</p>
           </div>
@@ -44,8 +44,8 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
         </div>
 
         <!-- Active Policies KPI -->
-        <div class="glass-card rounded-2xl p-6 hover:scale-[1.02] hover:border-primary/45 hover:shadow-[0_8px_32px_-16px_rgba(255,126,10,0.3)] transition-all duration-300 flex justify-between items-center group">
-          <div class="space-y-2">
+        <div class="glass-card rounded-2xl p-4 md:p-6 hover:scale-[1.02] hover:border-primary/45 hover:shadow-[0_8px_32px_-16px_rgba(255,126,10,0.3)] transition-all duration-300 flex justify-between items-center group">
+          <div class="space-y-1.5 md:space-y-2">
             <h3 class="text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">{{ t('dashboard.activePolicies') }}</h3>
             <p class="font-space-grotesk text-display-md font-bold text-on-surface group-hover:text-primary transition-colors">{{ state.activePoliciesCount }}</p>
           </div>
@@ -55,8 +55,8 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
         </div>
 
         <!-- Monthly Premium KPI -->
-        <div class="glass-card rounded-2xl p-6 hover:scale-[1.02] hover:border-primary/45 hover:shadow-[0_8px_32px_-16px_rgba(255,126,10,0.3)] transition-all duration-300 flex justify-between items-center group">
-          <div class="space-y-2">
+        <div class="glass-card rounded-2xl p-4 md:p-6 hover:scale-[1.02] hover:border-primary/45 hover:shadow-[0_8px_32px_-16px_rgba(255,126,10,0.3)] transition-all duration-300 flex justify-between items-center group">
+          <div class="space-y-1.5 md:space-y-2">
             <h3 class="text-label-sm uppercase tracking-wider text-on-surface-variant font-semibold">{{ t('dashboard.monthlyPremium') }}</h3>
             <p class="font-space-grotesk text-display-md font-bold text-on-surface group-hover:text-primary transition-colors">$ {{ state.totalMonthlyPremium | number:'1.2-2' }}</p>
           </div>
@@ -67,14 +67,14 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
       </div>
 
       <!-- Bento Layout Grid -->
-      <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 xl:grid-cols-3 gap-4 md:gap-6">
         
         <!-- Left Side: Payment History & Risk Distribution (Col span 2) -->
-        <div class="xl:col-span-2 space-y-6">
+        <div class="xl:col-span-2 space-y-4 md:space-y-6">
           
           <!-- Historial de Transiciones Card -->
-          <div class="glass-card rounded-2xl p-6 md:p-8">
-            <div class="flex justify-between items-center mb-6">
+          <div class="glass-card rounded-2xl p-4 md:p-8">
+            <div class="flex justify-between items-center mb-4 md:mb-6">
               <h3 class="font-space-grotesk text-headline-sm font-semibold text-on-surface">{{ t('dashboard.kafkaHistory') }}</h3>
               <span class="text-xs text-on-surface-variant bg-surface-container-high px-3 py-1 rounded-full font-semibold">{{ t('dashboard.hotEvents') }}</span>
             </div>
@@ -96,9 +96,9 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
               <!-- List of transitions -->
               <div 
                 *ngFor="let trans of state.transitions()" 
-                class="flex items-center justify-between py-4 first:pt-0 hover:bg-hover-custom px-3 rounded-xl transition-colors cursor-pointer group gap-2 min-w-0"
+                class="flex items-center justify-between py-2.5 first:pt-0 hover:bg-hover-custom px-2 rounded-xl transition-colors cursor-pointer group gap-2 min-w-0"
               >
-                <div class="flex items-center gap-4 min-w-0">
+                <div class="flex items-center gap-3 min-w-0">
                   <div 
                     class="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform"
                     [style.background-color]="trans.success ? 'var(--status-active-bg)' : 'var(--status-cancelled-bg)'"
@@ -130,9 +130,9 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
           </div>
 
           <!-- Risk Distribution Card -->
-          <div class="glass-card rounded-2xl p-6 md:p-8">
-            <h3 class="font-space-grotesk text-headline-sm font-semibold text-on-surface mb-6">{{ t('dashboard.riskDistribution') }}</h3>
-            <div class="space-y-6">
+          <div class="glass-card rounded-2xl p-4 md:p-8">
+            <h3 class="font-space-grotesk text-headline-sm font-semibold text-on-surface mb-4 md:mb-6">{{ t('dashboard.riskDistribution') }}</h3>
+            <div class="space-y-4 md:space-y-6">
               <!-- AUTO -->
               <div>
                 <div class="flex justify-between mb-2 text-sm font-medium">
@@ -179,15 +179,15 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
         </div>
 
         <!-- Right Side: Recent Policies list (Col span 1) -->
-        <div class="glass-card rounded-2xl p-6 md:p-8 flex flex-col justify-between">
+        <div class="glass-card rounded-2xl p-4 md:p-8 flex flex-col justify-between">
           <div>
-            <div class="flex justify-between items-center mb-6">
+            <div class="flex justify-between items-center mb-4 md:mb-6">
               <h3 class="font-space-grotesk text-headline-sm font-semibold text-on-surface">{{ t('dashboard.recentTitle') }}</h3>
               <span class="text-xs text-on-surface-variant bg-surface-container-high px-3 py-1 rounded-full font-semibold">Top 5</span>
             </div>
 
             <!-- Empty state -->
-            <div *ngIf="state.policies().length === 0" class="py-12 text-center text-on-surface-variant">
+            <div *ngIf="state.policies().length === 0" class="py-6 md:py-12 text-center text-on-surface-variant">
               <div class="w-12 h-12 bg-surface-container-high rounded-xl flex items-center justify-center mx-auto mb-3">
                 <span class="material-symbols-outlined text-2xl text-on-surface-variant/40">description</span>
               </div>
@@ -198,7 +198,7 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
             <div *ngIf="state.policies().length > 0" class="divide-y divide-border-custom">
               <div
                 *ngFor="let policy of state.policies().slice(0, 5)"
-                class="flex items-center justify-between py-4 first:pt-0 last:pb-0 hover:bg-hover-custom px-2 rounded-xl transition-colors group gap-2 min-w-0"
+                class="flex items-center justify-between py-2.5 first:pt-0 last:pb-0 hover:bg-hover-custom px-2 rounded-xl transition-colors group gap-2 min-w-0"
               >
                 <div class="flex items-center gap-3 min-w-0">
                   <div class="w-9 h-9 rounded-xl bg-primary/10 flex-shrink-0 flex items-center justify-center text-primary font-bold text-xs group-hover:scale-105 transition-transform">
@@ -233,8 +233,8 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
           </div>
 
           <!-- Bottom Action button to policies page -->
-          <div class="mt-8 pt-6 border-t border-border-custom">
-            <button routerLink="/app/policies" class="w-full h-12 border border-border-custom hover:bg-hover-custom rounded-xl font-medium transition-all text-body-sm flex items-center justify-center gap-2 cursor-pointer text-on-surface">
+          <div class="mt-4 pt-4 md:mt-8 md:pt-6 border-t border-border-custom">
+            <button routerLink="/app/policies" class="w-full h-11 border border-border-custom hover:bg-hover-custom rounded-xl font-medium transition-all text-body-sm flex items-center justify-center gap-2 cursor-pointer text-on-surface">
               {{ t('dashboard.viewAll') }}
               <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </button>

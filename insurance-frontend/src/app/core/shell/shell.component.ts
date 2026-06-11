@@ -241,7 +241,7 @@ import { StateService } from '../state/state.service';
         </header>
 
         <!-- Main Routing Container -->
-        <main class="flex-1 p-4 xs:p-6 md:p-10 max-w-container-max w-full mx-auto">
+        <main class="flex-1 p-3 xs:p-4 md:p-10 max-w-container-max w-full mx-auto">
           <router-outlet />
         </main>
       </div>

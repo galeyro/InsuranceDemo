@@ -10,9 +10,9 @@ import { CustomerHttpService } from '../../data/customer-http.service';
   standalone: true,
   imports: [CommonModule, RouterLink, TranslocoDirective],
   template: `
-    <div class="space-y-6 animate-fade-in" *transloco="let t">
+    <div class="space-y-4 md:space-y-6 animate-fade-in" *transloco="let t">
       <!-- Header Area -->
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border-custom pb-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border-custom pb-4 md:pb-6">
         <div class="space-y-1">
           <h2 class="font-outfit text-headline-lg font-bold text-on-surface flex items-center gap-3">
             {{ t('customers.title') }}
@@ -69,7 +69,7 @@ import { CustomerHttpService } from '../../data/customer-http.service';
                 *ngFor="let customer of state.customers()"
                 class="hover:bg-hover-custom transition-colors group"
               >
-                <td class="px-6 py-5">
+                <td class="px-3 py-3 md:px-6 md:py-5">
                   <div class="flex items-center gap-4">
                     <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-sm group-hover:scale-110 transition-transform">
                       {{ customer.name[0] }}
@@ -80,8 +80,8 @@ import { CustomerHttpService } from '../../data/customer-http.service';
                     </div>
                   </div>
                 </td>
-                <td class="hidden sm:table-cell px-6 py-5 text-on-surface-variant font-medium">{{ customer.email.value }}</td>
-                <td class="px-6 py-5">
+                <td class="hidden sm:table-cell px-3 py-3 md:px-6 md:py-5 text-on-surface-variant font-medium">{{ customer.email.value }}</td>
+                <td class="px-3 py-3 md:px-6 md:py-5">
                   <span
                     class="status-badge"
                     [class.status-badge-active]="customer.active"
@@ -95,7 +95,7 @@ import { CustomerHttpService } from '../../data/customer-http.service';
                     {{ customer.active ? 'Activo' : 'Inactivo' }}
                   </span>
                 </td>
-                <td class="px-6 py-5 text-right">
+                <td class="px-3 py-3 md:px-6 md:py-5 text-right">
                   <a
                     [routerLink]="['/app/customers', customer.id.value]"
                     class="inline-flex items-center justify-center gap-1 px-4 py-2 rounded-lg bg-surface-container hover:bg-primary hover:text-on-primary font-bold text-xs text-on-surface-variant transition-all duration-200"

@@ -12,7 +12,7 @@ import { PolicyStatus } from '../../../../domain/enums/policy-status.enum';
   standalone: true,
   imports: [CommonModule, TranslocoDirective],
   template: `
-    <div class="space-y-6" *transloco="let t">
+    <div class="space-y-4 md:space-y-6" *transloco="let t">
       <div class="flex items-center gap-4">
         <button
           (click)="router.navigate(['/app/policies'])"
@@ -25,10 +25,10 @@ import { PolicyStatus } from '../../../../domain/enums/policy-status.enum';
         <h2 class="font-outfit text-headline-md font-semibold text-on-surface">{{ t('policies.detail.title') }}</h2>
       </div>
       
-      <div *ngIf="currentPolicy() as p" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="space-y-6">
-          <div class="glass rounded-xl p-6">
-            <div class="flex flex-col xs:flex-row xs:items-center justify-between gap-4 mb-6">
+      <div *ngIf="currentPolicy() as p" class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+        <div class="space-y-4 md:space-y-6">
+          <div class="glass rounded-xl p-4 md:p-6">
+            <div class="flex flex-col xs:flex-row xs:items-center justify-between gap-4 mb-4 md:mb-6">
               <div>
                 <div class="text-label-sm uppercase tracking-wider text-on-surface-variant mb-1">{{ t('policies.detail.policyNumber') }}</div>
                 <div class="font-outfit text-xl xs:text-2xl font-bold text-on-surface truncate max-w-[220px] xs:max-w-none">{{ p.policyNumber }}</div>
@@ -72,7 +72,7 @@ import { PolicyStatus } from '../../../../domain/enums/policy-status.enum';
           </div>
           
           <!-- State Transitions -->
-          <div class="glass rounded-xl p-6" *ngIf="currentTransitions().length > 0">
+          <div class="glass rounded-xl p-4 md:p-6" *ngIf="currentTransitions().length > 0">
             <h3 class="font-outfit text-lg font-semibold text-on-surface mb-4">{{ t('policies.detail.transition') }}</h3>
             <div class="flex flex-wrap gap-3">
               <button
@@ -91,8 +91,8 @@ import { PolicyStatus } from '../../../../domain/enums/policy-status.enum';
           </div>
         </div>
         
-        <div class="space-y-6">
-          <div class="glass rounded-xl p-6">
+        <div class="space-y-4 md:space-y-6">
+          <div class="glass rounded-xl p-4 md:p-6">
             <h3 class="font-outfit text-lg font-semibold text-on-surface mb-4">{{ t('policies.form.ratingStrategy') }}</h3>
             <div class="space-y-3">
               <div class="flex justify-between py-2 border-b border-border-custom">
@@ -116,7 +116,7 @@ import { PolicyStatus } from '../../../../domain/enums/policy-status.enum';
             </div>
           </div>
           
-          <div class="glass rounded-xl p-6">
+          <div class="glass rounded-xl p-4 md:p-6">
             <h3 class="font-outfit text-lg font-semibold text-on-surface mb-4">{{ t('policies.detail.timeline') }}</h3>
             <div class="space-y-4">
               <div class="flex items-center gap-3">

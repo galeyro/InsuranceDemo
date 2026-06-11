@@ -12,11 +12,11 @@ import { canTransition, getAllowedTransitions } from '../../../../domain/service
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TranslocoDirective],
   template: `
-    <div class="space-y-6 max-w-2xl mx-auto" *transloco="let t">
+    <div class="space-y-4 md:space-y-6 max-w-2xl mx-auto" *transloco="let t">
       <h2 class="font-outfit text-headline-md font-semibold text-on-surface text-center">{{ t('policies.form.title') }}</h2>
       
-      <div class="glass rounded-xl p-6 md:p-8">
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+      <div class="glass rounded-xl p-4 md:p-8">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4 md:space-y-6">
           <!-- Step 1: Customer -->
           <div>
             <label class="block text-label-sm uppercase tracking-wider text-on-surface-variant mb-2">
@@ -41,12 +41,12 @@ import { canTransition, getAllowedTransitions } from '../../../../domain/service
             <label class="block text-label-sm uppercase tracking-wider text-on-surface-variant mb-2">
               {{ t('policies.form.branch') }}
             </label>
-            <div class="grid grid-cols-2 gap-3">
+            <div class="grid grid-cols-2 gap-2 md:gap-3">
               <button
                 type="button"
                 *ngFor="let branch of branches"
                 (click)="form.patchValue({ branch })"
-                class="p-4 rounded-xl border transition-all text-center cursor-pointer active:scale-95"
+                class="p-3 md:p-4 rounded-xl border transition-all text-center cursor-pointer active:scale-95"
                 [class.border-primary]="form.value.branch === branch"
                 [class.bg-primary/10]="form.value.branch === branch"
                 [class.border-outline-variant]="form.value.branch !== branch"
@@ -62,12 +62,12 @@ import { canTransition, getAllowedTransitions } from '../../../../domain/service
             <label class="block text-label-sm uppercase tracking-wider text-on-surface-variant mb-2">
               {{ t('policies.form.ratingStrategy') }}
             </label>
-            <div class="grid grid-cols-1 xs:grid-cols-3 gap-3">
+            <div class="grid grid-cols-1 xs:grid-cols-3 gap-2 md:gap-3">
               <button
                 type="button"
                 *ngFor="let strategy of strategies"
                 (click)="form.patchValue({ ratingStrategy: strategy })"
-                class="p-4 rounded-xl border transition-all text-center cursor-pointer active:scale-95"
+                class="p-3 md:p-4 rounded-xl border transition-all text-center cursor-pointer active:scale-95"
                 [class.border-primary]="form.value.ratingStrategy === strategy"
                 [class.bg-primary/10]="form.value.ratingStrategy === strategy"
                 [class.border-outline-variant]="form.value.ratingStrategy !== strategy"
@@ -79,7 +79,7 @@ import { canTransition, getAllowedTransitions } from '../../../../domain/service
           </div>
           
           <!-- Step 4: Risk Profile -->
-          <div class="grid grid-cols-1 xs:grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 xs:grid-cols-2 gap-3 md:gap-4">
             <div>
               <label class="block text-label-sm uppercase tracking-wider text-on-surface-variant mb-2">
                 {{ t('policies.form.riskScore') }}

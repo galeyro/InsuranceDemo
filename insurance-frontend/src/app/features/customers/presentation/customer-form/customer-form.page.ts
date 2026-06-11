@@ -10,11 +10,11 @@ import { CustomerHttpService } from '../../data/customer-http.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, TranslocoDirective],
   template: `
-    <div class="space-y-6 max-w-2xl mx-auto" *transloco="let t">
+    <div class="space-y-4 md:space-y-6 max-w-2xl mx-auto" *transloco="let t">
       <h2 class="font-outfit text-headline-md font-semibold text-on-surface text-center">{{ t('customers.form.title') }}</h2>
       
-      <div class="glass rounded-xl p-6 md:p-8">
-        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-6">
+      <div class="glass rounded-xl p-4 md:p-8">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4 md:space-y-6">
           <div>
             <label class="block text-label-sm uppercase tracking-wider text-on-surface-variant mb-2">
               {{ t('customers.form.name') }}

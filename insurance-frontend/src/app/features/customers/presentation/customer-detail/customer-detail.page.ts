@@ -11,7 +11,7 @@ import { PolicyHttpService } from '../../../policies/data/policy-http.service';
   standalone: true,
   imports: [CommonModule, RouterLink, TranslocoDirective],
   template: `
-    <div class="space-y-6" *transloco="let t">
+    <div class="space-y-4 md:space-y-6" *transloco="let t">
       <div class="flex items-center gap-4">
         <button
           (click)="router.navigate(['/app/customers'])"
@@ -24,10 +24,10 @@ import { PolicyHttpService } from '../../../policies/data/policy-http.service';
         <h2 class="font-outfit text-headline-md font-semibold text-on-surface">{{ t('customers.detail.title') }}</h2>
       </div>
       
-      <div *ngIf="currentCustomer() as c" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="glass rounded-xl p-6">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center">
+      <div *ngIf="currentCustomer() as c" class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
+        <div class="glass rounded-xl p-4 md:p-6">
+          <div class="flex items-center gap-4 mb-4 md:mb-6">
+            <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
               <span class="text-primary font-bold text-2xl">{{ c.name[0] }}</span>
             </div>
             <div>
@@ -52,8 +52,8 @@ import { PolicyHttpService } from '../../../policies/data/policy-http.service';
           </div>
         </div>
         
-        <div class="glass rounded-xl p-6">
-          <h3 class="font-outfit text-lg font-semibold text-on-surface mb-4">{{ t('policies.title') }}</h3>
+        <div class="glass rounded-xl p-4 md:p-6">
+          <h3 class="font-outfit text-lg font-semibold text-on-surface mb-3 md:mb-4">{{ t('policies.title') }}</h3>
           
           <div *ngIf="currentPolicies().length === 0" class="text-center py-8">
             <p class="text-on-surface-variant mb-4">{{ t('common.noData') }}</p>
@@ -68,7 +68,7 @@ import { PolicyHttpService } from '../../../policies/data/policy-http.service';
           <div *ngIf="currentPolicies().length > 0" class="space-y-3">
             <div
               *ngFor="let policy of currentPolicies()"
-              class="flex items-center justify-between p-4 rounded-lg bg-surface-container-high/40 border border-border-custom gap-2 min-w-0"
+              class="flex items-center justify-between p-3 md:p-4 rounded-lg bg-surface-container-high/40 border border-border-custom gap-2 min-w-0"
             >
               <div class="min-w-0">
                 <div class="font-medium text-on-surface truncate" [title]="policy.policyNumber">{{ policy.policyNumber }}</div>
