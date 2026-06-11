@@ -3,8 +3,6 @@ kind: Ingress
 metadata:
   name: insurance-ingress
   namespace: default
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
     - http:

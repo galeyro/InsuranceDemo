@@ -21,7 +21,7 @@ spec:
           image: ghcr.io/galeyro/insurance-backend:v1.0.10 # {"$imagepolicy": "flux-system:insurance-backend"}
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 8082
           env:
             - name: SPRING_DATASOURCE_URL
               value: jdbc:postgresql://my-postgres-postgresql:5432/insurance_db
@@ -31,6 +31,10 @@ spec:
               value: postgres
             - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
               value: my-kafka:9092
+            - name: KAFKA_USERNAME
+              value: "user1"
+            - name: KAFKA_PASSWORD
+              value: "amIkM2sFfr"
 ---
 apiVersion: apps/v1
 kind: Deployment
