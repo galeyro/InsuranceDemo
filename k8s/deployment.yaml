@@ -56,7 +56,7 @@ spec:
       containers:
         - name: frontend
           # Replace galeyro with your real GitHub username in lowercase
-          image: ghcr.io/galeyro/insurance-frontend:v1.0.6 # {"$imagepolicy": "flux-system:insurance-frontend"}
+          image: ghcr.io/galeyro/insurance-frontend:v1.0.7 # {"$imagepolicy": "flux-system:insurance-frontend"}
           imagePullPolicy: Always
           ports:
             - containerPort: 80
