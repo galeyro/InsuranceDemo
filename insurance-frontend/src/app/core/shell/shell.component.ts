@@ -49,7 +49,7 @@ import { StateService } from '../state/state.service';
           <a
             routerLink="/app/dashboard"
             routerLinkActive="bg-secondary-container/20 text-primary border-r-4 border-primary"
-            class="flex items-center gap-3 px-6 py-3.5 rounded-lg text-body-md font-medium text-on-surface-variant hover:bg-white/5 transition-all cursor-pointer active:scale-[0.98] group"
+            class="flex items-center gap-3 px-6 py-3.5 rounded-lg text-body-md font-medium text-on-surface-variant hover:bg-hover-custom transition-all cursor-pointer active:scale-[0.98] group"
             [class.text-on-surface-variant]="!isActive('/app/dashboard')"
             (click)="closeMobileMenu()"
           >
@@ -61,7 +61,7 @@ import { StateService } from '../state/state.service';
           <a
             routerLink="/app/customers"
             routerLinkActive="bg-secondary-container/20 text-primary border-r-4 border-primary"
-            class="flex items-center gap-3 px-6 py-3.5 rounded-lg text-body-md font-medium text-on-surface-variant hover:bg-white/5 transition-all cursor-pointer active:scale-[0.98] group"
+            class="flex items-center gap-3 px-6 py-3.5 rounded-lg text-body-md font-medium text-on-surface-variant hover:bg-hover-custom transition-all cursor-pointer active:scale-[0.98] group"
             [class.text-on-surface-variant]="!isActive('/app/customers')"
             (click)="closeMobileMenu()"
           >
@@ -73,7 +73,7 @@ import { StateService } from '../state/state.service';
           <a
             routerLink="/app/policies"
             routerLinkActive="bg-secondary-container/20 text-primary border-r-4 border-primary"
-            class="flex items-center gap-3 px-6 py-3.5 rounded-lg text-body-md font-medium text-on-surface-variant hover:bg-white/5 transition-all cursor-pointer active:scale-[0.98] group"
+            class="flex items-center gap-3 px-6 py-3.5 rounded-lg text-body-md font-medium text-on-surface-variant hover:bg-hover-custom transition-all cursor-pointer active:scale-[0.98] group"
             [class.text-on-surface-variant]="!isActive('/app/policies')"
             (click)="closeMobileMenu()"
           >
@@ -83,7 +83,7 @@ import { StateService } from '../state/state.service';
         </nav>
 
         <!-- Bottom Actions -->
-        <div class="border-t border-white/10 dark:border-white/10 pt-6 space-y-3">
+        <div class="border-t border-border-custom pt-6 space-y-3">
           <button
             routerLink="/app/policies/new"
             (click)="closeMobileMenu()"
@@ -94,7 +94,7 @@ import { StateService } from '../state/state.service';
           
           <a
             (click)="logout()"
-            class="flex items-center gap-3 px-6 py-3 rounded-lg text-body-sm font-medium text-on-surface-variant hover:bg-white/5 transition-all cursor-pointer group"
+            class="flex items-center gap-3 px-6 py-3 rounded-lg text-body-sm font-medium text-on-surface-variant hover:bg-hover-custom transition-all cursor-pointer group"
           >
             <span class="material-symbols-outlined transition-transform group-hover:translate-x-0.5">logout</span>
             {{ t('nav.logout') }}
@@ -105,34 +105,34 @@ import { StateService } from '../state/state.service';
       <!-- Main Contents Area -->
       <div class="lg:pl-64 flex flex-col min-h-screen">
         <!-- Top Navigation Bar -->
-        <header class="bg-surface/80 backdrop-blur-xl border-b border-outline/10 dark:border-white/10 sticky top-0 z-40 h-20">
+        <header class="bg-surface/80 backdrop-blur-xl border-b border-border-custom sticky top-0 z-40 h-20">
           <div class="flex justify-between items-center w-full px-gutter h-full max-w-container-max mx-auto">
             <!-- Left Side: Title and Mobile Toggle -->
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2 xs:gap-4">
               <button
-                class="lg:hidden p-2 rounded-full hover:bg-white/5 text-on-surface-variant flex items-center justify-center cursor-pointer"
+                class="lg:hidden p-2 rounded-full hover:bg-hover-custom text-on-surface-variant flex items-center justify-center cursor-pointer"
                 (click)="toggleMobileMenu()"
               >
                 <span class="material-symbols-outlined">menu</span>
               </button>
-              <h2 class="font-space-grotesk text-headline-sm text-primary font-semibold">
+              <h2 class="font-space-grotesk text-base xs:text-lg md:text-headline-sm text-primary font-semibold truncate max-w-[120px] xs:max-w-none">
                 {{ t(getPageTitle()) }}
               </h2>
             </div>
 
             <!-- Right Side Actions -->
-            <div class="flex items-center gap-4 md:gap-6">
+            <div class="flex items-center gap-2 xs:gap-4 md:gap-6">
               <!-- Language Switcher -->
               <app-lang-switcher />
 
               <!-- Theme Toggle -->
               <button
-                class="p-2 rounded-full hover:bg-white/10 transition-colors text-on-surface-variant cursor-pointer flex items-center justify-center"
+                class="p-2 rounded-full hover:bg-hover-custom transition-colors text-on-surface-variant cursor-pointer flex items-center justify-center"
                 (click)="themeService.toggle()"
                 title="Cambiar tema"
               >
                 <span class="material-symbols-outlined text-[20px]">
-                  {{ themeService.theme() === 'dark' ? 'light_mode' : 'dark_mode' }}
+                  {{ themeService.theme() === 'light' ? 'light_mode' : 'dark_mode' }}
                 </span>
               </button>
 
@@ -140,7 +140,7 @@ import { StateService } from '../state/state.service';
               <div class="relative flex items-center justify-center">
                 <button
                   (click)="toggleNotifDropdown()"
-                  class="p-2 rounded-full hover:bg-white/5 text-on-surface-variant hover:text-primary transition-all cursor-pointer flex items-center justify-center relative active:scale-95"
+                  class="p-2 rounded-full hover:bg-hover-custom text-on-surface-variant hover:text-primary transition-all cursor-pointer flex items-center justify-center relative active:scale-95"
                   title="Notificaciones"
                 >
                   <span class="material-symbols-outlined text-[22px]">notifications</span>
@@ -150,9 +150,9 @@ import { StateService } from '../state/state.service';
                 <!-- Dropdown Menu -->
                 <div
                   *ngIf="isNotifDropdownOpen"
-                  class="absolute right-0 top-12 w-80 bg-surface border border-outline/10 dark:border-white/10 rounded-2xl shadow-xl z-50 p-4 space-y-3 max-h-96 overflow-y-auto animate-fade-in glass-card text-left"
+                  class="absolute right-0 top-12 w-80 bg-surface border border-border-custom rounded-2xl shadow-xl z-50 p-4 space-y-3 max-h-96 overflow-y-auto animate-fade-in glass-card text-left"
                 >
-                  <div class="flex justify-between items-center pb-2 border-b border-outline-variant/20">
+                  <div class="flex justify-between items-center pb-2 border-b border-border-custom">
                     <div class="flex items-center gap-2">
                       <h3 class="font-space-grotesk text-title-sm font-bold text-on-surface">{{ t('notifications.title') }}</h3>
                       <span class="text-[9px] bg-primary/10 text-primary px-2 py-0.5 rounded-full font-bold tracking-wider uppercase">{{ t('notifications.badge') }}</span>
@@ -174,7 +174,7 @@ import { StateService } from '../state/state.service';
                   </div>
 
                   <!-- Notifications List -->
-                  <div class="space-y-3 divide-y divide-outline-variant/10">
+                  <div class="space-y-3 divide-y divide-border-custom">
                     <div
                       *ngFor="let notif of state.notifications()"
                       class="pt-3 first:pt-0 flex gap-3 text-left group"
@@ -215,7 +215,7 @@ import { StateService } from '../state/state.service';
                                  policyNumber: notif.payload?.policyNumber, 
                                  oldStatus: t('policies.status.' + notif.payload?.oldStatus), 
                                  newStatus: t('policies.status.' + notif.payload?.newStatus) 
-                               }) 
+                                 }) 
                             }}
                           </ng-container>
                         </p>
@@ -226,7 +226,7 @@ import { StateService } from '../state/state.service';
               </div>
 
               <!-- Divider -->
-              <span class="h-6 w-px bg-outline/20 dark:bg-white/10"></span>
+              <span class="h-6 w-px bg-border-custom"></span>
 
               <!-- User Avatar Profile -->
               <div class="flex items-center gap-3 cursor-pointer active:scale-95 transition-transform">
@@ -241,7 +241,7 @@ import { StateService } from '../state/state.service';
         </header>
 
         <!-- Main Routing Container -->
-        <main class="flex-1 p-6 md:p-10 max-w-container-max w-full mx-auto">
+        <main class="flex-1 p-4 xs:p-6 md:p-10 max-w-container-max w-full mx-auto">
           <router-outlet />
         </main>
       </div>

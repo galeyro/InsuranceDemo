@@ -28,42 +28,37 @@ import { PolicyStatus } from '../../../../domain/enums/policy-status.enum';
       <div *ngIf="currentPolicy() as p" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="space-y-6">
           <div class="glass rounded-xl p-6">
-            <div class="flex items-center justify-between mb-6">
+            <div class="flex flex-col xs:flex-row xs:items-center justify-between gap-4 mb-6">
               <div>
                 <div class="text-label-sm uppercase tracking-wider text-on-surface-variant mb-1">{{ t('policies.detail.policyNumber') }}</div>
-                <div class="font-outfit text-2xl font-bold text-on-surface">{{ p.policyNumber }}</div>
+                <div class="font-outfit text-xl xs:text-2xl font-bold text-on-surface truncate max-w-[220px] xs:max-w-none">{{ p.policyNumber }}</div>
               </div>
               <span
-                class="px-4 py-2 rounded-full text-sm font-medium"
-                [class.bg-emerald-400/20]="p.status === 'ACTIVE'"
-                [class.text-emerald-400]="p.status === 'ACTIVE'"
-                [class.bg-amber-400/20]="p.status === 'QUOTED'"
-                [class.text-amber-400]="p.status === 'QUOTED'"
-                [class.bg-blue-400/20]="p.status === 'ISSUED'"
-                [class.text-blue-400]="p.status === 'ISSUED'"
-                [class.bg-red-400/20]="p.status === 'CANCELLED'"
-                [class.text-red-400]="p.status === 'CANCELLED'"
-                [class.bg-orange-400/20]="p.status === 'SUSPENDED'"
-                [class.text-orange-400]="p.status === 'SUSPENDED'"
+                class="status-badge block text-center flex-shrink-0"
+                [class.status-badge-active]="p.status === 'ACTIVE'"
+                [class.status-badge-quoted]="p.status === 'QUOTED'"
+                [class.status-badge-issued]="p.status === 'ISSUED'"
+                [class.status-badge-cancelled]="p.status === 'CANCELLED'"
+                [class.status-badge-suspended]="p.status === 'SUSPENDED'"
               >
                 {{ t('policies.status.' + p.status) }}
               </span>
             </div>
             
             <div class="space-y-3">
-              <div class="flex justify-between py-2 border-b border-outline-variant/50">
+              <div class="flex justify-between py-2 border-b border-border-custom">
                 <span class="text-on-surface-variant">{{ t('policies.form.branch') }}</span>
                 <span class="text-on-surface font-medium">{{ t('policies.branch.' + p.branch) }}</span>
               </div>
-              <div class="flex justify-between py-2 border-b border-outline-variant/50">
+              <div class="flex justify-between py-2 border-b border-border-custom">
                 <span class="text-on-surface-variant">{{ t('policies.detail.monthlyPremium') }}</span>
                 <span class="text-on-surface font-medium">$ {{ p.monthlyPremium.amount | number:'1.0-2' }}</span>
               </div>
-              <div class="flex justify-between py-2 border-b border-outline-variant/50">
+              <div class="flex justify-between py-2 border-b border-border-custom">
                 <span class="text-on-surface-variant">{{ t('policies.detail.coverage') }}</span>
                 <span class="text-on-surface font-medium">$ {{ p.coverage.coverageAmount.amount | number:'1.0-2' }}</span>
               </div>
-              <div class="flex justify-between py-2 border-b border-outline-variant/50">
+              <div class="flex justify-between py-2 border-b border-border-custom">
                 <span class="text-on-surface-variant">{{ t('policies.detail.termMonths') }}</span>
                 <span class="text-on-surface font-medium">
                   {{ p.coverage.termMonths ? p.coverage.termMonths + ' ' + (p.coverage.termMonths === 1 ? t('common.month') : t('common.months')) : t('policies.detail.indefinite') }}
@@ -84,15 +79,11 @@ import { PolicyStatus } from '../../../../domain/enums/policy-status.enum';
                 *ngFor="let transition of currentTransitions()"
                 (click)="transitionTo(transition)"
                 [disabled]="transitionLoading"
-                class="px-6 py-3 rounded-default font-medium text-body-md transition-all hover:scale-105 active:scale-95 disabled:opacity-50"
-                [class.bg-emerald-400/20]="transition === 'ACTIVE'"
-                [class.text-emerald-400]="transition === 'ACTIVE'"
-                [class.bg-blue-400/20]="transition === 'ISSUED'"
-                [class.text-blue-400]="transition === 'ISSUED'"
-                [class.bg-orange-400/20]="transition === 'SUSPENDED'"
-                [class.text-orange-400]="transition === 'SUSPENDED'"
-                [class.bg-red-400/20]="transition === 'CANCELLED'"
-                [class.text-red-400]="transition === 'CANCELLED'"
+                class="status-badge py-3 px-6 hover:scale-105 active:scale-95 transition-all cursor-pointer disabled:opacity-50"
+                [class.status-badge-active]="transition === 'ACTIVE'"
+                [class.status-badge-issued]="transition === 'ISSUED'"
+                [class.status-badge-suspended]="transition === 'SUSPENDED'"
+                [class.status-badge-cancelled]="transition === 'CANCELLED'"
               >
                 {{ t('policies.status.' + transition) }}
               </button>
@@ -104,7 +95,7 @@ import { PolicyStatus } from '../../../../domain/enums/policy-status.enum';
           <div class="glass rounded-xl p-6">
             <h3 class="font-outfit text-lg font-semibold text-on-surface mb-4">{{ t('policies.form.ratingStrategy') }}</h3>
             <div class="space-y-3">
-              <div class="flex justify-between py-2 border-b border-outline-variant/50">
+              <div class="flex justify-between py-2 border-b border-border-custom">
                 <span class="text-on-surface-variant">{{ t('policies.form.riskScore') }}</span>
                 <span class="text-on-surface font-medium">{{ p.riskProfile.riskScore }}/100</span>
               </div>
@@ -114,12 +105,12 @@ import { PolicyStatus } from '../../../../domain/enums/policy-status.enum';
               </div>
             </div>
             
-            <div class="mt-4 h-2 bg-surface-container-high rounded-full overflow-hidden">
+            <div class="mt-4 h-2 bg-progress-bg-custom rounded-full overflow-hidden">
               <div
                 class="h-full rounded-full transition-all"
-                [class.bg-emerald-400]="p.riskProfile.riskScore < 40"
-                [class.bg-amber-400]="p.riskProfile.riskScore >= 40 && p.riskProfile.riskScore < 70"
-                [class.bg-red-400]="p.riskProfile.riskScore >= 70"
+                [class.bg-emerald-500]="p.riskProfile.riskScore < 40"
+                [class.bg-amber-500]="p.riskProfile.riskScore >= 40 && p.riskProfile.riskScore < 70"
+                [class.bg-red-500]="p.riskProfile.riskScore >= 70"
                 [style.width.%]="p.riskProfile.riskScore"
               ></div>
             </div>
@@ -129,14 +120,14 @@ import { PolicyStatus } from '../../../../domain/enums/policy-status.enum';
             <h3 class="font-outfit text-lg font-semibold text-on-surface mb-4">{{ t('policies.detail.timeline') }}</h3>
             <div class="space-y-4">
               <div class="flex items-center gap-3">
-                <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
+                <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
                 <div>
                   <div class="text-sm text-on-surface">{{ t('policies.detail.created') }}</div>
                   <div class="text-xs text-on-surface-variant">{{ p.createdAt | date:'medium' }}</div>
                 </div>
               </div>
               <div class="flex items-center gap-3">
-                <div class="w-3 h-3 rounded-full bg-blue-400"></div>
+                <div class="w-3 h-3 rounded-full bg-blue-500"></div>
                 <div>
                   <div class="text-sm text-on-surface">{{ t('policies.detail.lastUpdated') }}</div>
                   <div class="text-xs text-on-surface-variant">{{ p.updatedAt | date:'medium' }}</div>

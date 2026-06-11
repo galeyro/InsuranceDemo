@@ -25,7 +25,7 @@ import { CustomerHttpService } from '../../data/customer-http.service';
               class="w-full px-4 py-3 rounded-default bg-surface-container-high border border-outline-variant text-on-surface placeholder-on-surface-variant/50 focus:border-primary focus:outline-none transition-colors"
               [placeholder]="t('customers.form.name')"
             />
-            <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="text-sm text-red-400 mt-1">
+            <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="text-sm text-error mt-1">
               El nombre es obligatorio
             </div>
           </div>
@@ -40,16 +40,16 @@ import { CustomerHttpService } from '../../data/customer-http.service';
               class="w-full px-4 py-3 rounded-default bg-surface-container-high border border-outline-variant text-on-surface placeholder-on-surface-variant/50 focus:border-primary focus:outline-none transition-colors"
               [placeholder]="t('customers.form.email')"
             />
-            <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-sm text-red-400 mt-1">
+            <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-sm text-error mt-1">
               Email inválido
             </div>
           </div>
           
-          <div class="flex items-center gap-4 pt-4">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
             <button
               type="submit"
               [disabled]="form.invalid || loading"
-              class="px-8 py-3 rounded-default bg-primary text-on-primary font-medium text-body-md transition-all hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+              class="w-full sm:w-auto px-8 py-3 rounded-default bg-primary text-on-primary font-medium text-body-md transition-all hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-center"
             >
               <span *ngIf="!loading">{{ t('customers.form.submit') }}</span>
               <span *ngIf="loading">{{ t('common.loading') }}</span>
@@ -57,7 +57,7 @@ import { CustomerHttpService } from '../../data/customer-http.service';
             <button
               type="button"
               (click)="router.navigate(['/app/customers'])"
-              class="px-8 py-3 rounded-default border border-outline-variant text-on-surface font-medium text-body-md transition-colors hover:bg-surface-container-high"
+              class="w-full sm:w-auto px-8 py-3 rounded-default border border-outline-variant text-on-surface font-medium text-body-md transition-colors hover:bg-surface-container-high text-center"
             >
               {{ t('customers.form.cancel') }}
             </button>

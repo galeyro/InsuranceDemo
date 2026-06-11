@@ -31,7 +31,7 @@ import { canTransition, getAllowedTransitions } from '../../../../domain/service
                 {{ customer.name }} ({{ customer.email.value }})
               </option>
             </select>
-            <div *ngIf="form.get('customerId')!.invalid && form.get('customerId')!.touched" class="text-sm text-red-400 mt-1">
+            <div *ngIf="form.get('customerId')!.invalid && form.get('customerId')!.touched" class="text-sm text-error mt-1">
               Cliente requerido
             </div>
           </div>
@@ -62,7 +62,7 @@ import { canTransition, getAllowedTransitions } from '../../../../domain/service
             <label class="block text-label-sm uppercase tracking-wider text-on-surface-variant mb-2">
               {{ t('policies.form.ratingStrategy') }}
             </label>
-            <div class="grid grid-cols-3 gap-3">
+            <div class="grid grid-cols-1 xs:grid-cols-3 gap-3">
               <button
                 type="button"
                 *ngFor="let strategy of strategies"
@@ -79,7 +79,7 @@ import { canTransition, getAllowedTransitions } from '../../../../domain/service
           </div>
           
           <!-- Step 4: Risk Profile -->
-          <div class="grid grid-cols-2 gap-4">
+          <div class="grid grid-cols-1 xs:grid-cols-2 gap-4">
             <div>
               <label class="block text-label-sm uppercase tracking-wider text-on-surface-variant mb-2">
                 {{ t('policies.form.riskScore') }}
@@ -106,11 +106,11 @@ import { canTransition, getAllowedTransitions } from '../../../../domain/service
             </div>
           </div>
           
-          <div class="flex items-center gap-4 pt-4">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-4">
             <button
               type="submit"
               [disabled]="form.invalid || loading"
-              class="px-8 py-3 rounded-default bg-primary text-on-primary font-medium text-body-md transition-all hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
+              class="w-full sm:w-auto px-8 py-3 rounded-default bg-primary text-on-primary font-medium text-body-md transition-all hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed text-center"
             >
               <span *ngIf="!loading">{{ t('policies.form.submit') }}</span>
               <span *ngIf="loading">{{ t('common.loading') }}</span>
@@ -118,7 +118,7 @@ import { canTransition, getAllowedTransitions } from '../../../../domain/service
             <button
               type="button"
               (click)="router.navigate(['/app/policies'])"
-              class="px-8 py-3 rounded-default border border-outline-variant text-on-surface font-medium text-body-md transition-colors hover:bg-surface-container-high"
+              class="w-full sm:w-auto px-8 py-3 rounded-default border border-outline-variant text-on-surface font-medium text-body-md transition-colors hover:bg-surface-container-high text-center"
             >
               {{ t('policies.form.cancel') }}
             </button>

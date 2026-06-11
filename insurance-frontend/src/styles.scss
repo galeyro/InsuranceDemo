@@ -36,6 +36,10 @@
   --color-error-container: var(--error-container);
   --color-on-error-container: var(--on-error-container);
 
+  --color-hover-custom: var(--hover-custom);
+  --color-border-custom: var(--border-custom);
+  --color-progress-bg-custom: var(--progress-bg-custom);
+
   --font-outfit: 'Outfit', sans-serif;
   --font-inter: 'Inter', sans-serif;
   --font-space-grotesk: 'Space Grotesk', sans-serif;
@@ -49,6 +53,8 @@
 
   --spacing-gutter: 24px;
   --spacing-container-max: 1440px;
+
+  --breakpoint-xs: 480px;
 }
 
 @layer base {
@@ -96,51 +102,99 @@
     --sidebar-bg: #0d0d0d;
     --sidebar-border: rgba(255, 255, 255, 0.1);
     --sidebar-shadow: none;
+
+    --hover-custom: rgba(255, 255, 255, 0.05);
+    --border-custom: rgba(255, 255, 255, 0.1);
+    --progress-bg-custom: rgba(255, 255, 255, 0.05);
+
+    --status-active-bg: rgba(16, 185, 129, 0.12);
+    --status-active-text: #34d399;
+    --status-active-dot: #34d399;
+
+    --status-quoted-bg: rgba(245, 158, 11, 0.12);
+    --status-quoted-text: #fbbf24;
+    --status-quoted-dot: #fbbf24;
+
+    --status-issued-bg: rgba(59, 130, 246, 0.12);
+    --status-issued-text: #60a5fa;
+    --status-issued-dot: #60a5fa;
+
+    --status-cancelled-bg: rgba(239, 68, 68, 0.12);
+    --status-cancelled-text: #f87171;
+    --status-cancelled-dot: #f87171;
+
+    --status-suspended-bg: rgba(249, 115, 22, 0.12);
+    --status-suspended-text: #fb923c;
+    --status-suspended-dot: #fb923c;
   }
 
   [data-theme='light'] {
-    --background: #fcfcfc;
-    --surface: #fcfcfc;
-    --surface-dim: #fcfcfc;
+    --background: #f1f5f9; /* Gris pizarra suave mate para reducir el brillo */
+    --surface: #ffffff; /* Superficies en blanco puro para que las tarjetas resalten */
+    --surface-dim: #f8fafc; /* Gris slate ultra claro */
     --surface-bright: #ffffff;
     --surface-container-lowest: #ffffff;
-    --surface-container-low: #f3f4f6;
-    --surface-container: #e5e7eb;
-    --surface-container-high: #d1d5db;
-    --surface-container-highest: #9ca3af;
-    --surface-variant: #f3f4f6;
-    --on-surface: #0f0f0f;
-    --on-surface-variant: #4b5563;
-    --inverse-surface: #111827;
-    --inverse-on-surface: #f9fafb;
-    --outline: #D8D2CB;
-    --outline-variant: #e5e7eb;
+    --surface-container-low: #f8fafc;
+    --surface-container: #f1f5f9;
+    --surface-container-high: #e2e8f0; /* Divisores más visibles y limpios */
+    --surface-container-highest: #cbd5e1;
+    --surface-variant: #f8fafc;
+    --on-surface: #0f172a; /* Slate 900: texto oscuro premium */
+    --on-surface-variant: #475569; /* Slate 600 */
+    --inverse-surface: #0f172a;
+    --inverse-on-surface: #f1f5f9;
+    --outline: #cbd5e1;
+    --outline-variant: #e2e8f0;
     --surface-tint: #FF7E0A;
     --primary: #FF7E0A;
     --on-primary: #ffffff;
     --primary-container: #FFE3CC;
     --on-primary-container: #8F4200;
     --inverse-primary: #FF7E0A;
-    --secondary: #4b5563;
+    --secondary: #475569;
     --on-secondary: #ffffff;
-    --secondary-container: #e5e7eb;
-    --on-secondary-container: #111827;
-    --tertiary: #374151;
+    --secondary-container: #f1f5f9;
+    --on-secondary-container: #0f172a;
+    --tertiary: #334155;
     --on-tertiary: #ffffff;
-    --tertiary-container: #f3f4f6;
-    --on-tertiary-container: #111827;
-    --error: #ba1a1a;
+    --tertiary-container: #f8fafc;
+    --on-tertiary-container: #0f172a;
+    --error: #ba1a1a; /* Rojo oscuro legible */
     --on-error: #ffffff;
     --error-container: #ffdad6;
     --on-error-container: #410002;
 
     /* Component-specific variables */
     --card-bg: #ffffff;
-    --card-border: #e2e8f0;
-    --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 16px -6px rgba(0, 0, 0, 0.05);
+    --card-border: #cbd5e1; /* Borde más definido */
+    --card-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 8px -1px rgba(15, 23, 42, 0.03), 0 0 0 1px rgba(15, 23, 42, 0.02);
     --sidebar-bg: #ffffff;
-    --sidebar-border: #e2e8f0;
-    --sidebar-shadow: 8px 0 32px -16px rgba(0, 0, 0, 0.1);
+    --sidebar-border: #cbd5e1;
+    --sidebar-shadow: 1px 0 0 0 #cbd5e1, 6px 0 30px -15px rgba(15, 23, 42, 0.05);
+
+    --hover-custom: rgba(15, 23, 42, 0.04); /* Slate 900 a 4% */
+    --border-custom: rgba(15, 23, 42, 0.08); /* Slate 900 a 8% */
+    --progress-bg-custom: rgba(15, 23, 42, 0.06);
+
+    --status-active-bg: rgba(16, 185, 129, 0.12);
+    --status-active-text: #047857; /* Verde oscuro para excelente contraste */
+    --status-active-dot: #10b981;
+
+    --status-quoted-bg: rgba(245, 158, 11, 0.12);
+    --status-quoted-text: #b45309; /* Ámbar oscuro */
+    --status-quoted-dot: #f59e0b;
+
+    --status-issued-bg: rgba(59, 130, 246, 0.12);
+    --status-issued-text: #1d4ed8; /* Azul oscuro */
+    --status-issued-dot: #3b82f6;
+
+    --status-cancelled-bg: rgba(239, 68, 68, 0.12);
+    --status-cancelled-text: #b91c1c; /* Rojo oscuro */
+    --status-cancelled-dot: #ef4444;
+
+    --status-suspended-bg: rgba(249, 115, 22, 0.12);
+    --status-suspended-text: #c2410c; /* Naranja oscuro */
+    --status-suspended-dot: #f97316;
   }
 
   html,
@@ -208,4 +262,35 @@
     border: 1px solid color-mix(in oklab, var(--on-surface) 8%, transparent);
     box-shadow: 0 0 32px color-mix(in oklab, var(--primary) 18%, transparent);
   }
+
+  /* Status badge system */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition: all 0.2s ease;
+  }
+  .status-badge-active { background-color: var(--status-active-bg); color: var(--status-active-text); }
+  .status-badge-quoted { background-color: var(--status-quoted-bg); color: var(--status-quoted-text); }
+  .status-badge-issued { background-color: var(--status-issued-bg); color: var(--status-issued-text); }
+  .status-badge-cancelled { background-color: var(--status-cancelled-bg); color: var(--status-cancelled-text); }
+  .status-badge-suspended { background-color: var(--status-suspended-bg); color: var(--status-suspended-text); }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    transition: all 0.2s ease;
+  }
+  .status-dot-active { background-color: var(--status-active-dot); }
+  .status-dot-quoted { background-color: var(--status-quoted-dot); }
+  .status-dot-issued { background-color: var(--status-issued-dot); }
+  .status-dot-cancelled { background-color: var(--status-cancelled-dot); }
+  .status-dot-suspended { background-color: var(--status-suspended-dot); }
 }

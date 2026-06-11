@@ -17,30 +17,30 @@ import { LangSwitcherComponent } from '../../core/i18n/lang-switcher.component';
         [class.bg-surface-dim]="isScrolled"
         [class.bg-surface-dim/80]="!isScrolled"
         [class.h-20]="!isScrolled"
-        class="backdrop-blur-xl border-b border-white/10 fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        class="backdrop-blur-xl border-b border-border-custom fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       >
-        <div class="flex justify-between items-center w-full px-gutter h-full max-w-container-max mx-auto">
+        <div class="flex justify-between items-center w-full px-gutter h-full max-w-container-max mx-auto gap-4">
           <!-- Logo -->
-          <div class="flex items-center gap-3">
-            <span class="font-space-grotesk text-headline-md text-primary tracking-tight font-semibold">Sofka Insurance</span>
-            <span class="text-on-surface-variant text-label-sm px-2 py-0.5 border border-primary/20 rounded">PREMIUM</span>
+          <div class="flex items-center gap-2 sm:gap-3 min-w-0">
+            <span class="font-space-grotesk text-title-lg sm:text-headline-md text-primary tracking-tight font-semibold truncate">Sofka Insurance</span>
+            <span class="hidden sm:inline-block text-on-surface-variant text-label-sm px-2 py-0.5 border border-primary/20 rounded flex-shrink-0">PREMIUM</span>
           </div>
 
 
           <!-- Actions: Lang, Theme, Enter Platform -->
-          <div class="flex items-center gap-4">
+          <div class="flex items-center gap-2 sm:gap-4 flex-shrink-0">
             <app-lang-switcher />
             <button
-              class="p-2 rounded-full hover:bg-white/10 transition-colors text-on-surface-variant cursor-pointer flex items-center justify-center"
+              class="p-2 rounded-full hover:bg-hover-custom transition-colors text-on-surface-variant cursor-pointer flex items-center justify-center"
               (click)="themeService.toggle()"
             >
               <span class="material-symbols-outlined text-[20px]">
-                {{ themeService.theme() === 'dark' ? 'light_mode' : 'dark_mode' }}
+                {{ themeService.theme() === 'light' ? 'light_mode' : 'dark_mode' }}
               </span>
             </button>
             <button
               (click)="enterPlatform()"
-              class="bg-primary text-on-primary px-6 py-2 rounded-lg font-bold transition-all hover:brightness-110 active:scale-95 text-label-sm font-sans"
+              class="bg-primary text-on-primary px-4 sm:px-6 py-2 rounded-lg font-bold transition-all hover:brightness-110 active:scale-95 text-[11px] sm:text-label-sm font-sans"
             >
               {{ t('landing.cta.enter') }}
             </button>
@@ -50,8 +50,8 @@ import { LangSwitcherComponent } from '../../core/i18n/lang-switcher.component';
 
       <main class="relative pt-20">
         <!-- Hero Section -->
-        <section class="relative min-h-[90vh] flex items-center justify-center pt-16 pb-36 overflow-hidden">
-          <div class="max-w-container-max mx-auto px-gutter relative z-10 text-center">
+        <section class="relative flex flex-col items-center pt-20 pb-16 overflow-hidden">
+          <div class="max-w-container-max mx-auto px-gutter relative z-20 text-center mb-8">
             <!-- Badge -->
             <div class="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 px-4 py-1.5 rounded-full mb-8">
               <span class="material-symbols-outlined text-primary text-[16px]">auto_awesome</span>
@@ -78,16 +78,16 @@ import { LangSwitcherComponent } from '../../core/i18n/lang-switcher.component';
                 {{ t('landing.hero.cta.primary') }}
                 <span class="material-symbols-outlined">arrow_forward</span>
               </button>
-              <button class="border border-white/15 hover:bg-white/5 h-14 px-10 rounded-xl font-medium transition-all cursor-pointer text-on-surface">
+              <button class="border border-border-custom hover:bg-hover-custom h-14 px-10 rounded-xl font-medium transition-all cursor-pointer text-on-surface">
                 {{ t('landing.hero.cta.secondary') }}
               </button>
             </div>
           </div>
 
-          <!-- Dashboard Peek (Lower Hero) -->
-          <div class="absolute -bottom-64 left-1/2 -translate-x-1/2 w-full max-w-5xl opacity-40 hover:opacity-100 transition-opacity duration-700 pointer-events-none md:pointer-events-auto z-10">
-            <div class="glass-card rounded-t-3xl p-4 pb-0 overflow-hidden shadow-2xl transition-all duration-700 opacity-100 translate-y-0">
-              <img alt="Sofka Insure Executive Dashboard Interface" class="w-full rounded-t-2xl border border-white/10" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR_doasf7seGnmN4K3mPt6IDnl-Jxm2nYPIFkFQgDXTqI1WvLIcHDVYXFYubQFGNNHLs8GHDS-UwbLJQOWucGGPoU-z6tFzesBehlumiQJ1nVoct1cDq5o9SWG1YMPUeeSFL6hOSE4Oe479R3AUbwxLLlz-hDD8aEiDfU9kRCjQotCuAEoFtQipQAqIcOmxcioNxdZXSVIbYLlAWX6He0UbwCzBoET4hDyKAL7tdNrHNZjj382kbTU_qNUNUQI8hIlbVpqdWEAXho">
+          <!-- Dashboard Peek (Lower Hero - Stacked vertically for perfect readability and hover interaction) -->
+          <div class="relative w-full max-w-5xl px-gutter mx-auto opacity-70 hover:opacity-100 hover:scale-[1.01] transition-all duration-500 z-20 cursor-pointer">
+            <div class="glass-card rounded-2xl p-4 pb-0 overflow-hidden shadow-2xl border border-border-custom">
+              <img alt="Sofka Insure Executive Dashboard Interface" class="w-full rounded-t-xl border-t border-x border-border-custom shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR_doasf7seGnmN4K3mPt6IDnl-Jxm2nYPIFkFQgDXTqI1WvLIcHDVYXFYubQFGNNHLs8GHDS-UwbLJQOWucGGPoU-z6tFzesBehlumiQJ1nVoct1cDq5o9SWG1YMPUeeSFL6hOSE4Oe479R3AUbwxLLlz-hDD8aEiDfU9kRCjQotCuAEoFtQipQAqIcOmxcioNxdZXSVIbYLlAWX6He0UbwCzBoET4hDyKAL7tdNrHNZjj382kbTU_qNUNUQI8hIlbVpqdWEAXho">
             </div>
           </div>
         </section>
@@ -173,10 +173,10 @@ import { LangSwitcherComponent } from '../../core/i18n/lang-switcher.component';
                 <!-- Background Glow -->
                 <div class="absolute -inset-10 bg-primary/20 rounded-full blur-[100px] opacity-20 group-hover:opacity-40 transition-opacity"></div>
                 <!-- Visual Peek -->
-                <div class="relative glass-card p-6 rounded-[2rem] border-white/20 transform hover:-rotate-2 transition-all duration-500">
+                <div class="relative glass-card p-6 rounded-[2rem] border-border-custom transform hover:-rotate-2 transition-all duration-500">
                   <div class="bg-background rounded-xl overflow-hidden shadow-2xl">
                     <img alt="Sofka Insure Visual Stepper Analytics" class="w-full h-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLhxWqsufjR4tY6LcPSjFsLj7wt2B23wD7vpq9gOEEOxkbtRTWC8FfN4gIz1q09h9hklp-8FPh-6iSJN4Xwxny1z1pSAac0Pkmp3tCVaTYm55JNUp571s-AHBtTgGnqqFdI1_3iSd1UHv3y6NmvmQmYzb8AW11AwlC3TNSs73mQRjJ4tvb_NVXFVsKFIx-viUt5EsiCvHHgZ2OoeuLm3kpiZtQpYnlh55pHD-UySHXg5-DXFs_B_3COXMi1veqe2SMIn1yLrYxJYg">
-                    <div class="p-6 border-t border-white/10 flex justify-between items-center bg-surface-container-low/20">
+                    <div class="p-6 border-t border-border-custom flex justify-between items-center bg-surface-container-low/20">
                       <div>
                         <p class="text-on-surface-variant text-label-sm">{{ t('landing.portfolio.title') }}</p>
                         <p class="text-primary font-space-grotesk text-headline-md font-semibold">$142.8M</p>
@@ -199,7 +199,7 @@ import { LangSwitcherComponent } from '../../core/i18n/lang-switcher.component';
           <!-- Asymmetric Glow -->
           <div class="absolute top-0 right-0 w-1/3 h-full bg-primary/5 blur-[120px] rounded-full"></div>
           <div class="max-w-container-max mx-auto px-gutter text-center relative z-10">
-            <div class="max-w-3xl mx-auto border border-white/15 p-12 md:p-20 rounded-[3rem] surface-gradient glass-card transition-all duration-700 opacity-100 translate-y-0">
+            <div class="max-w-3xl mx-auto border border-border-custom p-6 sm:p-12 md:p-20 rounded-2xl sm:rounded-[3rem] surface-gradient glass-card transition-all duration-700 opacity-100 translate-y-0">
               <h2 class="font-space-grotesk text-display-lg-mobile md:text-display-lg mb-6 font-bold leading-tight">{{ t('landing.ctaSection.title') }}</h2>
               <p class="font-body-lg text-body-lg text-on-surface-variant opacity-80 mb-10">{{ t('landing.ctaSection.description') }}</p>
               <button
@@ -208,12 +208,12 @@ import { LangSwitcherComponent } from '../../core/i18n/lang-switcher.component';
               >
                 {{ t('landing.ctaSection.button') }}
               </button>
-              <div class="mt-8 flex items-center justify-center gap-6 text-on-surface-variant text-label-sm font-semibold">
+              <div class="mt-8 flex flex-wrap justify-center gap-4 sm:gap-6 text-on-surface-variant text-label-sm font-semibold">
                 <span class="flex items-center gap-1">
                   <span class="material-symbols-outlined text-[14px]">lock_open</span>
                   {{ t('landing.ctaSection.noLogin') }}
                 </span>
-                <span class="w-1 h-1 rounded-full bg-white/30"></span>
+                <span class="hidden sm:inline-block w-1 h-1 rounded-full bg-on-surface-variant/30"></span>
                 <span class="flex items-center gap-1">
                   <span class="material-symbols-outlined text-[14px]">verified_user</span>
                   {{ t('landing.ctaSection.certified') }}
@@ -224,22 +224,22 @@ import { LangSwitcherComponent } from '../../core/i18n/lang-switcher.component';
         </section>
 
         <!-- Footer -->
-        <footer class="py-16 border-t border-white/10">
+        <footer class="py-16 border-t border-border-custom">
           <div class="max-w-container-max mx-auto px-gutter flex flex-col md:flex-row justify-between items-center gap-8">
             <div class="flex flex-col items-center md:items-start gap-2">
               <span class="font-space-grotesk text-headline-sm text-primary tracking-tight font-semibold">Sofka Insurance</span>
               <p class="text-on-surface-variant text-label-sm">{{ t('landing.footer.copyright') }}</p>
             </div>
-            <div class="flex gap-8">
+            <div class="flex flex-wrap justify-center gap-4 sm:gap-8">
               <a class="text-on-surface-variant hover:text-primary transition-colors text-label-sm font-semibold" href="#">{{ t('landing.footer.privacy') }}</a>
               <a class="text-on-surface-variant hover:text-primary transition-colors text-label-sm font-semibold" href="#">{{ t('landing.footer.terms') }}</a>
               <a class="text-on-surface-variant hover:text-primary transition-colors text-label-sm font-semibold" href="#">{{ t('landing.footer.security') }}</a>
             </div>
             <div class="flex gap-4">
-              <button class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-all">
+              <button class="w-10 h-10 rounded-full border border-border-custom flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-all">
                 <span class="material-symbols-outlined text-[20px]">terminal</span>
               </button>
-              <button class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-all">
+              <button class="w-10 h-10 rounded-full border border-border-custom flex items-center justify-center text-on-surface-variant hover:border-primary hover:text-primary transition-all">
                 <span class="material-symbols-outlined text-[20px]">hub</span>
               </button>
             </div>

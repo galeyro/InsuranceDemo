@@ -79,7 +79,7 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
               <span class="text-xs text-on-surface-variant bg-surface-container-high px-3 py-1 rounded-full font-semibold">{{ t('dashboard.hotEvents') }}</span>
             </div>
             
-            <div class="divide-y divide-outline-variant/10">
+            <div class="divide-y divide-border-custom">
               <!-- Empty State -->
               <div *ngIf="state.transitions().length === 0" class="py-8 text-center space-y-3">
                 <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mx-auto">
@@ -96,35 +96,31 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
               <!-- List of transitions -->
               <div 
                 *ngFor="let trans of state.transitions()" 
-                class="flex items-center justify-between py-4 first:pt-0 hover:bg-white/5 px-3 rounded-xl transition-colors cursor-pointer group"
+                class="flex items-center justify-between py-4 first:pt-0 hover:bg-hover-custom px-3 rounded-xl transition-colors cursor-pointer group gap-2 min-w-0"
               >
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-4 min-w-0">
                   <div 
-                    class="w-10 h-10 rounded-xl flex items-center justify-center group-hover:scale-105 transition-transform"
-                    [class.bg-emerald-500/10]="trans.success"
-                    [class.text-emerald-400]="trans.success"
-                    [class.bg-red-500/10]="!trans.success"
-                    [class.text-red-400]="!trans.success"
+                    class="w-10 h-10 rounded-xl flex-shrink-0 flex items-center justify-center group-hover:scale-105 transition-transform"
+                    [style.background-color]="trans.success ? 'var(--status-active-bg)' : 'var(--status-cancelled-bg)'"
+                    [style.color]="trans.success ? 'var(--status-active-text)' : 'var(--status-cancelled-text)'"
                   >
                     <span class="material-symbols-outlined">{{ trans.success ? 'sync' : 'report' }}</span>
                   </div>
-                  <div>
-                    <p class="font-semibold text-on-surface group-hover:text-primary transition-colors text-sm">
+                  <div class="min-w-0">
+                    <p class="font-semibold text-on-surface group-hover:text-primary transition-colors text-sm truncate">
                       Transición Póliza {{ trans.policyNumber }}
                     </p>
-                    <p class="text-xs text-on-surface-variant">
+                    <p class="text-xs text-on-surface-variant truncate">
                       {{ trans.oldStatus }} ➔ {{ trans.newStatus }} • Encolado en Kafka
                     </p>
                   </div>
                 </div>
-                <div class="text-right">
+                <div class="text-right flex-shrink-0">
                   <p class="font-mono text-xs text-on-surface-variant font-medium">{{ trans.timestamp | date:'HH:mm:ss' }}</p>
                   <span 
                     class="text-[10px] px-2 py-0.5 rounded font-bold tracking-wider"
-                    [class.bg-emerald-500/15]="trans.success"
-                    [class.text-emerald-400]="trans.success"
-                    [class.bg-red-500/15]="!trans.success"
-                    [class.text-red-400]="!trans.success"
+                    [style.background-color]="trans.success ? 'var(--status-active-bg)' : 'var(--status-cancelled-bg)'"
+                    [style.color]="trans.success ? 'var(--status-active-text)' : 'var(--status-cancelled-text)'"
                   >
                     {{ trans.success ? 'ENCOLADO' : 'FALLIDO' }}
                   </span>
@@ -143,7 +139,7 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
                   <span class="text-on-surface-variant">{{ t('policies.form.branch') }} {{ t('policies.branch.AUTO') }} (AUTO)</span>
                   <span class="text-primary font-semibold">{{ getPolicyPercent('AUTO') }}% ({{ getPolicyCount('AUTO') }})</span>
                 </div>
-                <div class="w-full bg-white/5 h-2.5 rounded-full overflow-hidden">
+                <div class="w-full bg-progress-bg-custom h-2.5 rounded-full overflow-hidden">
                   <div class="bg-primary h-full transition-all duration-500" [style.width.%]="getPolicyPercent('AUTO')"></div>
                 </div>
               </div>
@@ -153,7 +149,7 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
                   <span class="text-on-surface-variant">{{ t('policies.form.branch') }} {{ t('policies.branch.LIFE') }} (LIFE)</span>
                   <span class="text-primary font-semibold">{{ getPolicyPercent('LIFE') }}% ({{ getPolicyCount('LIFE') }})</span>
                 </div>
-                <div class="w-full bg-white/5 h-2.5 rounded-full overflow-hidden">
+                <div class="w-full bg-progress-bg-custom h-2.5 rounded-full overflow-hidden">
                   <div class="bg-primary h-full transition-all duration-500" [style.width.%]="getPolicyPercent('LIFE')"></div>
                 </div>
               </div>
@@ -163,7 +159,7 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
                   <span class="text-on-surface-variant">{{ t('policies.form.branch') }} {{ t('policies.branch.HOME') }} (HOME)</span>
                   <span class="text-primary font-semibold">{{ getPolicyPercent('HOME') }}% ({{ getPolicyCount('HOME') }})</span>
                 </div>
-                <div class="w-full bg-white/5 h-2.5 rounded-full overflow-hidden">
+                <div class="w-full bg-progress-bg-custom h-2.5 rounded-full overflow-hidden">
                   <div class="bg-primary h-full transition-all duration-500" [style.width.%]="getPolicyPercent('HOME')"></div>
                 </div>
               </div>
@@ -173,7 +169,7 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
                   <span class="text-on-surface-variant">{{ t('policies.form.branch') }} {{ t('policies.branch.HEALTH') }} (HEALTH)</span>
                   <span class="text-primary font-semibold">{{ getPolicyPercent('HEALTH') }}% ({{ getPolicyCount('HEALTH') }})</span>
                 </div>
-                <div class="w-full bg-white/5 h-2.5 rounded-full overflow-hidden">
+                <div class="w-full bg-progress-bg-custom h-2.5 rounded-full overflow-hidden">
                   <div class="bg-primary h-full transition-all duration-500" [style.width.%]="getPolicyPercent('HEALTH')"></div>
                 </div>
               </div>
@@ -199,37 +195,32 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
             </div>
 
             <!-- List of Policies -->
-            <div *ngIf="state.policies().length > 0" class="divide-y divide-outline-variant/10">
+            <div *ngIf="state.policies().length > 0" class="divide-y divide-border-custom">
               <div
                 *ngFor="let policy of state.policies().slice(0, 5)"
-                class="flex items-center justify-between py-4 first:pt-0 last:pb-0 hover:bg-white/5 px-2 rounded-xl transition-colors group"
+                class="flex items-center justify-between py-4 first:pt-0 last:pb-0 hover:bg-hover-custom px-2 rounded-xl transition-colors group gap-2 min-w-0"
               >
-                <div class="flex items-center gap-3">
-                  <div class="w-9 h-9 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-xs group-hover:scale-105 transition-transform">
+                <div class="flex items-center gap-3 min-w-0">
+                  <div class="w-9 h-9 rounded-xl bg-primary/10 flex-shrink-0 flex items-center justify-center text-primary font-bold text-xs group-hover:scale-105 transition-transform">
                     {{ policy.branch[0] }}
                   </div>
-                  <div>
-                    <div class="font-bold text-on-surface group-hover:text-primary transition-colors text-sm">{{ policy.policyNumber }}</div>
-                    <div class="text-[10px] text-on-surface-variant flex items-center gap-1.5">
+                  <div class="min-w-0">
+                    <div class="font-bold text-on-surface group-hover:text-primary transition-colors text-sm truncate">{{ policy.policyNumber }}</div>
+                    <div class="text-[10px] text-on-surface-variant flex items-center gap-1.5 truncate">
                       <span>{{ t('policies.branch.' + policy.branch) }}</span>
-                      <span class="w-1 h-1 rounded-full bg-outline-variant"></span>
-                      <span>{{ t('policies.ratingStrategy.' + policy.ratingStrategy) }}</span>
+                      <span class="w-1.5 h-1.5 rounded-full bg-border-custom flex-shrink-0"></span>
+                      <span class="truncate">{{ t('policies.ratingStrategy.' + policy.ratingStrategy) }}</span>
                     </div>
                   </div>
                 </div>
-                <div class="text-right">
+                <div class="text-right flex-shrink-0">
                   <span
-                    class="px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider block mb-1 text-center"
-                    [class.bg-emerald-500/10]="policy.status === 'ACTIVE'"
-                    [class.text-emerald-400]="policy.status === 'ACTIVE'"
-                    [class.bg-amber-500/10]="policy.status === 'QUOTED'"
-                    [class.text-amber-400]="policy.status === 'QUOTED'"
-                    [class.bg-blue-500/10]="policy.status === 'ISSUED'"
-                    [class.text-blue-400]="policy.status === 'ISSUED'"
-                    [class.bg-red-500/10]="policy.status === 'CANCELLED'"
-                    [class.text-red-400]="policy.status === 'CANCELLED'"
-                    [class.bg-orange-500/10]="policy.status === 'SUSPENDED'"
-                    [class.text-orange-400]="policy.status === 'SUSPENDED'"
+                    class="status-badge block mb-1 text-center justify-center"
+                    [class.status-badge-active]="policy.status === 'ACTIVE'"
+                    [class.status-badge-quoted]="policy.status === 'QUOTED'"
+                    [class.status-badge-issued]="policy.status === 'ISSUED'"
+                    [class.status-badge-cancelled]="policy.status === 'CANCELLED'"
+                    [class.status-badge-suspended]="policy.status === 'SUSPENDED'"
                   >
                     {{ t('policies.status.' + policy.status) }}
                   </span>
@@ -242,8 +233,8 @@ import { PolicyHttpService } from '../../policies/data/policy-http.service';
           </div>
 
           <!-- Bottom Action button to policies page -->
-          <div class="mt-8 pt-6 border-t border-white/10">
-            <button routerLink="/app/policies" class="w-full h-12 border border-white/10 hover:bg-white/5 rounded-xl font-medium transition-all text-body-sm flex items-center justify-center gap-2 cursor-pointer text-on-surface">
+          <div class="mt-8 pt-6 border-t border-border-custom">
+            <button routerLink="/app/policies" class="w-full h-12 border border-border-custom hover:bg-hover-custom rounded-xl font-medium transition-all text-body-sm flex items-center justify-center gap-2 cursor-pointer text-on-surface">
               {{ t('dashboard.viewAll') }}
               <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </button>

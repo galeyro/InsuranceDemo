@@ -12,7 +12,7 @@ import { PolicyHttpService } from '../../data/policy-http.service';
   template: `
     <div class="space-y-6 animate-fade-in" *transloco="let t">
       <!-- Header Area -->
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-outline-variant/30 pb-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border-custom pb-6">
         <div class="space-y-1">
           <h2 class="font-outfit text-headline-lg font-bold text-on-surface flex items-center gap-3">
             {{ t('policies.title') }}
@@ -53,23 +53,23 @@ import { PolicyHttpService } from '../../data/policy-http.service';
       </div>
       
       <!-- Policies Table -->
-      <div *ngIf="state.policies().length > 0" class="glass rounded-2xl overflow-hidden border border-outline-variant/30">
+      <div *ngIf="state.policies().length > 0" class="glass rounded-2xl overflow-hidden border border-border-custom shadow-sm">
         <div class="overflow-x-auto">
           <table class="w-full border-collapse">
             <thead>
-              <tr class="bg-surface-container/30 border-b border-outline-variant/30 text-left">
+              <tr class="bg-surface-container-high/40 border-b border-border-custom text-left">
                 <th class="px-6 py-4 text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">{{ t('policies.detail.policyNumber') }}</th>
-                <th class="px-6 py-4 text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">{{ t('policies.form.branch') }}</th>
-                <th class="px-6 py-4 text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">{{ t('policies.form.ratingStrategy') }}</th>
+                <th class="hidden md:table-cell px-6 py-4 text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">{{ t('policies.form.branch') }}</th>
+                <th class="hidden sm:table-cell px-6 py-4 text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">{{ t('policies.form.ratingStrategy') }}</th>
                 <th class="px-6 py-4 text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">{{ t('policies.detail.status') }}</th>
                 <th class="px-6 py-4 text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">{{ t('policies.detail.monthlyPremium') }}</th>
                 <th class="px-6 py-4 text-label-sm uppercase tracking-wider text-on-surface-variant font-bold text-right">{{ t('common.actions') }}</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-outline-variant/20">
+            <tbody class="divide-y divide-border-custom">
               <tr
                 *ngFor="let policy of state.policies()"
-                class="hover:bg-primary/5 transition-colors group"
+                class="hover:bg-hover-custom transition-colors group"
               >
                 <td class="px-6 py-5">
                   <div class="flex items-center gap-3">
@@ -82,29 +82,24 @@ import { PolicyHttpService } from '../../data/policy-http.service';
                     </div>
                   </div>
                 </td>
-                <td class="px-6 py-5 text-on-surface font-medium">{{ t('policies.branch.' + policy.branch) }}</td>
-                <td class="px-6 py-5 text-on-surface-variant font-medium">{{ t('policies.ratingStrategy.' + policy.ratingStrategy) }}</td>
+                <td class="hidden md:table-cell px-6 py-5 text-on-surface font-medium">{{ t('policies.branch.' + policy.branch) }}</td>
+                <td class="hidden sm:table-cell px-6 py-5 text-on-surface-variant font-medium">{{ t('policies.ratingStrategy.' + policy.ratingStrategy) }}</td>
                 <td class="px-6 py-5">
                   <span
-                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider"
-                    [class.bg-emerald-500/10]="policy.status === 'ACTIVE'"
-                    [class.text-emerald-400]="policy.status === 'ACTIVE'"
-                    [class.bg-amber-500/10]="policy.status === 'QUOTED'"
-                    [class.text-amber-400]="policy.status === 'QUOTED'"
-                    [class.bg-blue-500/10]="policy.status === 'ISSUED'"
-                    [class.text-blue-400]="policy.status === 'ISSUED'"
-                    [class.bg-red-500/10]="policy.status === 'CANCELLED'"
-                    [class.text-red-400]="policy.status === 'CANCELLED'"
-                    [class.bg-orange-500/10]="policy.status === 'SUSPENDED'"
-                    [class.text-orange-400]="policy.status === 'SUSPENDED'"
+                    class="status-badge"
+                    [class.status-badge-active]="policy.status === 'ACTIVE'"
+                    [class.status-badge-quoted]="policy.status === 'QUOTED'"
+                    [class.status-badge-issued]="policy.status === 'ISSUED'"
+                    [class.status-badge-cancelled]="policy.status === 'CANCELLED'"
+                    [class.status-badge-suspended]="policy.status === 'SUSPENDED'"
                   >
                     <span
-                      class="w-1.5 h-1.5 rounded-full"
-                      [class.bg-emerald-400]="policy.status === 'ACTIVE'"
-                      [class.bg-amber-400]="policy.status === 'QUOTED'"
-                      [class.bg-blue-400]="policy.status === 'ISSUED'"
-                      [class.bg-red-400]="policy.status === 'CANCELLED'"
-                      [class.bg-orange-400]="policy.status === 'SUSPENDED'"
+                      class="status-dot"
+                      [class.status-dot-active]="policy.status === 'ACTIVE'"
+                      [class.status-dot-quoted]="policy.status === 'QUOTED'"
+                      [class.status-dot-issued]="policy.status === 'ISSUED'"
+                      [class.status-dot-cancelled]="policy.status === 'CANCELLED'"
+                      [class.status-dot-suspended]="policy.status === 'SUSPENDED'"
                     ></span>
                     {{ t('policies.status.' + policy.status) }}
                   </span>

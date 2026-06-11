@@ -12,7 +12,7 @@ import { CustomerHttpService } from '../../data/customer-http.service';
   template: `
     <div class="space-y-6 animate-fade-in" *transloco="let t">
       <!-- Header Area -->
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-outline-variant/30 pb-6">
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-border-custom pb-6">
         <div class="space-y-1">
           <h2 class="font-outfit text-headline-lg font-bold text-on-surface flex items-center gap-3">
             {{ t('customers.title') }}
@@ -53,21 +53,21 @@ import { CustomerHttpService } from '../../data/customer-http.service';
       </div>
       
       <!-- Customers Grid/Table -->
-      <div *ngIf="state.customers().length > 0" class="glass rounded-2xl overflow-hidden border border-outline-variant/30">
+      <div *ngIf="state.customers().length > 0" class="glass rounded-2xl overflow-hidden border border-border-custom shadow-sm">
         <div class="overflow-x-auto">
           <table class="w-full border-collapse">
             <thead>
-              <tr class="bg-surface-container/30 border-b border-outline-variant/30 text-left">
+              <tr class="bg-surface-container-high/40 border-b border-border-custom text-left">
                 <th class="px-6 py-4 text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">{{ t('customers.form.name') }}</th>
-                <th class="px-6 py-4 text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">{{ t('customers.form.email') }}</th>
+                <th class="hidden sm:table-cell px-6 py-4 text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">{{ t('customers.form.email') }}</th>
                 <th class="px-6 py-4 text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">Estado</th>
                 <th class="px-6 py-4 text-label-sm uppercase tracking-wider text-on-surface-variant font-bold text-right">{{ t('common.actions') }}</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-outline-variant/20">
+            <tbody class="divide-y divide-border-custom">
               <tr
                 *ngFor="let customer of state.customers()"
-                class="hover:bg-primary/5 transition-colors group"
+                class="hover:bg-hover-custom transition-colors group"
               >
                 <td class="px-6 py-5">
                   <div class="flex items-center gap-4">
@@ -80,16 +80,18 @@ import { CustomerHttpService } from '../../data/customer-http.service';
                     </div>
                   </div>
                 </td>
-                <td class="px-6 py-5 text-on-surface-variant font-medium">{{ customer.email.value }}</td>
+                <td class="hidden sm:table-cell px-6 py-5 text-on-surface-variant font-medium">{{ customer.email.value }}</td>
                 <td class="px-6 py-5">
                   <span
-                    class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider"
-                    [class.bg-emerald-500/10]="customer.active"
-                    [class.text-emerald-400]="customer.active"
-                    [class.bg-red-500/10]="!customer.active"
-                    [class.text-red-400]="!customer.active"
+                    class="status-badge"
+                    [class.status-badge-active]="customer.active"
+                    [class.status-badge-cancelled]="!customer.active"
                   >
-                    <span class="w-1.5 h-1.5 rounded-full" [class.bg-emerald-400]="customer.active" [class.bg-red-400]="!customer.active"></span>
+                    <span 
+                      class="status-dot" 
+                      [class.status-dot-active]="customer.active" 
+                      [class.status-dot-cancelled]="!customer.active"
+                    ></span>
                     {{ customer.active ? 'Activo' : 'Inactivo' }}
                   </span>
                 </td>

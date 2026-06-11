@@ -37,13 +37,13 @@ import { PolicyHttpService } from '../../../policies/data/policy-http.service';
           </div>
           
           <div class="space-y-3">
-            <div class="flex justify-between py-2 border-b border-outline-variant/50">
-              <span class="text-on-surface-variant">ID</span>
-              <span class="text-on-surface font-mono text-sm">{{ c.id.value }}</span>
+            <div class="flex justify-between items-center py-2 border-b border-border-custom gap-2 min-w-0">
+              <span class="text-on-surface-variant flex-shrink-0">ID</span>
+              <span class="text-on-surface font-mono text-xs xs:text-sm truncate max-w-[150px] xs:max-w-none" [title]="c.id.value">{{ c.id.value }}</span>
             </div>
-            <div class="flex justify-between py-2 border-b border-outline-variant/50">
+            <div class="flex justify-between py-2 border-b border-border-custom">
               <span class="text-on-surface-variant">{{ t('common.actions') }}</span>
-              <span class="text-on-surface">{{ c.active ? 'Activo' : 'Inactivo' }}</span>
+              <span class="text-on-surface font-medium">{{ c.active ? 'Activo' : 'Inactivo' }}</span>
             </div>
             <div class="flex justify-between py-2">
               <span class="text-on-surface-variant">Registro</span>
@@ -68,25 +68,20 @@ import { PolicyHttpService } from '../../../policies/data/policy-http.service';
           <div *ngIf="currentPolicies().length > 0" class="space-y-3">
             <div
               *ngFor="let policy of currentPolicies()"
-              class="flex items-center justify-between p-4 rounded-lg bg-surface-container-high/50"
+              class="flex items-center justify-between p-4 rounded-lg bg-surface-container-high/40 border border-border-custom gap-2 min-w-0"
             >
-              <div>
-                <div class="font-medium text-on-surface">{{ policy.policyNumber }}</div>
+              <div class="min-w-0">
+                <div class="font-medium text-on-surface truncate" [title]="policy.policyNumber">{{ policy.policyNumber }}</div>
                 <div class="text-sm text-on-surface-variant">{{ policy.branch }}</div>
               </div>
-              <div class="flex items-center gap-3">
+              <div class="flex items-center gap-3 flex-shrink-0">
                 <span
-                  class="px-3 py-1 rounded-full text-xs font-medium"
-                  [class.bg-emerald-400/20]="policy.status === 'ACTIVE'"
-                  [class.text-emerald-400]="policy.status === 'ACTIVE'"
-                  [class.bg-amber-400/20]="policy.status === 'QUOTED'"
-                  [class.text-amber-400]="policy.status === 'QUOTED'"
-                  [class.bg-blue-400/20]="policy.status === 'ISSUED'"
-                  [class.text-blue-400]="policy.status === 'ISSUED'"
-                  [class.bg-red-400/20]="policy.status === 'CANCELLED'"
-                  [class.text-red-400]="policy.status === 'CANCELLED'"
-                  [class.bg-orange-400/20]="policy.status === 'SUSPENDED'"
-                  [class.text-orange-400]="policy.status === 'SUSPENDED'"
+                  class="status-badge"
+                  [class.status-badge-active]="policy.status === 'ACTIVE'"
+                  [class.status-badge-quoted]="policy.status === 'QUOTED'"
+                  [class.status-badge-issued]="policy.status === 'ISSUED'"
+                  [class.status-badge-cancelled]="policy.status === 'CANCELLED'"
+                  [class.status-badge-suspended]="policy.status === 'SUSPENDED'"
                 >
                   {{ policy.status }}
                 </span>
