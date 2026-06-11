@@ -41,4 +41,9 @@ public class PolicyNumberSequencer {
     public void reset() {
         this.counter.set(0);
     }
+
+    // Permite establecer el valor del contador al inicializar la aplicación
+    public void setCounterValue(int value) {
+        this.counter.set(value);
+    }
 }

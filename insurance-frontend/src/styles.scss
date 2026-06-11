@@ -1,1 +1,211 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'tailwindcss';
+
+@theme {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-bright: var(--surface-bright);
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-surface-variant: var(--surface-variant);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-inverse-surface: var(--inverse-surface);
+  --color-inverse-on-surface: var(--inverse-on-surface);
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  --color-surface-tint: var(--surface-tint);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-primary-container: var(--primary-container);
+  --color-on-primary-container: var(--on-primary-container);
+  --color-inverse-primary: var(--inverse-primary);
+  --color-secondary: var(--secondary);
+  --color-on-secondary: var(--on-secondary);
+  --color-secondary-container: var(--secondary-container);
+  --color-on-secondary-container: var(--on-secondary-container);
+  --color-tertiary: var(--tertiary);
+  --color-on-tertiary: var(--on-tertiary);
+  --color-tertiary-container: var(--tertiary-container);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+  --color-error: var(--error);
+  --color-on-error: var(--on-error);
+  --color-error-container: var(--error-container);
+  --color-on-error-container: var(--on-error-container);
+
+  --font-outfit: 'Outfit', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-space-grotesk: 'Space Grotesk', sans-serif;
+
+  --radius-sm: 0.25rem;
+  --radius-default: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+
+  --spacing-gutter: 24px;
+  --spacing-container-max: 1440px;
+}
+
+@layer base {
+  :root,
+  [data-theme='dark'] {
+    --background: #0d0d0d;
+    --surface: #0d0d0d;
+    --surface-dim: #0d0d0d;
+    --surface-bright: #1c1c1c;
+    --surface-container-lowest: #050505;
+    --surface-container-low: #121212;
+    --surface-container: #181818;
+    --surface-container-high: #242424;
+    --surface-container-highest: #2e2e2e;
+    --surface-variant: #2e2e2e;
+    --on-surface: #ffffff;
+    --on-surface-variant: rgba(255, 255, 255, 0.75);
+    --inverse-surface: #ffffff;
+    --inverse-on-surface: #0d0d0d;
+    --outline: rgba(255, 255, 255, 0.2);
+    --outline-variant: rgba(255, 255, 255, 0.1);
+    --surface-tint: #FF7E0A;
+    --primary: #FF7E0A;
+    --on-primary: #ffffff;
+    --primary-container: #e06c00;
+    --on-primary-container: #ffffff;
+    --inverse-primary: #FF7E0A;
+    --secondary: #d1d5db;
+    --on-secondary: #111827;
+    --secondary-container: #374151;
+    --on-secondary-container: #f3f4f6;
+    --tertiary: #9ca3af;
+    --on-tertiary: #111827;
+    --tertiary-container: #4b5563;
+    --on-tertiary-container: #f9fafb;
+    --error: #ffb4ab;
+    --on-error: #690005;
+    --error-container: #93000a;
+    --on-error-container: #ffdad6;
+
+    /* Component-specific variables */
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --card-border: rgba(255, 255, 255, 0.15);
+    --card-shadow: none;
+    --sidebar-bg: #0d0d0d;
+    --sidebar-border: rgba(255, 255, 255, 0.1);
+    --sidebar-shadow: none;
+  }
+
+  [data-theme='light'] {
+    --background: #fcfcfc;
+    --surface: #fcfcfc;
+    --surface-dim: #fcfcfc;
+    --surface-bright: #ffffff;
+    --surface-container-lowest: #ffffff;
+    --surface-container-low: #f3f4f6;
+    --surface-container: #e5e7eb;
+    --surface-container-high: #d1d5db;
+    --surface-container-highest: #9ca3af;
+    --surface-variant: #f3f4f6;
+    --on-surface: #0f0f0f;
+    --on-surface-variant: #4b5563;
+    --inverse-surface: #111827;
+    --inverse-on-surface: #f9fafb;
+    --outline: #D8D2CB;
+    --outline-variant: #e5e7eb;
+    --surface-tint: #FF7E0A;
+    --primary: #FF7E0A;
+    --on-primary: #ffffff;
+    --primary-container: #FFE3CC;
+    --on-primary-container: #8F4200;
+    --inverse-primary: #FF7E0A;
+    --secondary: #4b5563;
+    --on-secondary: #ffffff;
+    --secondary-container: #e5e7eb;
+    --on-secondary-container: #111827;
+    --tertiary: #374151;
+    --on-tertiary: #ffffff;
+    --tertiary-container: #f3f4f6;
+    --on-tertiary-container: #111827;
+    --error: #ba1a1a;
+    --on-error: #ffffff;
+    --error-container: #ffdad6;
+    --on-error-container: #410002;
+
+    /* Component-specific variables */
+    --card-bg: #ffffff;
+    --card-border: #e2e8f0;
+    --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 16px -6px rgba(0, 0, 0, 0.05);
+    --sidebar-bg: #ffffff;
+    --sidebar-border: #e2e8f0;
+    --sidebar-shadow: 8px 0 32px -16px rgba(0, 0, 0, 0.1);
+  }
+
+  html,
+  body {
+    background: var(--background);
+    color: var(--on-surface);
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+}
+
+@layer components {
+  .glass {
+    background: color-mix(in oklab, var(--surface-bright) 62%, transparent);
+    backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid color-mix(in oklab, var(--on-surface) 8%, transparent);
+  }
+
+  .glass-elevated {
+    background: color-mix(in oklab, var(--surface-bright) 78%, transparent);
+    backdrop-filter: blur(40px) saturate(160%);
+    border: 1px solid color-mix(in oklab, var(--on-surface) 8%, transparent);
+    box-shadow: 0 24px 48px -16px color-mix(in oklab, var(--primary) 18%, transparent);
+  }
+
+  .glass-dark {
+    background: color-mix(in oklab, var(--surface-bright) 4%, transparent);
+    backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid color-mix(in oklab, var(--on-surface) 8%, transparent);
+  }
+
+  .surface-gradient {
+    background: linear-gradient(135deg, rgba(255, 126, 10, 0.05) 0%, rgba(13, 13, 13, 1) 100%);
+  }
+
+  .glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+  }
+
+  .app-sidebar {
+    background: var(--sidebar-bg);
+    border-right: 1px solid var(--sidebar-border);
+    box-shadow: var(--sidebar-shadow);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(255, 126, 10, 0.4);
+  }
+
+  .sofka-gradient-text {
+    background: linear-gradient(to right, #ffb689, #ff7e0a);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+
+  .glass-dark-elevated {
+    background: color-mix(in oklab, var(--surface-bright) 6%, transparent);
+    backdrop-filter: blur(40px) saturate(160%);
+    border: 1px solid color-mix(in oklab, var(--on-surface) 8%, transparent);
+    box-shadow: 0 0 32px color-mix(in oklab, var(--primary) 18%, transparent);
+  }
+}

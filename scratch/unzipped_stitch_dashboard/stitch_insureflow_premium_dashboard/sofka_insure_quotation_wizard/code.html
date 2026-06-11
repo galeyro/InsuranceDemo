@@ -1,0 +1,443 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Sofka Insure | Asistente de Cotización de Pólizas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        :root {
+            --surface-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+        }
+        .light :root {
+            --surface-gradient: linear-gradient(135deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.01) 100%);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .font-display { font-family: 'Space Grotesk', sans-serif; }
+        .glass-card {
+            background: var(--surface-gradient);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .light .glass-card {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        .light .glass-card:hover {
+            border-color: rgba(0, 0, 0, 0.2);
+        }
+        .branch-card.active {
+            border-color: #ffb689;
+            background: rgba(255, 182, 137, 0.05);
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #ffb689 !important;
+            box-shadow: 0 0 0 1px #ffb689;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #353534; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ffb689; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#690005",
+                        "on-secondary-fixed": "#261910",
+                        "on-secondary-fixed-variant": "#544339",
+                        "on-primary": "#512300",
+                        "tertiary-container": "#00abfb",
+                        "surface-variant": "#353534",
+                        "surface": "#131313",
+                        "secondary": "#dac2b4",
+                        "surface-container-high": "#2a2a2a",
+                        "on-primary-container": "#5e2a00",
+                        "on-secondary-container": "#cbb4a6",
+                        "surface-bright": "#3a3939",
+                        "secondary-fixed": "#f7decf",
+                        "on-tertiary": "#003450",
+                        "surface-container-highest": "#353534",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container-lowest": "#0e0e0e",
+                        "inverse-on-surface": "#313030",
+                        "on-surface-variant": "#dfc0af",
+                        "on-surface": "#e5e2e1",
+                        "tertiary-fixed-dim": "#8fcdff",
+                        "error-container": "#93000a",
+                        "background": "#131313",
+                        "inverse-primary": "#984800",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#57463b",
+                        "primary": "#ffb689",
+                        "tertiary": "#8fcdff",
+                        "on-primary-fixed-variant": "#743500",
+                        "on-tertiary-fixed-variant": "#004b71",
+                        "on-background": "#e5e2e1",
+                        "surface-container-low": "#1c1b1b",
+                        "on-primary-fixed": "#311300",
+                        "error": "#ffb4ab",
+                        "on-secondary": "#3c2d24",
+                        "secondary-fixed-dim": "#dac2b4",
+                        "on-tertiary-fixed": "#001e30",
+                        "tertiary-fixed": "#cbe6ff",
+                        "surface-tint": "#ffb689",
+                        "primary-fixed": "#ffdbc8",
+                        "primary-container": "#ff7e0a",
+                        "outline-variant": "#584235",
+                        "surface-container": "#201f1f",
+                        "outline": "#a68b7c",
+                        "surface-dim": "#131313",
+                        "primary-fixed-dim": "#ffb689",
+                        "on-tertiary-container": "#003c5c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "margin-desktop": "64px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Space Grotesk"],
+                        "headline-sm": ["Space Grotesk"],
+                        "display-lg-mobile": ["Space Grotesk"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-md": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface dark:bg-surface dark:text-on-surface light:bg-white light:text-slate-900 transition-colors duration-300">
+<!-- Top Navigation -->
+<nav class="bg-surface/80 dark:bg-surface/80 light:bg-white/80 backdrop-blur-xl border-b border-white/10 dark:border-white/10 light:border-black/5 sticky top-0 z-50 h-20">
+<div class="flex justify-between items-center w-full px-gutter h-full max-w-container-max mx-auto">
+<div class="flex items-center gap-8">
+<span class="font-display-lg text-display-lg text-primary tracking-tight">Sofka Insure</span>
+<div class="hidden md:flex gap-6">
+<a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md" href="#">Panel</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-label-md text-label-md" href="#">Pólizas</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-label-md text-label-md" href="#">Clientes</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-200 font-label-md text-label-md" href="#">Ajustes</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<!-- Theme Toggle -->
+<button class="p-2 rounded-full hover:bg-white/10 light:hover:bg-black/5 transition-colors text-on-surface-variant" onclick="toggleTheme()" title="Cambiar tema">
+<span class="material-symbols-outlined" id="theme-icon">light_mode</span>
+</button>
+<!-- Language Switcher -->
+<div class="relative group">
+<button class="flex items-center gap-1 p-2 rounded-lg hover:bg-white/10 light:hover:bg-black/5 transition-colors text-on-surface-variant font-label-sm text-label-sm uppercase">
+<span class="material-symbols-outlined text-[20px]">language</span> ES
+                    </button>
+<div class="absolute right-0 top-full mt-1 hidden group-hover:block bg-surface-container border border-white/10 rounded-lg shadow-xl overflow-hidden min-w-[100px]">
+<a class="block px-4 py-2 hover:bg-primary/10 text-on-surface font-label-sm text-label-sm" href="#">ES - Español</a>
+<a class="block px-4 py-2 hover:bg-primary/10 text-on-surface-variant font-label-sm text-label-sm" href="#">EN - English</a>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">notifications</span>
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center border border-white/10 cursor-pointer overflow-hidden">
+<img alt="Avatar de Cliente" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDe93Fu3o9dDLro0lXbsavD7t73ejCqCIcnW06KK6IZtxUQHoZ3YHDKkdpQhppT_dDviOC1bQsbWt_b6uwVyX-ROu_tZr-29Kkq8LOls_d2-f8Wu6dRxs4V1yGpE84eHhv3AKr76NixcAqE0WvsQkU9jWgi4GHRgjQlK8ZpnaIxlUGC8YXqtBJWVjkZFA5fBJhGCpC7jhAFPQkqKSvzIy7KYR_zwK2KiRY3u-yB9bxA1x3a3H76Xp5SPPB0jG82Mk0twKev44-0M4c">
+</div>
+</div>
+</div>
+</nav>
+<!-- Side Navigation (Left Fixed for Desktop) -->
+<aside class="hidden lg:flex h-screen w-64 fixed left-0 top-0 flex-col bg-surface dark:bg-surface light:bg-slate-50 border-r border-white/10 dark:border-white/10 light:border-black/5 py-8 px-4 z-40 mt-20">
+<div class="space-y-2 mb-auto">
+<div class="flex items-center gap-3 p-3 bg-secondary-container/20 text-primary border-r-4 border-primary cursor-pointer group">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">dashboard</span>
+<span class="font-label-md text-label-md">Panel de Control</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-white/5 light:hover:bg-black/5 transition-all duration-200 cursor-pointer group">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">description</span>
+<span class="font-label-md text-label-md">Pólizas</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-white/5 light:hover:bg-black/5 transition-all duration-200 cursor-pointer group">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">group</span>
+<span class="font-label-md text-label-md">Clientes</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-white/5 light:hover:bg-black/5 transition-all duration-200 cursor-pointer group">
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">settings</span>
+<span class="font-label-md text-label-md">Ajustes</span>
+</div>
+</div>
+<div class="border-t border-white/10 dark:border-white/10 light:border-black/5 pt-4 space-y-2">
+<div class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-white/5 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">headset_mic</span>
+<span class="font-label-md text-label-md">Soporte</span>
+</div>
+<div class="flex items-center gap-3 p-3 text-on-surface-variant hover:bg-white/5 transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-md text-label-md">Cerrar Sesión</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="lg:pl-64 min-h-screen">
+<div class="max-w-4xl mx-auto px-gutter py-margin-desktop">
+<header class="mb-12">
+<h1 class="font-headline-md text-headline-md text-primary mb-2">Asistente de Cotización de Pólizas</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Configure y emita una nueva póliza de seguros con evaluación de riesgos de precisión.</p>
+</header>
+<form class="space-y-8" id="quotation-wizard">
+<!-- Section 1: Client Selection -->
+<section class="glass-card rounded-xl p-8 dark:bg-transparent light:bg-slate-50/50">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">person_search</span>
+<h2 class="font-headline-sm text-headline-sm">1. Seleccionar Cliente</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="relative group">
+<label class="font-label-sm text-label-sm text-on-surface-variant mb-2 block">Base de Datos de Clientes</label>
+<select class="w-full bg-[#1a1a1a] dark:bg-[#1a1a1a] light:bg-white border border-white/10 dark:border-white/10 light:border-black/10 rounded-lg h-12 px-4 appearance-none font-body-md text-body-md cursor-pointer text-inherit">
+<option>Seleccione un cliente verificado...</option>
+<option>Alexander Pierce - ID: 88291</option>
+<option>Elena Rodriguez - ID: 44102</option>
+<option>Marcus Thorne - ID: 11094</option>
+<option>Sarah Jenkins - ID: 55219</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-10 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+<div class="flex items-end">
+<button class="h-12 px-6 border border-white/10 dark:border-white/10 light:border-black/10 rounded-lg font-label-md text-label-md hover:bg-white/5 light:hover:bg-black/5 transition-colors flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span> Registrar Nuevo Cliente
+                            </button>
+</div>
+</div>
+</section>
+<!-- Section 2: Branch Selection -->
+<section class="glass-card rounded-xl p-8 dark:bg-transparent light:bg-slate-50/50">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">category</span>
+<h2 class="font-headline-sm text-headline-sm">2. Seleccionar Ramo de Seguro</h2>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+<!-- AUTO -->
+<div class="branch-card glass-card rounded-xl p-6 cursor-pointer transition-all duration-300 text-center flex flex-col items-center gap-3 hover:scale-[1.02]" id="branch-AUTO" onclick="selectBranch('AUTO')">
+<span class="material-symbols-outlined text-3xl">directions_car</span>
+<span class="font-label-md text-label-md uppercase">AUTO</span>
+</div>
+<!-- LIFE -->
+<div class="branch-card glass-card rounded-xl p-6 cursor-pointer transition-all duration-300 text-center flex flex-col items-center gap-3 hover:scale-[1.02]" id="branch-LIFE" onclick="selectBranch('LIFE')">
+<span class="material-symbols-outlined text-3xl">favorite</span>
+<span class="font-label-md text-label-md uppercase">VIDA</span>
+</div>
+<!-- HOME -->
+<div class="branch-card glass-card rounded-xl p-6 cursor-pointer transition-all duration-300 text-center flex flex-col items-center gap-3 hover:scale-[1.02]" id="branch-HOME" onclick="selectBranch('HOME')">
+<span class="material-symbols-outlined text-3xl">home</span>
+<span class="font-label-md text-label-md uppercase">HOGAR</span>
+</div>
+<!-- HEALTH -->
+<div class="branch-card glass-card rounded-xl p-6 cursor-pointer transition-all duration-300 text-center flex flex-col items-center gap-3 hover:scale-[1.02]" id="branch-HEALTH" onclick="selectBranch('HEALTH')">
+<span class="material-symbols-outlined text-3xl">medical_services</span>
+<span class="font-label-md text-label-md uppercase">SALUD</span>
+</div>
+</div>
+<!-- Coverage Info -->
+<div class="hidden animate-in fade-in slide-in-from-top-4 duration-500" id="coverage-details">
+<div class="bg-surface-container-low dark:bg-surface-container-low light:bg-slate-100 rounded-lg p-6 border border-primary/20 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1" id="selected-branch-title">Cobertura Seleccionada</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-md" id="selected-branch-desc">Protección integral que incluye responsabilidad civil y cobertura por desastres naturales.</p>
+</div>
+<div class="text-right">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Prima Base</span>
+<div class="font-display-lg text-primary" id="base-premium-value">$0.00</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">por mes</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Rating & Strategy -->
+<section class="glass-card rounded-xl p-8 dark:bg-transparent light:bg-slate-50/50">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">analytics</span>
+<h2 class="font-headline-sm text-headline-sm">3. Estrategia de Tarificación</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="strategy-card border border-white/10 dark:border-white/10 light:border-black/10 rounded-lg p-4 cursor-pointer hover:bg-white/5 light:hover:bg-black/5 transition-all active:scale-95" id="strat-ESTANDAR" onclick="selectStrategy('ESTANDAR')">
+<h4 class="font-label-md text-label-md mb-2">ESTÁNDAR</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Precios fijos basados en demografía general.</p>
+</div>
+<div class="strategy-card border border-white/10 dark:border-white/10 light:border-black/10 rounded-lg p-4 cursor-pointer hover:bg-white/5 light:hover:bg-black/5 transition-all active:scale-95" id="strat-BASADO_RIESGO" onclick="selectStrategy('BASADO_RIESGO')">
+<h4 class="font-label-md text-label-md mb-2">BASADO EN RIESGO</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Precios dinámicos impulsados por telemetría de riesgo.</p>
+</div>
+<div class="strategy-card border border-white/10 dark:border-white/10 light:border-black/10 rounded-lg p-4 cursor-pointer hover:bg-white/5 light:hover:bg-black/5 transition-all active:scale-95" id="strat-FIDELIDAD" onclick="selectStrategy('FIDELIDAD')">
+<h4 class="font-label-md text-label-md mb-2">FIDELIDAD</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Recompensas para titulares de pólizas a largo plazo.</p>
+</div>
+</div>
+<!-- Conditional Inputs -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Risk Score -->
+<div class="hidden transition-opacity duration-300" id="input-risk-score">
+<label class="font-label-sm text-label-sm text-on-surface-variant mb-2 block">Puntuación de Riesgo (1-100) *</label>
+<div class="relative">
+<input class="w-full bg-[#1a1a1a] dark:bg-[#1a1a1a] light:bg-white border border-white/10 dark:border-white/10 light:border-black/10 rounded-lg h-12 px-4 font-body-md text-body-md text-inherit" max="100" min="1" placeholder="Ingrese puntuación" type="number">
+<span class="material-symbols-outlined absolute right-4 top-3 text-on-surface-variant">warning</span>
+</div>
+<p class="mt-2 font-label-sm text-label-sm text-primary/60 italic">Obligatorio para análisis Basado en Riesgo.</p>
+</div>
+<!-- Loyalty Year -->
+<div class="hidden transition-opacity duration-300" id="input-loyalty-year">
+<label class="font-label-sm text-label-sm text-on-surface-variant mb-2 block">Cliente desde el año *</label>
+<div class="relative">
+<input class="w-full bg-[#1a1a1a] dark:bg-[#1a1a1a] light:bg-white border border-white/10 dark:border-white/10 light:border-black/10 rounded-lg h-12 px-4 font-body-md text-body-md text-inherit" max="2026" min="1950" placeholder="AAAA" type="number">
+<span class="material-symbols-outlined absolute right-4 top-3 text-on-surface-variant">event</span>
+</div>
+<p class="mt-2 font-label-sm text-label-sm text-primary/60 italic">Obligatorio para cálculo de Fidelidad.</p>
+</div>
+</div>
+</section>
+<!-- Action CTA -->
+<div class="flex flex-col items-center gap-4 py-8">
+<button class="w-full max-w-md h-16 bg-primary-container text-on-primary-fixed font-bold rounded-lg font-headline-sm text-headline-sm flex items-center justify-center gap-3 hover:bg-[#e06c00] transition-all transform active:scale-95 shadow-xl shadow-primary/20" type="submit">
+                        Cotizar y Crear <span class="material-symbols-outlined">send</span>
+</button>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Al hacer clic, inicia una generación de cotización segura verificada por blockchain.</p>
+</div>
+</form>
+</div>
+<footer class="max-w-4xl mx-auto px-gutter py-8 border-t border-white/10 mt-12">
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="font-label-sm text-label-sm text-on-surface-variant">© 2026 Sofka Insure. Todos los derechos reservados.</p>
+        <div class="flex gap-6">
+            <a href="#" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors">Privacidad</a>
+            <a href="#" class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors">Términos</a>
+        </div>
+    </div>
+</footer></main>
+<!-- Visual Accents -->
+<div class="fixed top-[20%] right-[-10%] w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] pointer-events-none -z-10"></div>
+<div class="fixed bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-tertiary/5 rounded-full blur-[100px] pointer-events-none -z-10"></div>
+<script>
+        const branchData = {
+            'AUTO': { title: 'Protección de Auto', desc: 'Colisión total, robo y responsabilidad civil premium para vehículos modernos.', premium: '$124.50' },
+            'LIFE': { title: 'Herencia de Vida', desc: 'Asegure el legado de su familia con beneficios por fallecimiento de alto rendimiento.', premium: '$89.00' },
+            'HOME': { title: 'Hogar Refugio Seguro', desc: 'Protege estructuras, contenidos y gastos de vida temporales contra peligros.', premium: '$156.20' },
+            'HEALTH': { title: 'Bienestar Élite', desc: 'Acceso a red médica global con atención preventiva sin deducibles.', premium: '$210.00' }
+        };
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                html.classList.add('light');
+                icon.innerText = 'dark_mode';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.remove('light');
+                html.classList.add('dark');
+                icon.innerText = 'light_mode';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        // Apply saved theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.documentElement.classList.replace('dark', 'light');
+            document.getElementById('theme-icon').innerText = 'dark_mode';
+        }
+
+        function selectBranch(id) {
+            document.querySelectorAll('.branch-card').forEach(card => {
+                card.classList.remove('active', 'border-primary', 'bg-secondary-container/10');
+                card.classList.add('glass-card');
+            });
+            
+            const activeCard = document.getElementById(`branch-${id}`);
+            activeCard.classList.add('active', 'border-primary', 'bg-secondary-container/10');
+            activeCard.classList.remove('glass-card');
+
+            const details = document.getElementById('coverage-details');
+            const data = branchData[id];
+            
+            document.getElementById('selected-branch-title').innerText = data.title;
+            document.getElementById('selected-branch-desc').innerText = data.desc;
+            document.getElementById('base-premium-value').innerText = data.premium;
+            
+            details.classList.remove('hidden');
+        }
+
+        function selectStrategy(id) {
+            document.querySelectorAll('.strategy-card').forEach(card => {
+                card.classList.remove('border-primary', 'bg-secondary-container/20');
+            });
+            
+            const activeCard = document.getElementById(`strat-${id}`);
+            activeCard.classList.add('border-primary', 'bg-secondary-container/20');
+
+            const riskInput = document.getElementById('input-risk-score');
+            const loyaltyInput = document.getElementById('input-loyalty-year');
+
+            if (id === 'BASADO_RIESGO') {
+                riskInput.classList.remove('hidden');
+                loyaltyInput.classList.add('hidden');
+            } else if (id === 'FIDELIDAD') {
+                loyaltyInput.classList.remove('hidden');
+                riskInput.classList.add('hidden');
+            } else {
+                riskInput.classList.add('hidden');
+                loyaltyInput.classList.add('hidden');
+            }
+        }
+
+        document.getElementById('quotation-wizard').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Procesando...';
+            btn.classList.add('opacity-80', 'pointer-events-none');
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> ¡Cotizado con Éxito!';
+                btn.classList.replace('bg-primary-container', 'bg-emerald-600');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.classList.replace('bg-emerald-600', 'bg-primary-container');
+                    btn.classList.remove('opacity-80', 'pointer-events-none');
+                }, 2000);
+            }, 1500);
+        });
+    </script>
+
+
+</body></html>

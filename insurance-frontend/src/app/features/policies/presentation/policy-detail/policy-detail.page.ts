@@ -1,0 +1,217 @@
+import { Component, inject, OnInit, computed } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslocoDirective } from '@jsverse/transloco';
+import { StateService } from '../../../../core/state/state.service';
+import { PolicyHttpService } from '../../data/policy-http.service';
+import { getAllowedTransitions } from '../../../../domain/services/policy-state-machine';
+import { PolicyStatus } from '../../../../domain/enums/policy-status.enum';
+
+@Component({
+  selector: 'app-policy-detail',
+  standalone: true,
+  imports: [CommonModule, TranslocoDirective],
+  template: `
+    <div class="space-y-6" *transloco="let t">
+      <div class="flex items-center gap-4">
+        <button
+          (click)="router.navigate(['/app/policies'])"
+          class="p-2 rounded-default hover:bg-surface-container-high transition-colors"
+        >
+          <svg class="w-5 h-5 text-on-surface-variant" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+        </button>
+        <h2 class="font-outfit text-headline-md font-semibold text-on-surface">{{ t('policies.detail.title') }}</h2>
+      </div>
+      
+      <div *ngIf="currentPolicy() as p" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="space-y-6">
+          <div class="glass rounded-xl p-6">
+            <div class="flex items-center justify-between mb-6">
+              <div>
+                <div class="text-label-sm uppercase tracking-wider text-on-surface-variant mb-1">{{ t('policies.detail.policyNumber') }}</div>
+                <div class="font-outfit text-2xl font-bold text-on-surface">{{ p.policyNumber }}</div>
+              </div>
+              <span
+                class="px-4 py-2 rounded-full text-sm font-medium"
+                [class.bg-emerald-400/20]="p.status === 'ACTIVE'"
+                [class.text-emerald-400]="p.status === 'ACTIVE'"
+                [class.bg-amber-400/20]="p.status === 'QUOTED'"
+                [class.text-amber-400]="p.status === 'QUOTED'"
+                [class.bg-blue-400/20]="p.status === 'ISSUED'"
+                [class.text-blue-400]="p.status === 'ISSUED'"
+                [class.bg-red-400/20]="p.status === 'CANCELLED'"
+                [class.text-red-400]="p.status === 'CANCELLED'"
+                [class.bg-orange-400/20]="p.status === 'SUSPENDED'"
+                [class.text-orange-400]="p.status === 'SUSPENDED'"
+              >
+                {{ t('policies.status.' + p.status) }}
+              </span>
+            </div>
+            
+            <div class="space-y-3">
+              <div class="flex justify-between py-2 border-b border-outline-variant/50">
+                <span class="text-on-surface-variant">{{ t('policies.form.branch') }}</span>
+                <span class="text-on-surface font-medium">{{ t('policies.branch.' + p.branch) }}</span>
+              </div>
+              <div class="flex justify-between py-2 border-b border-outline-variant/50">
+                <span class="text-on-surface-variant">{{ t('policies.detail.monthlyPremium') }}</span>
+                <span class="text-on-surface font-medium">$ {{ p.monthlyPremium.amount }}</span>
+              </div>
+              <div class="flex justify-between py-2 border-b border-outline-variant/50">
+                <span class="text-on-surface-variant">{{ t('policies.detail.coverage') }}</span>
+                <span class="text-on-surface font-medium">$ {{ p.coverage.coverageAmount.amount }}</span>
+              </div>
+              <div class="flex justify-between py-2 border-b border-outline-variant/50">
+                <span class="text-on-surface-variant">{{ t('policies.detail.termMonths') }}</span>
+                <span class="text-on-surface font-medium">{{ p.coverage.termMonths }} meses</span>
+              </div>
+              <div class="flex justify-between py-2">
+                <span class="text-on-surface-variant">{{ t('policies.form.ratingStrategy') }}</span>
+                <span class="text-on-surface font-medium">{{ p.ratingStrategy }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <!-- State Transitions -->
+          <div class="glass rounded-xl p-6" *ngIf="currentTransitions().length > 0">
+            <h3 class="font-outfit text-lg font-semibold text-on-surface mb-4">{{ t('policies.detail.transition') }}</h3>
+            <div class="flex flex-wrap gap-3">
+              <button
+                *ngFor="let transition of currentTransitions()"
+                (click)="transitionTo(transition)"
+                [disabled]="transitionLoading"
+                class="px-6 py-3 rounded-default font-medium text-body-md transition-all hover:scale-105 active:scale-95 disabled:opacity-50"
+                [class.bg-emerald-400/20]="transition === 'ACTIVE'"
+                [class.text-emerald-400]="transition === 'ACTIVE'"
+                [class.bg-blue-400/20]="transition === 'ISSUED'"
+                [class.text-blue-400]="transition === 'ISSUED'"
+                [class.bg-orange-400/20]="transition === 'SUSPENDED'"
+                [class.text-orange-400]="transition === 'SUSPENDED'"
+                [class.bg-red-400/20]="transition === 'CANCELLED'"
+                [class.text-red-400]="transition === 'CANCELLED'"
+              >
+                {{ transition }}
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="space-y-6">
+          <div class="glass rounded-xl p-6">
+            <h3 class="font-outfit text-lg font-semibold text-on-surface mb-4">{{ t('policies.form.ratingStrategy') }}</h3>
+            <div class="space-y-3">
+              <div class="flex justify-between py-2 border-b border-outline-variant/50">
+                <span class="text-on-surface-variant">Risk Score</span>
+                <span class="text-on-surface font-medium">{{ p.riskProfile.riskScore }}/100</span>
+              </div>
+              <div class="flex justify-between py-2">
+                <span class="text-on-surface-variant">Customer Since</span>
+                <span class="text-on-surface font-medium">{{ p.riskProfile.customerSinceYear }}</span>
+              </div>
+            </div>
+            
+            <div class="mt-4 h-2 bg-surface-container-high rounded-full overflow-hidden">
+              <div
+                class="h-full rounded-full transition-all"
+                [class.bg-emerald-400]="p.riskProfile.riskScore < 40"
+                [class.bg-amber-400]="p.riskProfile.riskScore >= 40 && p.riskProfile.riskScore < 70"
+                [class.bg-red-400]="p.riskProfile.riskScore >= 70"
+                [style.width.%]="p.riskProfile.riskScore"
+              ></div>
+            </div>
+          </div>
+          
+          <div class="glass rounded-xl p-6">
+            <h3 class="font-outfit text-lg font-semibold text-on-surface mb-4">Timeline</h3>
+            <div class="space-y-4">
+              <div class="flex items-center gap-3">
+                <div class="w-3 h-3 rounded-full bg-emerald-400"></div>
+                <div>
+                  <div class="text-sm text-on-surface">Created</div>
+                  <div class="text-xs text-on-surface-variant">{{ p.createdAt | date:'medium' }}</div>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <div class="w-3 h-3 rounded-full bg-blue-400"></div>
+                <div>
+                  <div class="text-sm text-on-surface">Last Updated</div>
+                  <div class="text-xs text-on-surface-variant">{{ p.updatedAt | date:'medium' }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div *ngIf="!currentPolicy()" class="glass rounded-xl p-12 text-center">
+        <p class="text-body-md text-on-surface-variant">{{ t('common.loading') }}</p>
+      </div>
+    </div>
+  `,
+  styles: [],
+})
+export class PolicyDetailPage implements OnInit {
+  private readonly route = inject(ActivatedRoute);
+  protected readonly router = inject(Router);
+  private readonly state = inject(StateService);
+  private readonly policyService = inject(PolicyHttpService);
+
+  transitionLoading = false;
+
+  currentPolicy = computed(() => {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (!id) return undefined;
+    return this.state.getPolicyById(id);
+  });
+
+  currentTransitions = computed(() => {
+    const p = this.currentPolicy();
+    if (!p) return [];
+    return getAllowedTransitions(p.status);
+  });
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (!id) return;
+
+    const existing = this.state.getPolicyById(id);
+    if (!existing) {
+      this.policyService.getById(id).subscribe();
+    }
+  }
+
+  transitionTo(status: PolicyStatus): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (!id) return;
+
+    const current = this.currentPolicy();
+    const policyNumber = current ? current.policyNumber : 'POL-UNKNOWN';
+    const oldStatus = current ? current.status : 'UNKNOWN';
+
+    this.transitionLoading = true;
+    this.policyService.updateStatus(id, { targetStatus: status }).subscribe({
+      next: (updated) => {
+        this.transitionLoading = false;
+        this.state.addTransition({
+          policyNumber: updated.policyNumber || policyNumber,
+          oldStatus: oldStatus,
+          newStatus: updated.status,
+          timestamp: new Date(),
+          success: true
+        });
+      },
+      error: () => {
+        this.transitionLoading = false;
+        this.state.addTransition({
+          policyNumber: policyNumber,
+          oldStatus: oldStatus,
+          newStatus: status,
+          timestamp: new Date(),
+          success: false
+        });
+      },
+    });
+  }
+}
